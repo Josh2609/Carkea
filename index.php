@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start(); // get on the sesh
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -17,12 +21,25 @@ and open the template in the editor.
                 <li><a class = "active" href="index.php">Home</a></li>
                 <li><a href="#">Search</a></li>
 		<li><a href="#">Contact Us</a></li>
-                <li><a href="#">Branch List</a></li>
-                <li><a href="#">Login</a></li>
-            </ul>
+                <li><a href="branchlist.php">Branch List</a></li>
+                <?php 
+                if (isset($_SESSION['username'])) {
+                    $loggedInUser = $_SESSION["username"];
+                }
+                //session_destroy(); 
+                if (isset($_SESSION['loggedIn'])) {
+                    if($_SESSION['loggedIn'] == "true" )
+                    {   ?>
+                        <li><a href="profile.php"><?=$loggedInUser?></a></li>
+                    <?php } else { ?>
+                    <li><a href="login.php">Login</a></li>
+                    <?php } 
+                } else { ?>
+                <li><a href="login.php">Login</a></li>
+                <?php } ?>
+                </ul>
         </div> <!-- nav close -->
-        <?php
-        // put your code here
-        ?>
+        <div class="mainbody">
+        </div> <!-- close mainbody -->
     </body>
 </html>
