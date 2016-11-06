@@ -1,0 +1,128 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 01-Nov-2016, 19:50:30
+    Author     : joshcorps
+*/
+
+navtemp {
+    text-align: left;
+    border: 2px;
+    float: right;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  color: #999999;
+  font-size: 100%;
+  font-family: 'Oswald', sans-serif;
+}
+
+
+
+footer{
+    padding: 10px;
+    color: #999999;
+    text-decoration:none;
+    background-color: white;
+    border-top: 2px solid #ff8000;
+}
+
+.imagelayout{
+    list-style: none;
+}
+
+.imagelayout ul{
+    list-style: none;
+    margin: 0;
+}
+
+.imagelayout  li {
+    display: inline-block;
+  }
+  
+
+/*.regpage{
+    padding-left: 10px;
+    padding-right: 10px;
+}*/
+
+.reg ul{
+    text-decoration: none;
+    list-style: none;
+}
+
+.nav {
+    
+}
+
+.Profile{
+    float: right;
+}
+
+.nav ul {
+  position: fixed; /*THESE 3 LINES CREATE THE FIXED TOP BAR. REMOVE IF NEEDED*/
+  top: 0;
+  width: 100%;
+  list-style: none;
+  background-color: #fff;
+  text-align: center;
+  padding: 0;
+  margin: 0 auto;
+  border-bottom: 2px solid #ff8000;
+}
+.nav li {
+  font-family: 'Oswald', sans-serif;
+  font-size: 100%;
+  /*line-height: 40px;
+  height: 40px;*/
+  /*border-bottom: 4px solid #ff8000;*/
+}
+ 
+.nav a {
+  text-decoration: none;
+  color: #999999;
+  display: block;
+  transition: .3s background-color;
+}
+ 
+.nav a:hover {
+  background-color: #009999;
+  color: white;
+}
+ 
+.nav a.active {
+  background-color: #ff8000;
+  color: white;
+  cursor: default;
+}
+
+.mainbody{
+    margin: 0 auto;
+    padding: 60px;
+    width: 800px;
+    text-align: center;
+}
+ 
+@media screen and (min-width: 600px) {
+  .nav li {
+    width: 120px;
+    border-bottom: none;
+    height: 50px;
+    line-height: 50px;
+    /*font-size: 1.4em;*/
+  }
+ 
+  /* Option 1 - Display Inline */
+  .nav li {
+    display: inline-block;
+    margin-right: -4px;
+  }
+ 
+
+}
