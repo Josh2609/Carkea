@@ -33,8 +33,7 @@ and open the template in the editor.
             
             if(!$db)
                 echo mysql_error() ;
-            else
-                echo "Successfully connected. <br>";
+
             
             $queryBranchView = "SELECT * FROM branchView;";
             $branchQueryResult = mysql_query($queryBranchView,$db);

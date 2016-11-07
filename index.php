@@ -20,7 +20,7 @@ and open the template in the editor.
             <ul>
                 <li style="float:left; color:#999999"><a href="index.php">Carkea</a></li>
                 <li><a class = "active" href="index.php">Home</a></li>
-                <li><a href="#">Search</a></li>
+                <li><a href="search.php">Search</a></li>
 		<li><a href="#">Contact Us</a></li>
                 <li><a href="branchlist.php">Branch List</a></li>
                 <?php 
