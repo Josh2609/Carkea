@@ -12,6 +12,7 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="Style.css" />
+        <script src="dropdown.js"></script>
         <title>Carkea</title>
     </head>
     <body>
@@ -31,12 +32,21 @@ and open the template in the editor.
                     if($_SESSION['loggedIn'] == "true" )
                     {   ?>
                         <li><a href="profile.php"><?=$loggedInUser?></a></li>
+                        <li><a href="php_files/Logout.php">Logout</a></li>
                     <?php } else { ?>
                     <li><a href="login.php">Login</a></li>
                     <?php } 
                 } else { ?>
                 <li><a href="login.php">Login</a></li>
                 <?php } ?>
+                <li class="dropdown">
+                    <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </li>
                 </ul>
         </div> <!-- nav close -->
         <div class="mainbody">

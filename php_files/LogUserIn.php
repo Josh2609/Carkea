@@ -1,10 +1,9 @@
 <?php
 // use PDO to prevent SQLi
-
+    session_start();
     $username = $_POST["username"];
     $password = $_POST["password"];
-    
-    echo $username;
+
     $db = mysql_connect("silva.computing.dundee.ac.uk", "joshuacorps","AC32006"); // CONNECT TO DATABASE
             mysql_select_db("joshuacorpsdb"); // SELECT DATABASE
             
@@ -15,7 +14,6 @@
             
     // used bcrypt cos it's a fixed size (60) and seems secure enough. Default could change in the future so it's easier this way
     $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-    echo "<p>$passwordHash</p>";
     
     $stmt = $dbConnection->prepare('SELECT * FROM employeelogindetails WHERE Login_Username=:username');
     
@@ -34,12 +32,14 @@
         echo "<h1>Match</h1>";
         $_SESSION["loggedIn"] = "true";
         $_SESSION["username"] = $username;
+        $_SESSION["incorrectLogin"] = "false";
         echo "<p>{$_SESSION['username']}</p>";
-        //header("Location: ../index.php"); // redirects back to home page if logged in
+        header("Location: ../index.php"); // redirects back to home page if logged in
         exit();
     } else {
+        $_SESSION["incorrectLogin"] = "true";
+        header("Location: ../login.php");
         echo "<h1>Not Match</h1>";
     }
 ?>
-   
-    
+

@@ -31,8 +31,20 @@ and open the template in the editor.
             <div class="regpage">
             <h2>Enter your Username and password</h2>
             <h3>Login</h3>
+           
+            <?php
             
-            <form method="POST"  action="isloggedin.php">
+            if (isset($_SESSION["incorrectLogin"]))
+            {
+                if ($_SESSION["incorrectLogin"] == "true")
+                {
+                    echo "<p>Username or Password incorrect, Please try again</p>";
+                }
+            }
+            
+            ?>
+            
+            <form method="POST"  action="php_files/LogUserIn.php">
                 <ul style='list-style:none;'>
                     <li>User Name &nbsp;&nbsp;<input type="text" name="username"></li>
                     <br>
