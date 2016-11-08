@@ -4,9 +4,9 @@
     
     session_start();
     
-    $make = $_POST["make"];
-    $model = $_POST["model"];
-    $colour = $_POST["colour"];
+    $make = $_POST["makeSelect"];
+    $model = $_POST["modelSelect"];
+    $colour = $_POST["colourSelect"];
     
     if ($make=="anyMake")
             $make="*";

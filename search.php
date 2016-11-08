@@ -10,11 +10,12 @@ and open the template in the editor.
 -->
 <html>
     <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="Style.css" />
         <script src="dropdown.js"></script>
         <script src="js/showModelDrop.js"></script>
-        <title></title>
+        <title>Search</title>
     </head>
     <body>
         <div class="nav">
@@ -54,12 +55,12 @@ and open the template in the editor.
             <form method="POST"  action="php_files/getSearchResults.php">
                 <ul style='list-style:none;'>
                     <li><input type="text" name="postcode" placeholder="Postcode"></li>
-                    <li><select id="makeSelect" name="make" onChange="enableSelect();">
+                    <li><select id="makeSelect" name="makeSelect" onchange="showModels(this.value)">
                         <option value="anyMake">Make (Any)</option>
                         <?php
                             include "php_files/db_connect.php";
                             // TURN INTO VIEW **EDIT**
-                            $stmt = $dbConnection->prepare('SELECT DISTINCT Make FROM Car ORDER BY Make ASC');
+                            $stmt = $dbConnection->prepare('SELECT * FROM makeView');
                             $stmt->execute();
                             
                             foreach ($stmt as $row)
@@ -69,11 +70,12 @@ and open the template in the editor.
                         <?php } ?>
                     </select></li> <!-- MAKE OPTION -->
                     
-                    <li><select id="modelSelect" name="model">
+                    <li><div id="modelDropdown">
+                        <select id="modelSelect" name="modelSelect">
                             <option value="anyModel">Model (Any)</option>
                         <?php
                             // TURN INTO VIEW **EDIT**
-                            $stmt = $dbConnection->prepare('SELECT DISTINCT Model FROM Car ORDER BY Model ASC');
+                            $stmt = $dbConnection->prepare('SELECT * FROM modelView');
                             $stmt->execute();
                             
                             foreach ($stmt as $row)
@@ -81,13 +83,13 @@ and open the template in the editor.
                                 $model = $row['Model'];   ?>
                                 <option value="<?=$model?>"><?=$model?></option>
                         <?php } ?>
-                    </select></li> <!-- MODEL OPTION -->
+                        </select></div></li> <!-- MODEL OPTION -->
                     
-                    <li><select id="colourSelect" name="colour">
+                    <li><select id="colourSelect" name="colourSelect">
                             <option value="anyColour">Colour (Any)</option>
                         <?php
                             // TURN INTO VIEW **EDIT**
-                            $stmt = $dbConnection->prepare('SELECT DISTINCT Colour FROM Car ORDER BY Colour ASC');
+                            $stmt = $dbConnection->prepare('SELECT * FROM colourView');
                             $stmt->execute();
                             
                             foreach ($stmt as $row)
