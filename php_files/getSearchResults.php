@@ -15,7 +15,7 @@
     if ($colour=="anyColour")
             $colour="*";
     
-    $stmt = $dbConnection->prepare('SELECT * FROM Car WHERE Make=:make AND Model=:model AND Colour=:colour');
+    $stmt = $dbConnection->prepare('SELECT * FROM carSearchView WHERE Make=:make AND Model=:model AND Colour=:colour');
     
     $stmt->bindParam(':make', $make);
     $stmt->bindParam(':model', $model);

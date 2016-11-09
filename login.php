@@ -47,8 +47,10 @@ and open the template in the editor.
             <form method="POST"  action="php_files/LogUserIn.php">
                 <ul style='list-style:none;'>
                     <li>User Name &nbsp;&nbsp;<input type="text" name="username"></li>
-                    <br>
+                    <li><br></li>
                     <li>Password  &nbsp;&nbsp;&nbsp;&nbsp;<input type="password" name="password"></li>
+                    <li><br></li>
+                    <li><input type="checkbox" name="staff" value="staff">Staff?</li>
                 </ul>
                 <br/> 
                 <input type="submit" value="Login"> 

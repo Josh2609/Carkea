@@ -1,6 +1,7 @@
 <?php
 // Start the session
 session_start(); // get on the sesh
+$customerID = $_SESSION['customerID'];
 if (isset($_SESSION['loggedIn'])) 
 {
     if($_SESSION['loggedIn'] !== "true" )
@@ -8,7 +9,7 @@ if (isset($_SESSION['loggedIn']))
         header("Location: index.php");
     } 
 } else {
-    header("Location: index.php");
+    header("Location: ../index.php");
 }
 ?>
 
@@ -21,18 +22,19 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="Style.css" />
-        <script src="dropdown.js"></script>
-        <title></title>
+        <link rel="stylesheet" type="text/css" href="../Style.css" />
+        <script src="../dropdown.js"></script>
+        <script src="js/showUser.js"></script>
+        <title>Edit Profile</title>
     </head>
     <body>
         <div class="nav">
             <ul>
                 <li style="float:left; color:#999999"><a href="index.php">Carkea</a></li>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="search.php">Search</a></li>
+                <li><a href="../index.php">Home</a></li>
+                <li><a href="../search.php">Search</a></li>
 		<li><a href="#">Contact Us</a></li>
-                <li><a href="branchlist.php">Branch List</a></li>
+                <li><a href="../branchlist.php">Branch List</a></li>
                 <?php 
                 if (isset($_SESSION['username'])) {
                     $loggedInUser = $_SESSION["username"];
@@ -44,26 +46,24 @@ and open the template in the editor.
                         <li class="dropdown">
                         <button onclick="myFunction()" class="dropbtn"><?=$loggedInUser?></button>
                         <div id="myDropdown" class="dropdown-content">
-                            <?php if ($_SESSION['staff'] === "false")
-                            {?>
-                                <a href="user/editProfile.php">Edit Details</a>
-                                <a href="#">View Purchases</a> <!-- Add if for user type **EDIT** -->
-                                <a href="#">Link 3</a>
-                            <?php } else {?>
-                                <a href="staff/editProfile.php">Edit Details</a>
-                                <a href="#">View Purchases</a> <!-- Add if for user type **EDIT** -->
-                                <a href="#">Link 3</a>
-                            <?php } ?>
+                            <a href="editProfile.php">Edit Details</a>
+                            <a href="#">View Purchases</a> <!-- Add if for user type **EDIT** -->
+                            <a href="#">Link 3</a>
                         </div>
                         </li>
-                        <li><a href="php_files/Logout.php">Logout</a></li>
+                        <li><a href="../php_files/Logout.php">Logout</a></li>
                     <?php } else { ?>
-                    <li><a href="login.php">Login</a></li>
+                    <li><a href="../login.php">Login</a></li>
                     <?php } 
                 } else { ?>
-                <li><a href="login.php">Login</a></li>
+                <li><a href="../login.php">Login</a></li>
                 <?php } ?>
                 </ul>
         </div> <!-- nav close -->
+        <div class="mainbody">
+            <button type="button" onclick="showUser(<?php echo $customerID ?>)">Change Content</button>
+            <br>
+            <div id="txtHint"><b>Person info will be listed here.</b></div>
+        </div> <!-- close mainbody -->
     </body>
 </html>

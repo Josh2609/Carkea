@@ -1,6 +1,7 @@
 <?php
 // Start the session
 session_start();
+$_SESSION["incorrectLogin"] = "false";
 ?>
 <!DOCTYPE html>
 <!--
@@ -28,8 +29,8 @@ and open the template in the editor.
         <div class="mainbody">
         <?php
             // change to Team7 and CarkeaDB for release
-            $db = mysql_connect("silva.computing.dundee.ac.uk", "joshuacorps","AC32006"); // CONNECT TO DATABASE
-            mysql_select_db("joshuacorpsdb"); // SELECT DATABASE
+            $db = mysql_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
+            mysql_select_db("16ac3d07"); // SELECT DATABASE
             
             if(!$db)
                 echo mysql_error() ;
@@ -41,7 +42,7 @@ and open the template in the editor.
             // Displays branch list, needs cleaning up with css/html
             while ($row = mysql_fetch_array($branchQueryResult))
             {
-                echo $row['Branch_Name']." ".$row['Telephone']." ".$row['Street_Number']
+                echo $row['Branch_Name']." ".$row['Stock_Amount']." ".$row['Telephone']." ".$row['Street_Number']
                         ." ".$row['Street']." ".$row['City']." ".$row['County']." ".$row['Postcode'];
                 echo "<br>";
             }

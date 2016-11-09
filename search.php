@@ -59,7 +59,6 @@ and open the template in the editor.
                         <option value="anyMake">Make (Any)</option>
                         <?php
                             include "php_files/db_connect.php";
-                            // TURN INTO VIEW **EDIT**
                             $stmt = $dbConnection->prepare('SELECT * FROM makeView');
                             $stmt->execute();
                             
@@ -74,7 +73,6 @@ and open the template in the editor.
                         <select id="modelSelect" name="modelSelect">
                             <option value="anyModel">Model (Any)</option>
                         <?php
-                            // TURN INTO VIEW **EDIT**
                             $stmt = $dbConnection->prepare('SELECT * FROM modelView');
                             $stmt->execute();
                             
@@ -88,7 +86,6 @@ and open the template in the editor.
                     <li><select id="colourSelect" name="colourSelect">
                             <option value="anyColour">Colour (Any)</option>
                         <?php
-                            // TURN INTO VIEW **EDIT**
                             $stmt = $dbConnection->prepare('SELECT * FROM colourView');
                             $stmt->execute();
                             
