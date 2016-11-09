@@ -2,20 +2,25 @@
 
     include "db_connect.php";
     
+    $con = mysqli_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
+          mysqli_select_db($con,"16ac3d07"); // SELECT DATABASE
+          
     session_start();
+    
+    $resultsPerPage;
     
     $make = $_POST["makeSelect"];
     $model = $_POST["modelSelect"];
     $colour = $_POST["colourSelect"];
     
     if ($make=="anyMake")
-            $make="*";
+            $make="%";
     if ($model=="anyModel")
-            $model="*";
+            $model="%";
     if ($colour=="anyColour")
-            $colour="*";
+            $colour="%";
     
-    $stmt = $dbConnection->prepare('SELECT * FROM carSearchView WHERE Make=:make AND Model=:model AND Colour=:colour');
+    $stmt = $dbConnection->prepare('SELECT * FROM carSearchView WHERE Make LIKE :make AND Model LIKE :model AND Colour LIKE :colour');
     
     $stmt->bindParam(':make', $make);
     $stmt->bindParam(':model', $model);

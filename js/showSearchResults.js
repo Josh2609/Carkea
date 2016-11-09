@@ -24,7 +24,7 @@ function showSearchResults(make, model, colour) {
       document.getElementById("txtHint").innerHTML=this.responseText;
     }
   }
-  xmlhttp.open("GET","include/getuser.php?q="+str,true);
+  xmlhttp.open("GET","../searchresults.php?q="+str,true);
   xmlhttp.send();
 }
 

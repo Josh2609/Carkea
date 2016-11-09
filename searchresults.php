@@ -14,14 +14,14 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="Style.css" />
         <script src="dropdown.js"></script>
-        <title>Carkea</title>
+        <title>Search Results</title>
     </head>
     <body>
         <div class="nav">
             <ul>
                 <li style="float:left; color:#999999"><a href="index.php">Carkea</a></li>
-                <li><a class = "active" href="index.php">Home</a></li>
-                <li><a href="search.php">Search</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a class = "active" href="search.php">Search</a></li>
 		<li><a href="#">Contact Us</a></li>
                 <li><a href="branchlist.php">Branch List</a></li>
                 <?php 
