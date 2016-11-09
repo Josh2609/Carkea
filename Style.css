@@ -121,6 +121,13 @@ footer{
     
 }
 
+.activeDropBtn 
+{
+    background-color: #ff8000;
+    color: white;
+    cursor: default;
+}
+
 /* Dropdown button on hover & focus */
 .dropbtn:hover, .dropbtn:focus {
     background-color: #009999;
