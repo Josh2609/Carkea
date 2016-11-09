@@ -47,6 +47,10 @@ and open the template in the editor.
                     {?>
                         <li><a href="staff/addstock.php">Add Stock</a></li>
                     <?php }  
+                    else if($_SESSION["accessLevel"] == "3")
+                    {?>
+                        <li><a href="staff/addemployee.php">Add Employee</a></li>
+                    <?php }  
                 }?>
             </ul>
         </div> <!-- nav close -->
