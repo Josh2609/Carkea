@@ -16,6 +16,7 @@
     if ($staff)
     {
         $stmt = $dbConnection->prepare('SELECT * FROM employeelogindetails WHERE Login_Username=:username');
+       
     } else {
         $stmt = $dbConnection->prepare('SELECT * FROM customerlogindetails WHERE Login_Username=:username');
     }
@@ -28,8 +29,16 @@
         $dbHash = $row['Login_Password_Hash'];
         if ($staff)
         {
-            $accessLevel = $row['Data_Access_Permissions'];
             $employeeID = $row['Employee_ID'];
+            $stmt = $dbConnection->prepare('SELECT Branch_ID FROM employee WHERE Employee_ID=:empID');
+            $stmt->bindParam(':empID', $employeeID);
+            $stmt->execute();
+            foreach ($stmt as $i)
+            {
+                $empBranch = $i['Branch_ID'];
+            }
+            
+            $accessLevel = $row['Data_Access_Permissions'];
         } else {
             $customerID = $row['Customer_ID'];
         }
@@ -40,6 +49,7 @@
         echo "<h1>Match</h1>";
         if ($staff)
         {
+            $_SESSION["empBranch"] = $empBranch;
             $_SESSION["staff"] = 'true';
             $_SESSION["accessLevel"] = $accessLevel;
             $_SESSION["employeeID"] = $employeeID;

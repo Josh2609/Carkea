@@ -55,7 +55,7 @@ and open the template in the editor.
             <form method="POST"  action="php_files/getSearchResults.php">
                 <ul style='list-style:none;'>
                     <li><input type="text" name="postcode" placeholder="Postcode"></li>
-                    <li><select id="makeSelect" name="makeSelect" onchange="showModels(this.value)">
+                    <li><select id="makeSelect" name="makeSelectasd" onchange="showModels(this.value)">
                         <option value="anyMake">Make (Any)</option>
                         <?php
                             include "php_files/db_connect.php";

@@ -1,14 +1,14 @@
 <?php
 // Start the session
 session_start(); 
-if (isset($_SESSION['loggedIn']) && isset($_SESSION['staff'])) 
+if (isset($_SESSION['loggedIn']) || isset($_SESSION['staff']) || isset($_SESSION['accessLevel'])) 
 {
-    if($_SESSION['loggedIn'] !== "true" && $_SESSION['staff'] !== "true")
+    if($_SESSION['loggedIn'] !== "true" || $_SESSION['staff'] !== "true" || $_SESSION['accessLevel'] != "1")
     {
-        header("Location: index.php");
+        header("Location: ../index.php");
     } 
 } else {
-    header("Location: index.php");
+    header("Location: ../index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -57,8 +57,80 @@ and open the template in the editor.
                 }?>
             </ul>
         </div> <!-- nav close -->
-        <?php
-        // put your code here
-        ?>
+        
+        <div class="mainbody">
+             <form method="POST"  action="include/addStockDB.php">
+                <ul style='list-style:none;'>
+                    <?php if ($_SESSION['accessLevel'] == "1")
+                    {?>
+                    <li><select id="branchSelect1" name="branchSelect">
+                        
+                        <?php
+                        include "../php_files/db_connect.php";
+                        $stmt = $dbConnection->prepare('SELECT Branch_ID, Branch_Name FROM branchView WHERE Branch_ID=:branchID');
+                        $stmt->bindParam(':branchID',$_SESSION["empBranch"]);
+                        $stmt->execute();
+                            
+                        foreach ($stmt as $row)
+                        { 
+                            $branchID = $row['Branch_ID'];
+                            $branchName = $row['Branch_Name'];  
+                        } ?>
+                        <option value="<?=$branchID?>"><?=$branchName?></option>
+                    </select></li>
+                        <?php
+                    } else if ($_SESSION['accessLevel'] == "10")
+                    { ?>
+                    <li><select id="branchSelect10" name="branchSelect">
+                        <?php
+                        include "../php_files/db_connect.php";
+                        $stmt = $dbConnection->prepare('SELECT Branch_ID, Branch_Name FROM branchView');
+                        $stmt->execute();
+                            
+                        foreach ($stmt as $row)
+                        { 
+                            $branchID = $row['Branch_ID'];
+                            $branchName = $row['Branch_Name'];?>
+                            <option value="<?=$branchID?>"><?=$branchName?></option>
+                        <?php } ?>
+                        </select></li>
+                    <?php } ?>
+                        
+                    <li>Vehicle Identification Number (VIN)<input type="text" name="vin" required></li>
+                    <li>Registration<input type="text" name="reg" required></li>
+                    <li>Make<input type="text" name="make" required></li>
+                    <li>Model<input type="text" name="model" required></li>
+                    <li>Colour<input type="text" name="colour" required></li>
+                    <li>Mileage<input type="text" name="mileage" required></li>
+                    <li>Fuel Type<input type="text" name="fuelType" required></li>
+                    <li>Car Type<input type="text" name="carType" required></li>
+                    <li>Transmission<input type="text" name="transmission" required></li>
+                    <li>Manufacture Date<input type="text" name="manufactureDate" required></li>
+                    <li>Number of Doors<input type="text" name="numDoors" required></li>
+                    <li>Engine Size<input type="text" name="engSize" required></li>
+                    
+                    <li>Asking Price<input type="text" name="askPrice" required></li>
+                    <li>Condition<input type="text" name="condition" required></li>
+  
+                </ul>
+                <input type="submit" value="Add Stock"> 
+            </form> 
+            
+            <?php 
+            if(!empty($_GET['message']))
+            {
+                $message = $_GET['message'];
+                if($message == "Success")
+                {
+                    echo "<p>Stock successfully added to the database</p>";
+                } else if ($message == "Duplicate") 
+                {
+                    echo "<p>This Vehicle Identification Number already exists in the database</p>";
+                } else {
+                    echo "<p>There was an error when adding the stock to the database, please try again</p>";
+                }
+            }
+            ?>
+        </div> <!-- mainbody close -->
     </body>
 </html>
