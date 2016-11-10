@@ -9,7 +9,7 @@
  * and open the template in the editor.
  */
 function showSearchResults(make, model, colour) {
-  if (str=="") {
+  if (make=="") {
     document.getElementById("txtHint").innerHTML="";
     return;
   } 
@@ -24,7 +24,7 @@ function showSearchResults(make, model, colour) {
       document.getElementById("txtHint").innerHTML=this.responseText;
     }
   }
-  xmlhttp.open("GET","../searchresults.php?q="+str,true);
+  xmlhttp.open("GET","newgetSearchResults.php?make="+make+"&model="+model+"&colour="+colour,true);
   xmlhttp.send();
 }
 

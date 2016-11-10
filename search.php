@@ -14,8 +14,23 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="Style.css" />
         <script src="dropdown.js"></script>
-        <script src="js/showModelDrop.js"></script>
+        <script src="js/showSearchResults.js"></script>
         <title>Search</title>
+        <script>
+            var make = '%';
+            var model = '%';
+            var colour = '%';
+            function getMake(option) {
+                make = option.value;  
+            }
+            function getModel(option) {
+                model = option.value;  
+            }
+            function getColour(option) {
+                colour = option.value;  
+            }
+        </script>
+            
     </head>
     <body>
         <div class="nav">
@@ -55,7 +70,7 @@ and open the template in the editor.
             <form method="POST"  action="php_files/getSearchResults.php">
                 <ul style='list-style:none;'>
                     <li><input type="text" name="postcode" placeholder="Postcode"></li>
-                    <li><select id="makeSelect" name="makeSelect" onchange="showModels(this.value)">
+                    <li><select id="makeSelect" name="makeSelect" onchange="getMake(this)">
                         <option value="anyMake">Make (Any)</option>
                         <?php
                             include "php_files/db_connect.php";
@@ -70,7 +85,7 @@ and open the template in the editor.
                     </select></li> <!-- MAKE OPTION -->
                     
                     <li><div id="modelDropdown">
-                        <select id="modelSelect" name="modelSelect">
+                            <select id="modelSelect" name="modelSelect" onchange="getModel(this)">
                             <option value="anyModel">Model (Any)</option>
                         <?php
                             $stmt = $dbConnection->prepare('SELECT * FROM modelView');
@@ -83,7 +98,7 @@ and open the template in the editor.
                         <?php } ?>
                         </select></div></li> <!-- MODEL OPTION -->
                     
-                    <li><select id="colourSelect" name="colourSelect">
+                        <li><select id="colourSelect" name="colourSelect" onchange="getColour(this)">
                             <option value="anyColour">Colour (Any)</option>
                         <?php
                             $stmt = $dbConnection->prepare('SELECT * FROM colourView');
@@ -97,9 +112,11 @@ and open the template in the editor.
                     </select></li> <!-- Colour OPTION -->
                 </ul>
                 <br/> 
-                <input type="submit" value="Search"> 
+                <input type="submit" value="Search">  
             </form>  
             
+            <button type="button" onclick="showSearchResults(make, model, colour)">Improved Search?</button> 
+            <div id="txtHint"><b>Car info will be listed here.</b></div>
             
         </div> <!-- close mainbody -->
     </body>
