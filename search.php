@@ -20,6 +20,11 @@ and open the template in the editor.
             var make = '%';
             var model = '%';
             var colour = '%';
+            var fuel = '%';
+            var carType = '%';
+            var transType = '%';
+            var numDoors = '%';
+            var condition = '%';
             function getMake(option) {
                 make = option.value;  
             }
@@ -28,6 +33,21 @@ and open the template in the editor.
             }
             function getColour(option) {
                 colour = option.value;  
+            }
+            function getFuel(option) {
+                fuel = option.value;  
+            }
+            function getCarType(option) {
+                carType = option.value;  
+            }
+            function getTransType(option) {
+                transType = option.value;  
+            }
+            function getNumDoors(option) {
+                numDoors = option.value;  
+            }
+            function getCondition(option) {
+                condition = option.value;  
             }
         </script>
             
@@ -110,12 +130,88 @@ and open the template in the editor.
                                 <option value="<?=$colour?>"><?=$colour?></option>
                         <?php } ?>
                     </select></li> <!-- Colour OPTION -->
+                    <li>Mileage: From<input type="text" name="mileageLow">To<input type="text" name="mileageHigh"></li>
+                    
+                        <li><div id="fuelDropdown">
+                            <select id="fuelSelect" name="fuelSelect" onchange="getFuel(this)">
+                            <option value="anyFuel">Fuel Type (Any)</option>
+                        <?php
+                            $stmt = $dbConnection->prepare('SELECT * FROM fuelView');
+                            $stmt->execute();
+                            
+                            foreach ($stmt as $row)
+                            { 
+                                $fuelType = $row['Fuel_Type'];   ?>
+                                <option value="<?=$fuelType?>"><?=$fuelType?></option>
+                        <?php } ?>
+                            </select></div>
+                        </li> <!-- FUEL OPTION -->
+                        
+                        <li><div id="carTypeDropdown">
+                            <select id="carTypeSelect" name="carTypeSelect" onchange="getCarType(this)">
+                            <option value="anyCarType">Car Type (Any)</option>
+                        <?php
+                            $stmt = $dbConnection->prepare('SELECT DISTINCT Car_Type FROM Car'); // **EDIT**
+                            $stmt->execute();
+                            
+                            foreach ($stmt as $row)
+                            { 
+                                $carType = $row['Car_Type'];   ?>
+                                <option value="<?=$carType?>"><?=$carType?></option>
+                        <?php } ?>
+                            </select></div>
+                        </li> <!-- carType OPTION -->
+                        
+                        <li><div id="transmissionDropdown">
+                            <select id="transmissionSelect" name="transmissionSelect" onchange="getTransType(this)">
+                            <option value="anyTransmission">Transmission (Any)</option>
+                        <?php
+                            $stmt = $dbConnection->prepare('SELECT DISTINCT Transmission FROM Car'); // **EDIT**
+                            $stmt->execute();
+                            
+                            foreach ($stmt as $row)
+                            { 
+                                $transmission = $row['Transmission'];   ?>
+                                <option value="<?=$transmission?>"><?=$transmission?></option>
+                        <?php } ?>
+                            </select></div>
+                        </li> <!-- transmission OPTION -->
+                        
+                        <li><div id="numDoorsDropdown">
+                            <select id="numDoorSelect" name="numDoorSelect" onchange="getNumDoors(this)">
+                            <option value="anyNumDoors">Number of Doors (Any)</option>
+                        <?php
+                            $stmt = $dbConnection->prepare('SELECT DISTINCT Number_of_Doors FROM Car'); // **EDIT**
+                            $stmt->execute();
+                            
+                            foreach ($stmt as $row)
+                            { 
+                                $numDoors = $row['Number_of_Doors'];   ?>
+                                <option value="<?=$numDoors?>"><?=$numDoors?></option>
+                        <?php } ?>
+                            </select></div>
+                        </li> <!-- numDoors OPTION -->
+                        
+                        <li><div id="conditionDropdown">
+                            <select id="conditionSelect" name="conditionSelect" onchange="getCondition(this)">
+                            <option value="anyCondition">Condition (Any)</option>
+                        <?php
+                            $stmt = $dbConnection->prepare('SELECT DISTINCT Car_Condition FROM CarStock'); // **EDIT**
+                            $stmt->execute();
+                            
+                            foreach ($stmt as $row)
+                            { 
+                                $condition = $row['Car_Condition'];   ?>
+                                <option value="<?=$condition?>"><?=$condition?></option>
+                        <?php } ?>
+                            </select></div>
+                        </li> <!-- numDoors OPTION -->
                 </ul>
                 <br/> 
                 <input type="submit" value="Search">  
             </form>  
             
-            <button type="button" onclick="showSearchResults(make, model, colour)">Improved Search?</button> 
+            <button type="button" onclick="showSearchResults(make, model, colour, fuel, carType, transType, numDoors, condition)">Improved Search?</button> 
             <div id="txtHint"><b>Car info will be listed here.</b></div>
             
         </div> <!-- close mainbody -->

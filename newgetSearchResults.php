@@ -22,6 +22,11 @@ session_start();
 $make = $_GET['make'];
 $model = $_GET['model'];
 $colour = $_GET['colour'];
+$fuelType = $_GET['fuel'];
+$carType = $_GET['cartype'];
+$transType = $_GET['transtype'];
+$numDoors = $_GET['numdoors'];
+$condition = $_GET['condition'];
 
     if ($make=="anyMake")
             $make="%";
@@ -29,12 +34,23 @@ $colour = $_GET['colour'];
             $model="%";
     if ($colour=="anyColour")
             $colour="%";
-
+    if ($fuelType=="anyFuel")
+            $fuelType="%";
+    if ($carType=="anyCarType")
+            $carType="%";
+    if ($transType=="anyTransmission")
+            $transType="%";
+    if ($numDoors=="anyNumDoors")
+            $numDoors="%";
+    if ($condition=="anyCondition")
+            $condition="%";
 
 $con = mysqli_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
           mysqli_select_db($con,"16ac3d07"); // SELECT DATABASE
             
-$sql="SELECT * FROM Car WHERE Make LIKE '".$make."' AND Model LIKE '".$model."' AND Colour LIKE '".$colour."' AND Sold='".'0'."'";
+$sql="SELECT * FROM searchView WHERE Make LIKE '".$make."' AND Model LIKE '".$model."' AND Colour LIKE '".$colour."' "
+        . "AND Fuel_Type LIKE '".$fuelType."' AND Car_Type LIKE '".$carType."' AND Transmission LIKE '".$transType."'"
+        . "AND Number_of_Doors LIKE '".$numDoors."' AND Car_Condition LIKE '".$condition."' AND Sold='".'0'."'";
 $result = mysqli_query($con,$sql);
 
 echo "<table>
@@ -45,8 +61,9 @@ echo "<table>
 <th>Registration</th>
 </tr>";
 while($row = mysqli_fetch_array($result)) {
-    echo "<tr>";
-    echo "<td>" . $row['Make'] . "</td>";
+    $vin = $row['Vehicle_Identification_Number'];
+    echo '<tr>';
+    echo '<td><a href="stock.php?id='.$vin.'">' . $row["Make"] . '</a></td>';
     echo "<td>" . $row['Model'] . "</td>";
     echo "<td>" . $row['Colour'] . "</td>";
     echo "<td>" . $row['Registration'] . "</td>";

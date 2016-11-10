@@ -8,7 +8,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function showSearchResults(make, model, colour) {
+function showSearchResults(make, model, colour, fuel, carType, transType, numDoors, condition) {
   if (make=="") {
     document.getElementById("txtHint").innerHTML="";
     return;
@@ -24,7 +24,7 @@ function showSearchResults(make, model, colour) {
       document.getElementById("txtHint").innerHTML=this.responseText;
     }
   }
-  xmlhttp.open("GET","newgetSearchResults.php?make="+make+"&model="+model+"&colour="+colour,true);
+  xmlhttp.open("GET","newgetSearchResults.php?make="+make+"&model="+model+"&colour="+colour+"&fuel="+fuel+"&cartype="+carType+"&transtype="+transType+"&numdoors="+numDoors+"&condition="+condition,true);
   xmlhttp.send();
 }
 
