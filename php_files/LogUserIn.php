@@ -11,7 +11,7 @@
     $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
     // used bcrypt cos it's a fixed size (60) and seems secure enough. Default could change in the future so it's easier this way
-    $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+    $passwordHash = password_hash($password, PASSWORD_BCRYPT); // **unused?**
     
     if ($staff)
     {

@@ -37,7 +37,7 @@ and open the template in the editor.
                         <div id="myDropdown" class="dropdown-content">
                             <?php if ($_SESSION['staff'] === "false")
                             {?>
-                                <a href="user/editProfile.php">Edit Details</a>
+                                <a href="user/editProfile.php?id=<?=$_SESSION['customerID']?>">Edit Details</a>
                                 <a href="#">View Purchases</a> <!-- Add if for user type **EDIT** -->
                                 <a href="#">Link 3</a>
                             <?php } else {?>

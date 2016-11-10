@@ -11,6 +11,7 @@ if (isset($_SESSION['loggedIn']))
 } else {
     header("Location: ../index.php");
 }
+$id = $_GET['id'];
 ?>
 
 <!DOCTYPE html>
@@ -61,9 +62,67 @@ and open the template in the editor.
                 </ul>
         </div> <!-- nav close -->
         <div class="mainbody">
-            <button type="button" onclick="showUser(<?php echo $customerID ?>)">Change Content</button>
+            <?php
+            include "include/getUser.php";
+            ?>
             <br>
-            <div id="txtHint"><b>Person info will be listed here.</b></div>
+            <form method="POST"  action="include/updateProfile.php">
+                <ul style='list-style:none;'>
+                    <li>User Name &nbsp;&nbsp;<input type="text" name="username" value="<?=$username?>" disabled></li>
+                    <li>First Name  &nbsp;&nbsp;<input type="text" name="firstName" value="<?=$firstName?>"></li>
+                    <li>Last Name  &nbsp;&nbsp;<input type="text" name="lastName" value="<?=$lastName?>"></li>
+                    <li>Telephone  &nbsp;&nbsp;&nbsp;<input type="text" name="telephone" value="<?=$telephone?>"></li>
+                    <li>Email  &nbsp;<input type="text" name="email" value="<?=$email?>"></li>
+                    <li>Current Password  &nbsp;<input type="password" name="currPassword"></li>     
+                </ul>
+                <input type="submit" value="Update Details"> 
+            </form>  
+            
+            <?php 
+            if(!empty($_GET['message']))
+            {
+                $message = $_GET['message'];
+                if($message == "success")
+                {
+                    echo "<p>Details successfully updated</p>";
+                } else if ($message == "passwordnotmatch")
+                {
+                    echo "<p>The password you entered did not match your stored password.</p>";
+                } else {
+                    echo "<p>There was an error when updating your details, please try again.</p>";
+                }
+            }
+            ?>
+            <br><br>
+            <form method="POST"  action="include/changePass.php">
+                <ul style='list-style:none;'>
+                    <li>Enter a new password if you would like to update your password</li>
+                    <li><br></li>
+                    <li>Current Password  &nbsp;<input type="password" name="currPassword"></li> 
+                    <li>New Password  &nbsp;<input type="password" name="newPassword"></li>
+                    <li>Repeate New Password  &nbsp;<input type="password" name="repeatNewPass"></li>
+                </ul>
+                <input type="submit" value="Change Password"> 
+            </form> 
+            
+            <?php 
+            if(!empty($_GET['message2']))
+            {
+                $message = $_GET['message2'];
+                if($message == "success")
+                {
+                    echo "<p>Password successfully updated</p>";
+                } else if ($message == "passwordnotmatch")
+                {
+                    echo "<p>The password you entered did not match your stored password.</p>";
+                } else if ($message == "newpassnotmatch")
+                {
+                    echo "<p>The new passwords you entered did not match.</p>";
+                } else {
+                    echo "<p>There was an error when updating your details, please try again.</p>";
+                }
+            }
+            ?>   
         </div> <!-- close mainbody -->
     </body>
 </html>
