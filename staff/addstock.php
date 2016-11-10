@@ -120,7 +120,7 @@ and open the template in the editor.
             if(!empty($_GET['message']))
             {
                 $message = $_GET['message'];
-                if($message == "Success")
+                if($message == "success")
                 {
                     echo "<p>Stock successfully added to the database</p>";
                 } else if ($message == "Duplicate") 

@@ -15,13 +15,14 @@
     $engSize = $_POST["engSize"];
     $askPrice = $_POST["askPrice"];
     $condition = $_POST["condition"];
+    $sold = '0';
     
     $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
 
     $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    $stmt = $dbConnection->prepare('INSERT INTO car (Vehicle_Identification_Number, Registration, Make, Model, Colour, Mileage, Fuel_Type, Car_Type, Transmission, Manufacture_Date, Number_of_Doors, Engine_Size) VALUES (:vin, :reg, :make, :model, :colour, :mileage, :fuelType, :carType, :transmission, :manufactureDate, :numDoors, :engSize)');
+    $stmt = $dbConnection->prepare('INSERT INTO car (Vehicle_Identification_Number, Registration, Make, Model, Colour, Mileage, Fuel_Type, Car_Type, Transmission, Manufacture_Date, Number_of_Doors, Engine_Size, Sold) VALUES (:vin, :reg, :make, :model, :colour, :mileage, :fuelType, :carType, :transmission, :manufactureDate, :numDoors, :engSize, :sold)');
     
     $stmt->bindParam(':vin', $vin);
     $stmt->bindParam(':reg', $reg);
@@ -35,8 +36,9 @@
     $stmt->bindParam(':manufactureDate', $manufactureDate);
     $stmt->bindParam(':numDoors', $numDoors);
     $stmt->bindParam(':engSize', $engSize); 
+    $stmt->bindParam(':sold', $sold); 
     
-    try {
+    try{
         $stmt->execute();
     } catch (PDOException $e) {
         if ($e->errorInfo[1] == 1062) {
@@ -45,7 +47,7 @@
             header("Location: ../addstock.php?message=error");
             exit();
         }
-    }   
+   }   
    
     $stmt = $dbConnection->prepare('INSERT INTO CarStock (Car_Stock_ID, Asking_Price, Date_Acquired, Car_Condition, Branch_ID, Vehicle_Identification_Number)'
              . ' VALUES (NULL, :askPrice, CURDATE(), :condition, :branchID, :vin)');
