@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function showSearchResults(make, model, colour, fuel, carType, transType, numDoors, condition) {
-  if (make=="") {
-    document.getElementById("txtHint").innerHTML="";
-    return;
-  } 
+function showAddressForm()
+{
+  document.getElementById("addressDiv").style.display = "block";
+}
+
+function deleteAddress(addressID)
+{
   if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
     xmlhttp=new XMLHttpRequest();
@@ -16,11 +18,9 @@ function showSearchResults(make, model, colour, fuel, carType, transType, numDoo
   }
   xmlhttp.onreadystatechange=function() {
     if (this.readyState==4 && this.status==200) {
-      document.getElementById("txtHint").innerHTML=this.responseText;
+        location.reload();
     }
   }
-  xmlhttp.open("GET","newgetSearchResults.php?make="+make+"&model="+model+"&colour="+colour+"&fuel="+fuel+"&cartype="+carType+"&transtype="+transType+"&numdoors="+numDoors+"&condition="+condition,true);
+  xmlhttp.open("GET","include/deleteAddress.php?id="+addressID,true);
   xmlhttp.send();
 }
-
-
