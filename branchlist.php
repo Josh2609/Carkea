@@ -20,10 +20,10 @@ and open the template in the editor.
         <div class="nav">
             <ul>
                 <li style="float:left; color:#999999"><a href="index.php">Carkea</a></li>
-                <li><a class = "active" href="index.php">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li><a href="search.php">Search</a></li>
 		<li><a href="#">Contact Us</a></li>
-                <li><a href="branchlist.php">Branch List</a></li>
+                <li><a class = "active" href="branchlist.php">Branch List</a></li>
                 <?php 
                 if (isset($_SESSION['username'])) {
                     $loggedInUser = $_SESSION["username"];
