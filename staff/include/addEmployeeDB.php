@@ -71,16 +71,16 @@ if (isset($_SESSION['loggedIn']) || isset($_SESSION['staff']) || isset($_SESSION
     $stmt->bindParam(':roleID', $roleID);
     $stmt->bindParam(':employeeID', $employeeID);
     
-    try {
-        $stmt->execute();
-    } catch (PDOException $e) {
-        if ($e->errorInfo[1] == 1062) {
-        header("Location: ../addstock.php?message=duplicate");
-        } else {
-            header("Location: ../addstock.php?message=error");
-            exit();
-        }
-    }   
+//    try {
+//        $stmt->execute();
+//    } catch (PDOException $e) {
+//        if ($e->errorInfo[1] == 1062) {
+//        header("Location: ../addstock.php?message=duplicate");
+//        } else {
+//            header("Location: ../addstock.php?message=error");
+//            exit();
+//        }
+//    }   
     try
     {
         if ($stmt->execute())

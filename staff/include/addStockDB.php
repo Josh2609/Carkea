@@ -59,6 +59,10 @@
     
     if ($stmt->execute())
     {
+        $stmt2 = $dbConnection->prepare('UPDATE Branch SET Stock_Amount = Stock_Amount + 1 WHERE Branch_ID = :branchID');
+        $stmt2->bindParam(':branchID', $branchID);
+        $stmt2->execute();
+        
         header("Location: ../addstock.php?message=success");
     } else {
         $stmt = $dbConnection->prepare('DELETE FROM car WHERE Vehicle_Identification_Number=:vin');
