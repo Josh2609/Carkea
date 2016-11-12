@@ -25,6 +25,8 @@ and open the template in the editor.
             var transType = '%';
             var numDoors = '%';
             var condition = '%';
+            //var mileLow = '0';
+            //var mileHigh = '10000000';
             function getMake(option) {
                 make = option.value;  
             }
@@ -48,6 +50,12 @@ and open the template in the editor.
             }
             function getCondition(option) {
                 condition = option.value;  
+            }
+            function getMileLow(option) {
+                mileLow = option.value;  
+            }
+            function getMileHigh(option) {
+                mileHigh = option.value;  
             }
         </script>
             
@@ -130,7 +138,7 @@ and open the template in the editor.
                                 <option value="<?=$colour?>"><?=$colour?></option>
                         <?php } ?>
                     </select></li> <!-- Colour OPTION -->
-                    <li>Mileage: From<input type="text" name="mileageLow">To<input type="text" name="mileageHigh"></li>
+                    <li>Mileage: From<input type="text" name="mileageLow" onchange="getMileLow(this)">To<input type="text" name="mileageHigh" onchange="getMileHigh(this)"></li>
                     
                         <li><div id="fuelDropdown">
                             <select id="fuelSelect" name="fuelSelect" onchange="getFuel(this)">
@@ -211,7 +219,7 @@ and open the template in the editor.
                 <input type="submit" value="Search">  
             </form>  
             
-            <button type="button" onclick="showSearchResults(make, model, colour, fuel, carType, transType, numDoors, condition)">Improved Search?</button> 
+            <button type="button" onclick="showSearchResults(make, model, colour, fuel, carType, transType, numDoors, condition, mileLow, mileHigh)">Improved Search?</button> 
             <div id="txtHint"><b>Car info will be listed here.</b></div>
             
         </div> <!-- close mainbody -->

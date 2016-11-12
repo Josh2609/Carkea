@@ -42,7 +42,7 @@ and open the template in the editor.
                                 <a href="#">View Purchases</a>
                             <?php } else {?>
                                 <a href="staff/editProfile.php?id=<?=$_SESSION['employeeID']?>">Update Details</a>
-                                <a href="#">View Purchases</a> <!-- Add if for user type **EDIT** -->
+                                <a href="staff/searchcustomers.php">Search Customers</a> <!-- Add if for user type **EDIT** -->
                                 <a href="#">Link 3</a>
                             <?php } ?>
                         </div>

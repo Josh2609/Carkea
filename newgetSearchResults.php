@@ -27,6 +27,8 @@ $carType = $_GET['cartype'];
 $transType = $_GET['transtype'];
 $numDoors = $_GET['numdoors'];
 $condition = $_GET['condition'];
+$mileLow = $_GET['milelow'];
+$mileHigh = $_GET['milehigh'];
 
     if ($make=="anyMake")
             $make="%";
@@ -44,13 +46,24 @@ $condition = $_GET['condition'];
             $numDoors="%";
     if ($condition=="anyCondition")
             $condition="%";
+    if ($mileLow=="")
+            $mileLow="0";
+    if ($mileHigh=="")
+            $mileHigh="100000000";
+    if ($mileHigh<$mileLow) // stops the user being stupid
+    {
+            $temp=$mileHigh;
+            $mileHigh=$mileLow;
+            $mileLow=$temp;
+    }
 
 $con = mysqli_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
           mysqli_select_db($con,"16ac3d07"); // SELECT DATABASE
             
 $sql="SELECT * FROM searchView WHERE Make LIKE '".$make."' AND Model LIKE '".$model."' AND Colour LIKE '".$colour."' "
         . "AND Fuel_Type LIKE '".$fuelType."' AND Car_Type LIKE '".$carType."' AND Transmission LIKE '".$transType."'"
-        . "AND Number_of_Doors LIKE '".$numDoors."' AND Car_Condition LIKE '".$condition."' AND Sold='".'0'."'";
+        . "AND Number_of_Doors LIKE '".$numDoors."' AND Car_Condition LIKE '".$condition."' "
+        . "AND Mileage BETWEEN '".$mileLow."' AND '".$mileHigh."' AND Sold='".'0'."'";
 $result = mysqli_query($con,$sql);
 
 echo "<table>
