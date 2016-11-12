@@ -28,8 +28,9 @@
         {
              header("Location: ../editProfile.php?message2=newpassnotmatch");
         } else {
-            $stmt = $dbConnection->prepare('UPDATE EmployeeLoginDetails SET Login_Password_Hash=:newPassHash');
+            $stmt = $dbConnection->prepare('UPDATE EmployeeLoginDetails SET Login_Password_Hash=:newPassHash WHERE Employee_ID=:empID');
             $stmt->bindParam(':newPassHash', $newPassHash);
+            $stmt->bindParam(':empID', $id);
             if ($stmt->execute())
             {
                 header("Location: ../editProfile.php?message2=success");
