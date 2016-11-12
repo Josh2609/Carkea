@@ -41,7 +41,7 @@ and open the template in the editor.
                                 <a href="user/updateaddress.php?id=<?=$_SESSION['customerID']?>">Update Addresses</a> <!-- Add if for user type **EDIT** -->
                                 <a href="#">View Purchases</a>
                             <?php } else {?>
-                                <a href="staff/editProfile.php">Update Details</a>
+                                <a href="staff/editProfile.php?id=<?=$_SESSION['employeeID']?>">Update Details</a>
                                 <a href="#">View Purchases</a> <!-- Add if for user type **EDIT** -->
                                 <a href="#">Link 3</a>
                             <?php } ?>

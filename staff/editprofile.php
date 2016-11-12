@@ -2,9 +2,9 @@
 // Start the session
 session_start();
 $id = $_GET['id'];
-if (isset($_SESSION['loggedIn']) && isset($_SESSION['customerID'])) 
+if (isset($_SESSION['loggedIn']) && isset($_SESSION['employeeID'])) 
 {
-    if ($id != $_SESSION['customerID'])
+    if ($id != $_SESSION['employeeID'])
     {
         header("Location: ../index.php");
     }
@@ -65,38 +65,6 @@ and open the template in the editor.
                 </ul>
         </div> <!-- nav close -->
         <div class="mainbody">
-            <?php
-            include "include/getUser.php";
-            ?>
-            <br>
-            <form method="POST"  action="include/updateProfile.php">
-                <ul style='list-style:none;'>
-                    <li>User Name &nbsp;&nbsp;<input type="text" name="username" value="<?=$username?>" disabled></li>
-                    <li>First Name  &nbsp;&nbsp;<input type="text" name="firstName" value="<?=$firstName?>"></li>
-                    <li>Last Name  &nbsp;&nbsp;<input type="text" name="lastName" value="<?=$lastName?>"></li>
-                    <li>Telephone  &nbsp;&nbsp;&nbsp;<input type="text" name="telephone" value="<?=$telephone?>"></li>
-                    <li>Email  &nbsp;<input type="text" name="email" value="<?=$email?>"></li>
-                    <li>Current Password  &nbsp;<input type="password" name="currPassword"></li>     
-                </ul>
-                <input type="submit" value="Update Details"> 
-            </form>  
-            
-            <?php 
-            if(!empty($_GET['message']))
-            {
-                $message = $_GET['message'];
-                if($message == "success")
-                {
-                    echo "<p>Details successfully updated</p>";
-                } else if ($message == "passwordnotmatch")
-                {
-                    echo "<p>The password you entered did not match your stored password.</p>";
-                } else {
-                    echo "<p>There was an error when updating your details, please try again.</p>";
-                }
-            }
-            ?>
-            <br><br>
             <form method="POST"  action="include/changePass.php">
                 <ul style='list-style:none;'>
                     <li>Enter a new password if you would like to update your password</li>

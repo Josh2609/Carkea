@@ -1,7 +1,7 @@
 <?php
 
     session_start();
-    $id = intval($_SESSION['customerID']);
+    $id = intval($_SESSION['employeeID']);
     
     $firstName = $_POST["firstName"];
     $lastName = $_POST["lastName"];

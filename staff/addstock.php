@@ -117,8 +117,8 @@ and open the template in the editor.
                 <input type="submit" value="Add Stock"> 
             </form> 
             
-            <form action="include/addCarImage.php" method="POST" enctype="multipart/form-data">
-                <label>File: </label><input type="file" name="image" />
+            <form action="include/addCarImage.php" method="POST" enctype="multipart/form-data" >
+                <label>File: </label><input type="file" name="image" accept="image/*"/>
                 <input type="submit" />
             </form>
             

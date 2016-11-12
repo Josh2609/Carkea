@@ -5,8 +5,7 @@ $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk
     $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$db = mysql_connect("silva.computing.dundee.ac.uk", "16ac3u07",
-     "bac132");
+$db = mysql_connect("silva.computing.dundee.ac.uk", "16ac3u07", "bac132");
 // SELECT DATABASE - use your own database name
 mysql_select_db("16ac3d07");
 
@@ -19,15 +18,7 @@ $query = "INSERT INTO testblob (image_id, image, image_name ) VALUES (NULL, '$im
 mysql_query($query,$db);
 
 
-// $stmt = $dbConnection->prepare('INSERT INTO testblob (image_id, image, image_name ) '
-//         . 'VALUES (NULL, :image, :iname)');
-//    
-//    $stmt->bindParam(':image', $image, PDO::PARAM_LOB);
-//    $stmt->bindParam(':iname', $image_name);
-//    $stmt->execute();
     
-    
- $db = mysqli_connect("silva.computing.dundee.ac.uk","16ac3u07","bac132","16ac3d07"); //keep your db name
     $stmt = $dbConnection->prepare("SELECT image FROM testblob WHERE image_id =?");
     //$stmt->execute();
     
@@ -37,13 +28,6 @@ mysql_query($query,$db);
         echo '<img src="data:image/jpeg;base64,' . base64_encode($row['image']) . '"">'; //this prints the image data, transforming the image.php to an image
         }
         
-//foreach ($stmt as $row)
-//    {
-//        $image = $row['image'];
-//        echo '<img src="data:image/jpeg;base64,'.base64_encode($image->load()) .'" />';
-//    }
-
-
 
 // ** WORKING ON BELOW **
 //if($_FILES['image']['name'])
