@@ -100,14 +100,14 @@ and open the template in the editor.
 
                 </ul>
                 <br/> 
-                <input type="submit" value="Search"> 
+                <input type="submit" value="Add Employee"> 
             </form>  
             
             <?php 
             if(!empty($_GET['message']))
             {
                 $message = $_GET['message'];
-                if($message == "Success")
+                if($message == "success")
                 {
                     echo "<p>Employee successfully added to the database.</p>";
                 } else if ($message == "passwordmatch") 

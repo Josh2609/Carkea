@@ -71,21 +71,16 @@ if (isset($_SESSION['loggedIn']) || isset($_SESSION['staff']) || isset($_SESSION
     $stmt->bindParam(':roleID', $roleID);
     $stmt->bindParam(':employeeID', $employeeID);
     
-//    try {
-//        $stmt->execute();
-//    } catch (PDOException $e) {
-//        if ($e->errorInfo[1] == 1062) {
-//        header("Location: ../addstock.php?message=duplicate");
-//        } else {
-//            header("Location: ../addstock.php?message=error");
-//            exit();
-//        }
-//    }   
+    
+    
     try
     {
         if ($stmt->execute())
         {
-            header("Location: ../addemployee.php?message=Success");
+            $stmt2 = $dbConnection->prepare('UPDATE Branch SET Employee_Amount = Employee_Amount + 1 WHERE Branch_ID = :branchID');
+            $stmt2->bindParam(':branchID', $branchID);
+            $stmt2->execute();
+            header("Location: ../addemployee.php?message=success");
         } else {
             $stmt = $dbConnection->prepare('DELETE FROM employee WHERE Employee_ID=:empID');
             $stmt->bindParam(':empID', $employeeID);
