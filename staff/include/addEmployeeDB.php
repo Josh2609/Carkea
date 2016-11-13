@@ -61,8 +61,6 @@ if (isset($_SESSION['loggedIn']) || isset($_SESSION['staff']) || isset($_SESSION
     
     $employeeID = $dbConnection->lastInsertId();
     
-    echo "<p><?=$employeeID?> </p>";
-    
     $stmt = $dbConnection->prepare('INSERT INTO EmployeeLoginDetails (Login_Username, Login_Password_Hash, Data_Access_Permissions, Employee_ID)'
             . ' VALUES (:username, :passwordHash, :roleID, :employeeID)');
     

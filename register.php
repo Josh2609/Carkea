@@ -14,13 +14,14 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="Style.css" />
         <script src="dropdown.js"></script>
-        <title>Carkea</title>
+        <title>Register</title>
+       
     </head>
     <body>
         <div class="nav">
             <ul>
                 <li style="float:left; color:#999999"><a href="index.php">Carkea</a></li>
-                <li><a class = "active" href="index.php">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li><a href="search.php">Search</a></li>
 		<li><a href="#">Contact Us</a></li>
                 <li><a href="branchlist.php">Branch List</a></li>
@@ -50,11 +51,11 @@ and open the template in the editor.
                         <li><a href="php_files/Logout.php">Logout</a></li>
                     <?php } else { ?>
                     <li><a href="login.php">Login</a></li>
-                    <li><a href="register.php">Register</a></li>
+                    <li><a class = "active" href="register.php">Register</a></li>
                     <?php } 
                 } else { ?>
                 <li><a href="login.php">Login</a></li>
-                <li><a href="register.php">Register</a></li>
+                <li><a class = "active" href="register.php">Register</a></li>
                 <?php }
 
                 if (isset($_SESSION["accessLevel"])) 
@@ -71,6 +72,49 @@ and open the template in the editor.
             </ul>
         </div> <!-- nav close -->
         <div class="mainbody">
+
+            <h2>Register</h2>
+            <h3>Please enter your details below</h3>
+            
+            
+            <form method="POST"  action="php_files/registerUserDB.php">
+                <ul style='list-style:none;'>
+                        <li>First Name<input type ="text" name ="firstname"></li>
+                        <li><br></li>
+                        <li>Surname<input type="text" name ="surname"></li>
+                        <li><br></li>
+                        <li>Telephone<input type ="text" name="telephone"></li>
+                        <li><br></li>
+                        <li>Email<input type ="text" name="email"></li>
+                        <li><br></li>
+                        <li>Username<input type="text" name="username"></li>
+                        <li><br></li>
+                        <li>Password<input type="password" name="password"></li>
+                        <li><br></li>
+                        <li>Repeat Password<input type="password" name="repeatPass"></li>
+                        <li><br></li>
+                    </ul>
+                <br/> 
+                <input type="submit" value="Register"> 
+            </form>
+            
+            <?php 
+            if(!empty($_GET['message']))
+            {
+                $message = $_GET['message'];
+                if($message == "success")
+                {
+                    echo "<p>You have successfully registered.</p>";
+                } else if ($message == "passwordmatch") 
+                {
+                    echo "<p>The passwords you entered did not match. Please try again.</p>";
+                } else if ($message == "duplicate"){
+                    echo "<p>The username you entered is already taken. Please try again.</p>";
+                } else { 
+                    echo "<p>There was an error when registering, please try again later.</p>";
+                }
+            }
+            ?>
         </div> <!-- close mainbody -->
     </body>
 </html>
