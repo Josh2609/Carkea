@@ -60,10 +60,7 @@ $key = 'AIzaSyDv0SJXrfeWAu-LeH9z_1XXriQC-Lrdilk';
         $branchLat = $row['Branch_Lat'];
         $branchLong = $row['Branch_Long'];
         if(distance($xlatAddress, $xlongAddress, $branchLat, $branchLong, "M") < $distance)
-        {
-            echo $xlatAddress.",".$xlongAddress;
-            echo "<p>AYY</p>";
-            
+        {   
             $branchID = $row['Branch_ID'];
             array_push($inRangeBranch,$branchID);
         }
