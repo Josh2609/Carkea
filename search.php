@@ -25,8 +25,8 @@ and open the template in the editor.
             var transType = '%';
             var numDoors = '%';
             var condition = '%';
-            //var mileLow = '0';
-            //var mileHigh = '10000000';
+            var mileLow = '0';
+            var mileHigh = '100000000';
             function getMake(option) {
                 make = option.value;  
             }
