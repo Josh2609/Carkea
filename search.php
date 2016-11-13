@@ -12,7 +12,8 @@ and open the template in the editor.
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="Style.css" />
+        <!--<link rel="stylesheet" type="text/css" href="Style.css" />-->
+        <link href="newStyle.css" rel="stylesheet" type="text/css"/>
         <script src="dropdown.js"></script>
         <script src="js/showSearchResults.js"></script>
         <title>Search</title>
@@ -72,7 +73,7 @@ and open the template in the editor.
     <body>
         <div class="nav">
             <ul>
-                <li style="float:left; color:#999999"><a href="index.php">Carkea</a></li>
+                <li class="logo"><a class = "logo" href="index.php">Carkea</a></li>
                 <li><a href="index.php">Home</a></li>
                 <li><a class = "active" href="search.php">Search</a></li>
 		<li><a href="#">Contact Us</a></li>
@@ -103,12 +104,21 @@ and open the template in the editor.
                 </li>
                 </ul>
         </div> <!-- nav close -->
-        <div class="mainbody">
+        
+            <div class="searchBody">
+            <div class="thingyholder">
+            <br>
+            <a href="#hide1" class="hide" id="hide1">Click to hide the Search Options</a>
+            <a href="#show1" class="show" id="show1">Click to view the Search Options</a>
+                        <br><br>
+            
+            <div class="list">  
             <form method="POST"  action="php_files/getSearchResults.php">
-                <ul style='list-style:none;'>
-                    <li><input type="text" name="postcode" placeholder="Postcode" onchange="getPostcode(this)"></li>
-                    <li><input type="text" name="distance" placeholder="Distance" onchange="getDistance(this)"></li>
-                    <li><select id="makeSelect" name="makeSelect" onchange="getMake(this)">
+                <table style="width:100%">
+                <tr>
+                    <td><input type="text" name="postcode" placeholder="Postcode" onchange="getPostcode(this)" style="width: 150px;height:25px;"></td>
+                    <td><input type="text" name="distance" placeholder="Distance" onchange="getDistance(this)" style="width: 150px;height:25px;"></td>
+                    <td><select id="makeSelect" name="makeSelect" onchange="getMake(this)" style="width: 155px;height:30px;color:#2d5986">
                         <option value="anyMake">Make (Any)</option>
                         <?php
                             include "php_files/db_connect.php";
@@ -120,10 +130,11 @@ and open the template in the editor.
                                 $make = $row['Make'];   ?>
                                 <option value="<?=$make?>"><?=$make?></option>
                         <?php } ?>
-                    </select></li> <!-- MAKE OPTION -->
-                    
-                    <li><div id="modelDropdown">
-                            <select id="modelSelect" name="modelSelect" onchange="getModel(this)">
+                    </select></td><!-- MAKE OPTION -->
+                     </tr>
+                    <tr>
+                        <div id="modelDropdown">
+                            <td><select id="modelSelect" name="modelSelect" onchange="getModel(this)" style="width: 155px;height:30px;color:#2d5986">
                             <option value="anyModel">Model (Any)</option>
                         <?php
                             $stmt = $dbConnection->prepare('SELECT * FROM modelView');
@@ -134,9 +145,9 @@ and open the template in the editor.
                                 $model = $row['Model'];   ?>
                                 <option value="<?=$model?>"><?=$model?></option>
                         <?php } ?>
-                        </select></div></li> <!-- MODEL OPTION -->
+                            </select></div></td> <!-- MODEL OPTION -->
                     
-                        <li><select id="colourSelect" name="colourSelect" onchange="getColour(this)">
+                        <td><select id="colourSelect" name="colourSelect" onchange="getColour(this)" style="width: 155px;height:30px;color:#2d5986">
                             <option value="anyColour">Colour (Any)</option>
                         <?php
                             $stmt = $dbConnection->prepare('SELECT * FROM colourView');
@@ -147,11 +158,10 @@ and open the template in the editor.
                                 $colour = $row['Colour'];   ?>
                                 <option value="<?=$colour?>"><?=$colour?></option>
                         <?php } ?>
-                    </select></li> <!-- Colour OPTION -->
-                    <li>Mileage: From<input type="text" name="mileageLow" onchange="getMileLow(this)">To<input type="text" name="mileageHigh" onchange="getMileHigh(this)"></li>
+                            </select></td> <!-- Colour OPTION -->
                     
-                        <li><div id="fuelDropdown">
-                            <select id="fuelSelect" name="fuelSelect" onchange="getFuel(this)">
+                        <td><div id="fuelDropdown">
+                            <select id="fuelSelect" name="fuelSelect" onchange="getFuel(this)" style="width: 155px;height:30px;color:#2d5986">
                             <option value="anyFuel">Fuel Type (Any)</option>
                         <?php
                             $stmt = $dbConnection->prepare('SELECT * FROM fuelView');
@@ -163,10 +173,11 @@ and open the template in the editor.
                                 <option value="<?=$fuelType?>"><?=$fuelType?></option>
                         <?php } ?>
                             </select></div>
-                        </li> <!-- FUEL OPTION -->
-                        
-                        <li><div id="carTypeDropdown">
-                            <select id="carTypeSelect" name="carTypeSelect" onchange="getCarType(this)">
+                        </td> <!-- FUEL OPTION -->
+                </tr>
+                <tr>
+                        <td><div id="carTypeDropdown">
+                            <select id="carTypeSelect" name="carTypeSelect" onchange="getCarType(this)" style="width: 155px;height:30px;color:#2d5986">
                             <option value="anyCarType">Car Type (Any)</option>
                         <?php
                             $stmt = $dbConnection->prepare('SELECT DISTINCT Car_Type FROM Car'); // **EDIT**
@@ -178,10 +189,10 @@ and open the template in the editor.
                                 <option value="<?=$carType?>"><?=$carType?></option>
                         <?php } ?>
                             </select></div>
-                        </li> <!-- carType OPTION -->
+                        </td> <!-- carType OPTION -->
                         
-                        <li><div id="transmissionDropdown">
-                            <select id="transmissionSelect" name="transmissionSelect" onchange="getTransType(this)">
+                        <td><div id="transmissionDropdown">
+                            <select id="transmissionSelect" name="transmissionSelect" onchange="getTransType(this)" style="width: 155px;height:30px;color:#2d5986">
                             <option value="anyTransmission">Transmission (Any)</option>
                         <?php
                             $stmt = $dbConnection->prepare('SELECT DISTINCT Transmission FROM Car'); // **EDIT**
@@ -193,10 +204,10 @@ and open the template in the editor.
                                 <option value="<?=$transmission?>"><?=$transmission?></option>
                         <?php } ?>
                             </select></div>
-                        </li> <!-- transmission OPTION -->
+                        </td> <!-- transmission OPTION -->
                         
-                        <li><div id="numDoorsDropdown">
-                            <select id="numDoorSelect" name="numDoorSelect" onchange="getNumDoors(this)">
+                        <td><div id="numDoorsDropdown">
+                            <select id="numDoorSelect" name="numDoorSelect" onchange="getNumDoors(this)" style="width: 155px;height:30px;color:#2d5986">
                             <option value="anyNumDoors">Number of Doors (Any)</option>
                         <?php
                             $stmt = $dbConnection->prepare('SELECT DISTINCT Number_of_Doors FROM Car'); // **EDIT**
@@ -208,10 +219,12 @@ and open the template in the editor.
                                 <option value="<?=$numDoors?>"><?=$numDoors?></option>
                         <?php } ?>
                             </select></div>
-                        </li> <!-- numDoors OPTION -->
-                        
-                        <li><div id="conditionDropdown">
-                            <select id="conditionSelect" name="conditionSelect" onchange="getCondition(this)">
+                        </td> <!-- numDoors OPTION -->
+                </tr>
+                </table>
+                <br/><h5 style = "background-color:#2d5986;padding-top:10px;padding-bottom:10px;width:100%;color:white;">Condition</h5>
+                        <div id="conditionDropdown">
+                            <select id="conditionSelect" name="conditionSelect" onchange="getCondition(this)" style="width: 155px;height:30px;color:#2d5986">
                             <option value="anyCondition">Condition (Any)</option>
                         <?php
                             $stmt = $dbConnection->prepare('SELECT DISTINCT Car_Condition FROM CarStock'); // **EDIT**
@@ -222,15 +235,22 @@ and open the template in the editor.
                                 $condition = $row['Car_Condition'];   ?>
                                 <option value="<?=$condition?>"><?=$condition?></option>
                         <?php } ?>
-                            </select></div>
-                        </li> <!-- numDoors OPTION -->
-                </ul>
-                <br/> 
-                <input type="submit" value="Search">  
+                            </select></div> <!-- numDoors OPTION -->
+      
+                <br><h5 style = "background-color:#2d5986;padding-top:10px;padding-bottom:10px;width:100%;color:white;">Mileage</h5>               
+                <input type="text" style="width: 155px;height:30px;color:#2d5986" name="mileageLow" onchange="getMileLow(this)" placeholder=Minimum>&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" style="width:155px;height:30px;color:#2d5986" name="mileageHigh" onchange="getMileHigh(this)" placeholder="Maximum"><br><br>
+                            
+                <br><h5 style = "background-color:#2d5986;padding-top:10px;padding-bottom:10px;width:100%;color:white;">Price</h5>               
+                <input type="text" style="width: 155px;height:30px;color:#2d5986" name="#" placeholder=Minimum>&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" style="width:155px;height:30px;color:#2d5986" name="#" placeholder="Maximum"><br><br>
             </form>  
             
-            <button type="button" onclick="showSearchResults(make, model, colour, fuel, carType, transType, numDoors, condition, mileLow, mileHigh, postcode, distance)">Improved Search?</button> 
-            <div id="txtHint"><b>Car info will be listed here.</b></div>
+            <button type="button" onclick="showSearchResults(make, model, colour, fuel, carType, transType, numDoors, condition, mileLow, mileHigh, postcode, distance)">Search</button> 
+            </div></div>
+                <br><br>
+            </div>
+        
+            
+            <div id="searchResults"><b></b></div>
             
         </div> <!-- close mainbody -->
     </body>

@@ -12,14 +12,15 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="Style.css" />
+        <!--<link rel="stylesheet" type="text/css" href="Style.css" />-->
+        <link href="newStyle.css" rel="stylesheet" type="text/css"/>
         <script src="dropdown.js"></script>
         <title>Carkea</title>
     </head>
     <body>
         <div class="nav">
             <ul>
-                <li style="float:left; color:#999999"><a href="index.php">Carkea</a></li>
+                <li class="logo"><a class = "logo" href="index.php">Carkea</a></li>
                 <li><a class = "active" href="index.php">Home</a></li>
                 <li><a href="search.php">Search</a></li>
 		<li><a href="#">Contact Us</a></li>
@@ -70,7 +71,54 @@ and open the template in the editor.
                 }?>
             </ul>
         </div> <!-- nav close -->
-        <div class="mainbody">
-        </div> <!-- close mainbody -->
+        <br><br><br><br><br>
+        <table style="width:80%;margin:0 auto;"><tr>
+                <td><div class="IndexIMG">
+                <img src="Carkea/image1.jpg" style="width: 100%;height:100%;"  align="middle">
+                <h2><span>Buy a new Car</span></h2>
+                    </div></td>
+                    <td><div class="IndexIMG">
+                            <a href ="#" class = "homepageimgs"><img src="Carkea/image2.jpg" style="width: 100%;height:100%;"  align="middle"></a>
+                <h2><span>Employee Login</span></h2>
+                        </div></td>
+            </tr><tr>
+                <td><div class="IndexIMG">
+                <img src="Carkea/image3.jpg" style="width: 100%;height:100%;"  align="middle">
+                <h2><span>Sign Up</span></h2>
+                    </div></td>
+                    <td><div class="IndexIMG">
+                <img src="Carkea/image4.jpg" style="width: 100%;height:100%;"  align="middle">
+                <h2><span>Sell your car</span></h2>
+                        </div></td></tr>
+            <tr>
+                <td><div class="IndexIMG">
+                <img src="Carkea/image1.jpg" style="width: 100%;height:100%;"  align="middle">
+                <h2><span>Buy a new Car</span></h2>
+                    </div></td>
+                    <td><div class="IndexIMG">
+                <img src="Carkea/image2.jpg" style="width: 100%;height:100%;"  align="middle">
+                <h2><span>Employee Login</span></h2>
+                        </div></td>
+            </tr>
+            <tr>
+                <td><div class="IndexIMG">
+                <img src="Carkea/image3.jpg" style="width: 100%;height:100%;"  align="middle">
+                <h2><span>Sign Up</span></h2>
+                    </div></td>
+                    <td><div class="IndexIMG">
+                <img src="Carkea/image4.jpg" style="width: 100%;height:100%;"  align="middle">
+                <h2><span>Sell your car</span></h2>
+                        </div></td></tr>
+            
+            
+            <!--<img src="Carkea/image1.jpg" style="width: 100%;height:100%;"  align="middle">
+            <img src="Carkea/image2.jpg" style="width: 100%;height:100%;"  align="middle">
+            <img src="Carkea/image3.jpg" style="width: 100%;height:100%;"  align="middle">
+            <img src="Carkea/image4.jpg" style="width: 100%;height:100%;"  align="middle">-->
+            
+            
+        </table>
+        <br><br><br><br><br><br><br><br>
+       
     </body>
 </html>

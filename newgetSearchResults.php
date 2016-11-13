@@ -2,19 +2,7 @@
 <html>
 <head>
     <script src="js/getBranchInDistance.js"></script>
-<style>
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-table, td, th {
-    border: 1px solid black;
-    padding: 5px;
-}
-
-th {text-align: left;}
-</style>
+    <link href="newStyle.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
@@ -65,7 +53,6 @@ $key = 'AIzaSyDv0SJXrfeWAu-LeH9z_1XXriQC-Lrdilk'; // Josh's key for googles API
         {   
             $branchID = $row['Branch_ID'];
             array_push($inRangeBranch,$branchID);
-            echo "<p>in range branch = ".var_dump($inRangeBranch)."</p>";
         }
     }
     mysqli_close($con);
@@ -100,7 +87,7 @@ $key = 'AIzaSyDv0SJXrfeWAu-LeH9z_1XXriQC-Lrdilk'; // Josh's key for googles API
 $con = mysqli_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
           mysqli_select_db($con,"16ac3d07"); // SELECT DATABASE
           
-         $in = implode(',', $inRangeBranch);
+        $in = implode(',', $inRangeBranch);
           
 $sql="SELECT * FROM searchView WHERE Make LIKE '".$make."' AND Model LIKE '".$model."' AND Colour LIKE '".$colour."' "
         . "AND Fuel_Type LIKE '".$fuelType."' AND Car_Type LIKE '".$carType."' AND Transmission LIKE '".$transType."'"
@@ -114,35 +101,60 @@ $result = mysqli_query($con,$sql);
     $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-echo "<table>
-<tr>
-<th>Image</th>
-<th>Make</th>
-<th>Model</th>
-<th>Colour</th>
-<th>Registration</th>
-</tr>";
+
 while($row = mysqli_fetch_array($result)) 
 {    
     $vin = $row['Vehicle_Identification_Number'];
     //**EDIT** Probably a much better way to do this
     $stmt = $dbConnection->prepare("SELECT Image_Blob FROM CarImage WHERE Vehicle_Identification_Number =?");
     
-    echo '<tr>';
+   // echo '<tr>';
+//    if ($stmt->execute(array($vin))) 
+//    {
+//        if ($column=$stmt->fetch())
+//        {
+//            echo '<td><img src="data:image/jpeg;base64,' . base64_encode($column['Image_Blob']) . '""height="90" width="90"></td>';
+//        } else {
+//            echo '<td><img src="placeholder.png "height="90" width="90"></td>';
+//        }
+//    }
+//    echo '<td><a href="stock.php?id='.$vin.'">' . $row["Make"] . '</a></td>';
+//    echo "<td>" . $row['Model'] . "</td>";
+//    echo "<td>" . $row['Colour'] . "</td>";
+//    echo "<td>" . $row['Registration'] . "</td>";
+//    echo "</tr>";
+    
+    
+    echo '<div class="searchResults">';
     if ($stmt->execute(array($vin))) 
     {
         if ($column=$stmt->fetch())
         {
-            echo '<td><img src="data:image/jpeg;base64,' . base64_encode($column['Image_Blob']) . '""height="90" width="90"></td>';
+            echo '<img src="data:image/jpeg;base64,' . base64_encode($column['Image_Blob']) . '""height="90" width="90">';
         } else {
-            echo '<td><img src="placeholder.png "height="90" width="90"></td>';
+            echo '<img src="placeholder.png "height="90" width="90">';
         }
     }
-    echo '<td><a href="stock.php?id='.$vin.'">' . $row["Make"] . '</a></td>';
-    echo "<td>" . $row['Model'] . "</td>";
-    echo "<td>" . $row['Colour'] . "</td>";
-    echo "<td>" . $row['Registration'] . "</td>";
-    echo "</tr>";
+                echo '<div class="searchInfo">';
+                    echo '<h3 style="color:#2d5986">'.$row['Make'].' '.$row['Model'].'</h3>';
+                    echo '<h2>£'.$row['Asking_Price'].'</h2>';
+                    echo '<table style="width:60%">';
+                        echo '<tr>';
+                            echo '<td>Mileage: '. $row['Mileage'].'</td>';
+                            echo '<td>Example Info2</td>';
+                        echo '</tr>';
+                        echo '<tr>';
+                            echo '<td>Example Info3</td>';
+                            echo '<td>Example Info4</td>';
+                        echo '</tr>';
+                        echo '<tr>';
+                            echo '<td>Example Info5</td>';
+                            echo '<td>Example Info6</td>';
+                        echo '</tr>';
+                    echo '</table>';
+                echo '</div>';
+            echo '</div>';
+            echo '<br>';
 }
 echo "</table>";
 mysqli_close($con);

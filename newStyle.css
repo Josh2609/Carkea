@@ -1,0 +1,446 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 01-Nov-2016, 19:50:30
+    Author     : joshcorps
+*/
+
+navtemp {
+    text-align: left;
+    border: 2px;
+    float: right;
+}
+
+body {
+  margin: 0 auto;
+  padding: 0;
+  color: #999999;
+  background-color:  #f2f2f2;
+  font-size: 100%;
+  font-family: 'Oswald', sans-serif;
+}
+
+footer{
+    padding: 10px;
+    color: #999999;
+    text-decoration:none;
+    background-color: white;
+    border-top: 2px solid #ff8000;
+}
+
+.imagelayout{
+    list-style: none;
+}
+
+.imagelayout ul{
+    list-style: none;
+    margin: 0;
+}
+
+.imagelayout  li {
+    display: inline-block;
+  }  
+
+/*.regpage{
+    padding-left: 10px;
+    padding-right: 10px;
+}*/
+
+.reg ul{
+    text-decoration: none;
+    list-style: none;
+}
+
+.nav {
+    
+}
+
+.Profile{
+    float: right;
+}
+
+.imageholder{
+    display: block;
+    margin: auto;
+    left:50%;
+    right:-50%;
+}
+
+.logo{
+    color:black;
+    font-size: 150%;
+    font-family: "Lucida Console", Monaco, monospace;  
+}
+
+.nav ul {
+  position: fixed; /*THESE 3 LINES CREATE THE FIXED TOP BAR. REMOVE IF NEEDED*/
+  top: 0;
+  width: 100%;
+  list-style: none;
+  /*background-color: #fff;*/
+  background-color: #33ccff;
+  text-align: center;
+  padding: 0;
+  margin: 0 auto;
+  padding: 40px;
+  padding-bottom: 0px; 
+  padding-top: 0px;
+  border-bottom: 4px solid #33ccff;
+  opacity: 0.8;
+  z-index:3;
+}
+.nav li {
+  font-family: 'Oswald', sans-serif;
+  font-size: 100%;
+  /*line-height: 40px;
+  height: 40px;*/
+  /*border-bottom: 4px solid #ff8000;*/
+}
+ 
+.nav a {
+  text-decoration: none;
+  /*color: #999999;*/
+  color: white;
+  display: block;
+  transition: .3s background-color;
+}
+ 
+.nav a:hover {
+  /*background-color: #66ccff;*/
+  color: black;
+}
+ 
+.nav a.active {
+  background-color: #00ace6;
+  color: black;
+  cursor: default;
+}
+
+.mainbody{
+    margin: 0 auto;
+    padding: 60px;
+    width: 800px;
+    text-align: center;
+}
+ 
+.dropdown-content {
+    color: white;
+    display: none;
+    position: absolute;
+    /*background-color: #f9f9f9;*/
+    background-color: gray;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+@media screen and (min-width: 600px) {
+  .nav li {
+    width: 120px;
+    border-bottom: none;
+    height: 50px;
+    line-height: 50px;
+    /*font-size: 1.4em;*/
+  }
+ 
+  /* Option 1 - Display Inline */
+  .nav li {
+    display: inline-block;
+    margin-right: -4px;
+  }
+  
+  .logo{
+    color:black;
+    font-size: 150%;
+    font-family: "Lucida Console", Monaco, monospace;
+    float:left;
+  }
+  
+  .nav a.active {
+    background-color: #33ccff;
+    color: black;
+    cursor: default;
+    border-bottom: 4px solid black;
+  }
+}  
+/*Nav bar stuff closing*/
+
+
+
+
+
+ /*Testing collapsible Item*/ 
+.show {
+    text-decoration:none;
+    color: blue;
+    font-weight: bold;
+    display: none; 
+}
+
+.hide{
+    text-decoration:none;
+    color: blue;
+    font-weight: bold;
+}
+.hide:target + .show {
+    display: inline; 
+}
+.hide:target {
+    display: none; 
+}
+.hide:target ~ .list {
+    display:none; 
+}
+
+.searchBody{
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 60%;
+    text-align: center;
+}
+.list {
+    display:block;  
+}
+
+.thingyholder{
+    display:block; 
+    margin:0 auto;
+    width: 100%;
+    /*padding:20px;*/
+    background-color: #eeeeee;
+    color: #2d5986;
+    border: 1px solid #d9d9d9;
+    text-align: center;
+    /*border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px; 
+    /*position: fixed;*/
+}
+
+
+
+
+
+/*Home page Image links open*/
+.IndexIMG{
+   position: relative; 
+   width: 100%;
+   z-index:2;
+}
+
+.IndexIMG h2{
+    position: absolute; 
+   bottom: 30%; 
+   left: 0; 
+   width: 100%; 
+}
+
+.IndexIMG h2 span { 
+   color: white; 
+   font: bold 2em Helvetica, Sans-Serif; 
+   letter-spacing: -1px;  
+   background: rgb(0, 0, 0); /* fallback color */
+   background: rgba(0, 0, 0, 0.2);
+}
+/*Home page Image links close*/
+
+
+
+
+
+/*IMAGE EFFECT STARTS HERE*/
+.frame{
+    
+    height: 100%;
+    width: 100%;
+    overflow:hidden;
+}
+.homepageimgs img {
+    -webkit-transition: all 1s ease;
+     -moz-transition: all 1s ease;
+       -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+          transition: all 1s ease;
+  height: 100%;
+  width: 100%;
+}
+
+.homepageimgs img:hover {
+   /* -webkit-filter: blur(3px);*/
+      width: 120%;
+  height: 100%;
+}
+/* IMAGE EFFECTS END HERE*/
+
+
+
+
+
+
+
+
+/*working on making the homepage images responsive STARTS*/
+.centreing{
+    margin: 0 auto;
+    position: relative;
+    padding: 0;
+    top: 50px; /*Space created between nav bar and images when in mobile view*/
+}
+.imglist{
+    margin: 0 auto;
+}
+
+.imglist ul {
+  width: 95%;
+  list-style: none;
+  margin: 0 auto;
+}
+.imglist li {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+}
+ 
+.imglist a {
+  color: white;
+  display: block;
+  transition: .3s background-color;
+   margin: 0 auto;
+}
+ 
+@media screen and (min-width: 1000px) {
+
+  .imglist li {
+    display: inline-block;
+    margin: 0 auto;
+    width: 45%;
+  }
+  
+  .centreing{
+    top: 0px; /*Nav bar distancing when in normal view*/
+}
+  
+} 
+/*working on making the homepage images responsive ENDS*/
+
+
+
+
+
+
+
+
+
+
+/*New user notice Open*/
+
+.closeintro {
+    display:inline;
+    float:right;
+    width: 25px;
+    height: 25px;
+    border-radius: 12.5px;
+    font-weight: bold;
+    font-size: 1em;
+    text-align: center;
+    text-decoration: none;
+    background: #006666;
+}
+
+.closeintro:target{
+    display: inline; 
+}
+.closeintro:target {
+    display: none; 
+}
+.closeintro:target ~ .signup {
+    display:none; 
+}
+
+.signup{
+    display:block; 
+    margin-top: 54px;
+    width: 100%;
+    height: 100%;
+    color: white;
+    background-color: teal;
+    text-align:center;
+}
+
+/*New User notice close*/
+
+
+.searchResults {
+    display: block;
+    margin: 0 auto;
+    width: 60%;
+    height: 200px;
+    background-color: white;
+    border: 1px solid #d9d9d9;
+    color: black;
+    list-style: none;
+    padding: 10px;
+    font-size: 1em;
+}
+
+.searchInfo{
+    display: inline-block;
+    width: 60%;
+    text-align: left;
+    /*background-color: red; Just testing the size of the holder div*/
+    height: 90%
+}
+
+.searchInfo table{
+    font-size: 12px;
+    line-height: 30px;
+    color: #737373;
+    font-weight: lighter;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.searchInfo h2{
+    float:right;
+    color:#2d5986;
+    display: inline-block;
+}
+
+.searchInfo td{
+    border-bottom: 1px solid #ddd;
+}
+
+.searchResults ul{
+    list-style: none;
+}
+
+.searchResults img{
+    display: inline-block;
+    float:left;
+    width: 30%;
+    height: 100%;
+    margin-right: 20px;
+    opacity: 0.5;
+    /*border: 1px solid #d9d9d9;
+    border-right: none;*/
+}
+
+/*
+@media screen and (min-width: 600px) {
+    .searchResults img{
+        width: 30%;
+        height: 100%;
+        display: inline-block;
+    }
+
+    .searchResults li{
+        list-style: none;
+        display: inline-block;
+    }
+}*/

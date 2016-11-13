@@ -5,7 +5,7 @@
  */
 function showSearchResults(make, model, colour, fuel, carType, transType, numDoors, condition, mileLow, mileHigh, postcode, distance) {
   if (make=="") {
-    document.getElementById("txtHint").innerHTML="";
+    document.getElementById("searchResults").innerHTML="";
     return;
   } 
   if (window.XMLHttpRequest) {
@@ -16,7 +16,7 @@ function showSearchResults(make, model, colour, fuel, carType, transType, numDoo
   }
   xmlhttp.onreadystatechange=function() {
     if (this.readyState==4 && this.status==200) {
-      document.getElementById("txtHint").innerHTML=this.responseText;
+      document.getElementById("searchResults").innerHTML=this.responseText;
     }
   }
   xmlhttp.open("GET","newgetSearchResults.php?make="+make+"&model="+model+"&colour="+colour+"&fuel="+fuel+"&cartype="+carType+"&transtype="+transType+"&numdoors="+numDoors+"&condition="+condition+"&milelow="+mileLow+"&milehigh="+mileHigh+"&postcode="+postcode+"&distance="+distance,true);                      
