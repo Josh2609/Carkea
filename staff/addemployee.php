@@ -115,7 +115,9 @@ and open the template in the editor.
                     echo "<p>The passwords you entered did not match. Please try again.</p>";
                 } else if ($message == "duplicate"){
                     echo "<p>The username you entered is already taken. Please try again.</p>";
-                } else { 
+                } else if ($message ==  "detailsmissing") {
+                     echo "<p>There was information missing from the form.</p>";
+                } else {
                     echo "<p>There was an error when adding the employee to the database, please try again.</p>";
                 }
             }

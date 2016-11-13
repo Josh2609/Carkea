@@ -27,6 +27,9 @@ and open the template in the editor.
             var condition = '%';
             var mileLow = '0';
             var mileHigh = '100000000';
+            var postcode = '';
+            var distance = '500';
+            
             function getMake(option) {
                 make = option.value;  
             }
@@ -56,6 +59,12 @@ and open the template in the editor.
             }
             function getMileHigh(option) {
                 mileHigh = option.value;  
+            }
+            function getPostcode(option) {
+                postcode = option.value;  
+            }
+            function getDistance(option) {
+                distance = option.value;  
             }
         </script>
             
@@ -97,7 +106,8 @@ and open the template in the editor.
         <div class="mainbody">
             <form method="POST"  action="php_files/getSearchResults.php">
                 <ul style='list-style:none;'>
-                    <li><input type="text" name="postcode" placeholder="Postcode"></li>
+                    <li><input type="text" name="postcode" placeholder="Postcode" onchange="getPostcode(this)"></li>
+                    <li><input type="text" name="distance" placeholder="Distance" onchange="getDistance(this)"></li>
                     <li><select id="makeSelect" name="makeSelect" onchange="getMake(this)">
                         <option value="anyMake">Make (Any)</option>
                         <?php
@@ -219,7 +229,7 @@ and open the template in the editor.
                 <input type="submit" value="Search">  
             </form>  
             
-            <button type="button" onclick="showSearchResults(make, model, colour, fuel, carType, transType, numDoors, condition, mileLow, mileHigh)">Improved Search?</button> 
+            <button type="button" onclick="showSearchResults(make, model, colour, fuel, carType, transType, numDoors, condition, mileLow, mileHigh, postcode, distance)">Improved Search?</button> 
             <div id="txtHint"><b>Car info will be listed here.</b></div>
             
         </div> <!-- close mainbody -->

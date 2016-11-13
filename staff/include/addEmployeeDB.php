@@ -11,6 +11,21 @@ if (isset($_SESSION['loggedIn']) || isset($_SESSION['staff']) || isset($_SESSION
     header("Location: ../index.php");
 }
 
+// doesn't work
+if ($_POST['roleSelect'] == "" || $_POST['branchSelect'] == "" || $_POST['firstName'] == ""
+        || $_POST['lastName'] == "" || $_POST['salary'] == "" || $_POST['username'] == ""
+        || $_POST['password'] == "" || $_POST['repeatPassword'] == "")
+{
+    header("Location: ../addemployee.php?message=detailsmissing");
+}
+// also doesn't work
+if(!isset($_POST['roleSelect']) || !isset($_POST['branchSelect']) || !isset($_POST['firstName'])
+         || !isset($_POST['lastName']) || !isset($_POST['salary']) || !isset($_POST['username'])
+         || !isset($_POST['password']) || !isset($_POST['repeatPassword']))
+{
+    header("Location: ../addemployee.php?message=detailsmissing");
+}
+
     $roleID = $_POST["roleSelect"];
     $branchID = $_POST["branchSelect"];
     $firstName = $_POST["firstName"];

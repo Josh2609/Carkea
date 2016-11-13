@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="js/getBranchInDistance.js"></script>
 <style>
 table {
     width: 100%;
@@ -19,6 +20,8 @@ th {text-align: left;}
 
 <?php
 session_start();
+include "php_files/distanceCalc.php";
+
 $make = $_GET['make'];
 $model = $_GET['model'];
 $colour = $_GET['colour'];
@@ -29,6 +32,43 @@ $numDoors = $_GET['numdoors'];
 $condition = $_GET['condition'];
 $mileLow = $_GET['milelow'];
 $mileHigh = $_GET['milehigh'];
+$postcode = $_GET['postcode'];
+$distance = $_GET['distance'];
+if ($postcode=="")
+    $postcode="UK";
+if ($distance=="")
+    $distance="700";
+   
+$key = 'AIzaSyDv0SJXrfeWAu-LeH9z_1XXriQC-Lrdilk';
+
+    $url = "https://maps.googleapis.com/maps/api/geocode/json?address=". $postcode .",+&key=".$key;
+    $jsonData = file_get_contents($url);
+    $data = json_decode($jsonData);
+    $xlatAddress = $data->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
+    $xlongAddress = $data->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
+
+    $con = mysqli_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
+          mysqli_select_db($con,"16ac3d07"); // SELECT DATABASE
+            
+    $sql="SELECT Branch_Lat, Branch_Long, Branch_ID FROM BranchLocation";
+    $result = mysqli_query($con,$sql);
+    
+    $inRangeBranch = array();
+    
+    while($row = mysqli_fetch_array($result)) 
+    {    
+        $branchLat = $row['Branch_Lat'];
+        $branchLong = $row['Branch_Long'];
+        if(distance($xlatAddress, $xlongAddress, $branchLat, $branchLong, "M") < $distance)
+        {
+            echo $xlatAddress.",".$xlongAddress;
+            echo "<p>AYY</p>";
+            
+            $branchID = $row['Branch_ID'];
+            array_push($inRangeBranch,$branchID);
+        }
+    }
+    mysqli_close($con);
 
     if ($make=="anyMake")
             $make="%";
@@ -59,11 +99,14 @@ $mileHigh = $_GET['milehigh'];
 
 $con = mysqli_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
           mysqli_select_db($con,"16ac3d07"); // SELECT DATABASE
-            
+          
+         $in = join(',', $inRangeBranch);
+          
 $sql="SELECT * FROM searchView WHERE Make LIKE '".$make."' AND Model LIKE '".$model."' AND Colour LIKE '".$colour."' "
         . "AND Fuel_Type LIKE '".$fuelType."' AND Car_Type LIKE '".$carType."' AND Transmission LIKE '".$transType."'"
         . "AND Number_of_Doors LIKE '".$numDoors."' AND Car_Condition LIKE '".$condition."' "
-        . "AND Mileage BETWEEN '".$mileLow."' AND '".$mileHigh."' AND Sold='".'0'."'";
+        . "AND Mileage BETWEEN '".$mileLow."' AND '".$mileHigh."' AND Branch_ID IN ('".$in."')"
+        . "AND Sold='".'0'."'";
 $result = mysqli_query($con,$sql);
 
     $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
@@ -88,8 +131,12 @@ while($row = mysqli_fetch_array($result))
     echo '<tr>';
     if ($stmt->execute(array($vin))) 
     {
-        $column=$stmt->fetch();
-        echo '<td><img src="data:image/jpeg;base64,' . base64_encode($column['Image_Blob']) . '""height="90" width="90"></td>'; //this prints the image data, transforming the image.php to an image
+        if ($column=$stmt->fetch())
+        {
+            echo '<td><img src="data:image/jpeg;base64,' . base64_encode($column['Image_Blob']) . '""height="90" width="90"></td>';
+        } else {
+            echo '<td><img src="placeholder.png "height="90" width="90"></td>';
+        }
     }
     echo '<td><a href="stock.php?id='.$vin.'">' . $row["Make"] . '</a></td>';
     echo "<td>" . $row['Model'] . "</td>";
