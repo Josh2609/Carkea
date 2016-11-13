@@ -59,7 +59,7 @@ and open the template in the editor.
         </div> <!-- nav close -->
         
         <div class="mainbody">
-             <form method="POST"  action="include/addStockDB.php" enctype="multipart/form-data">
+             <form action="include/addStockDB.php" method="POST" enctype="multipart/form-data" >
                 <ul style='list-style:none;'>
                     <?php if ($_SESSION['accessLevel'] == "1")
                     {?>
@@ -112,15 +112,10 @@ and open the template in the editor.
                     <li>Asking Price<input type="text" name="askPrice" required></li>
                     <li>Condition<input type="text" name="condition" required></li>
                     
-                    <li>File to upload: <input type="file" name="carImage" accept="image/jpeg,image/pjpeg,image/bmp,image/gif,image/jpeg,image/png"><br/></li>
+                    <li><label>File: </label><input type="file" name="image" accept="image/*"/><br/></li>
                 </ul>
                 <input type="submit" value="Add Stock"> 
             </form> 
-            
-            <form action="include/addCarImage.php" method="POST" enctype="multipart/form-data" >
-                <label>File: </label><input type="file" name="image" accept="image/*"/>
-                <input type="submit" />
-            </form>
             
             <?php 
             if(!empty($_GET['message']))

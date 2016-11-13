@@ -66,16 +66,31 @@ $sql="SELECT * FROM searchView WHERE Make LIKE '".$make."' AND Model LIKE '".$mo
         . "AND Mileage BETWEEN '".$mileLow."' AND '".$mileHigh."' AND Sold='".'0'."'";
 $result = mysqli_query($con,$sql);
 
+    $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
+
+    $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 echo "<table>
 <tr>
+<th>Image</th>
 <th>Make</th>
 <th>Model</th>
 <th>Colour</th>
 <th>Registration</th>
 </tr>";
-while($row = mysqli_fetch_array($result)) {
+while($row = mysqli_fetch_array($result)) 
+{    
     $vin = $row['Vehicle_Identification_Number'];
+    //**EDIT** Probably a much better way to do this
+    $stmt = $dbConnection->prepare("SELECT Image_Blob FROM CarImage WHERE Vehicle_Identification_Number =?");
+    
     echo '<tr>';
+    if ($stmt->execute(array($vin))) 
+    {
+        $column=$stmt->fetch();
+        echo '<td><img src="data:image/jpeg;base64,' . base64_encode($column['Image_Blob']) . '""height="90" width="90"></td>'; //this prints the image data, transforming the image.php to an image
+    }
     echo '<td><a href="stock.php?id='.$vin.'">' . $row["Make"] . '</a></td>';
     echo "<td>" . $row['Model'] . "</td>";
     echo "<td>" . $row['Colour'] . "</td>";

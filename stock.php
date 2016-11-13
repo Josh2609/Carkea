@@ -115,13 +115,17 @@ th {text-align: left;}
                 echo "<td>" . $row['Car_Type'] . "</td>";
                 echo "<td>" . $row['Fuel_Type'] . "</td>";
                 echo "<td>" . $row['Registration'] . "</td>";
-
+                echo '<td><button type="button" onclick="('.$row["Vehicle_Identification_Number"].')">Add to wishlist</button></td>';
                 echo "</tr>";
             }
             echo "</table>";
+            
             mysqli_close($con);
-
+            
             ?>
+            
+            
+            
         </div> <!-- close mainbody -->
     </body>
 </html>
