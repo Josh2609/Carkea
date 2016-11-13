@@ -1,7 +1,7 @@
 <?php
 
     session_start();
-    $id = intval($_SESSION['employeeID']);
+    $id = intval($_SESSION['customerID']);
     
     $firstName = $_POST["firstName"];
     $lastName = $_POST["lastName"];
@@ -15,7 +15,7 @@
     $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-    $stmt = $dbConnection->prepare('SELECT * FROM customerView WHERE Customer_ID = :id');
+    $stmt = $dbConnection->prepare('SELECT Login_Password_Hash FROM customerView WHERE Customer_ID = :id');
     $stmt->bindParam(':id', $id);
     $stmt->execute();
     

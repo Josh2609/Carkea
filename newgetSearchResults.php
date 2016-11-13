@@ -38,8 +38,10 @@ if ($postcode=="")
     $postcode="UK";
 if ($distance=="")
     $distance="700";
+
+$postcode = str_replace(' ', '', $postcode);
    
-$key = 'AIzaSyDv0SJXrfeWAu-LeH9z_1XXriQC-Lrdilk';
+$key = 'AIzaSyDv0SJXrfeWAu-LeH9z_1XXriQC-Lrdilk'; // Josh's key for googles API
 
     $url = "https://maps.googleapis.com/maps/api/geocode/json?address=". $postcode .",+&key=".$key;
     $jsonData = file_get_contents($url);
@@ -105,7 +107,6 @@ $sql="SELECT * FROM searchView WHERE Make LIKE '".$make."' AND Model LIKE '".$mo
         . "AND Number_of_Doors LIKE '".$numDoors."' AND Car_Condition LIKE '".$condition."' "
         . "AND Mileage BETWEEN '".$mileLow."' AND '".$mileHigh."' AND Branch_ID IN (".$in.")"
         . "AND Sold='".'0'."'";
-echo "<p>$sql </p>";
 $result = mysqli_query($con,$sql);
 
     $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
