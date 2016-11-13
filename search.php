@@ -238,7 +238,7 @@ and open the template in the editor.
                             </select></div> <!-- numDoors OPTION -->
       
                 <br><h5 style = "background-color:#2d5986;padding-top:10px;padding-bottom:10px;width:100%;color:white;">Mileage</h5>               
-                <input type="text" style="width: 155px;height:30px;color:#2d5986" name="mileageLow" onchange="getMileLow(this)" placeholder=Minimum>&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" style="width:155px;height:30px;color:#2d5986" name="mileageHigh" onchange="getMileHigh(this)" placeholder="Maximum"><br><br>
+                <input type="text" style="width: 155px;height:30px;color:#2d5986" name="mileageLow" onchange="getMileLow(this)" placeholder=Minimum>&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" style="width:155px;height:30px;color:#2d5986" name="mileageHigh" onchange="getMileHigh(this)" placeholder="Maximum"><br>
                             
                 <br><h5 style = "background-color:#2d5986;padding-top:10px;padding-bottom:10px;width:100%;color:white;">Price</h5>               
                 <input type="text" style="width: 155px;height:30px;color:#2d5986" name="#" placeholder=Minimum>&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" style="width:155px;height:30px;color:#2d5986" name="#" placeholder="Maximum"><br><br>
