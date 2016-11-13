@@ -54,7 +54,7 @@ $key = 'AIzaSyDv0SJXrfeWAu-LeH9z_1XXriQC-Lrdilk';
     $result = mysqli_query($con,$sql);
     
     $inRangeBranch = array();
-    
+    // **EDIT** Kinda works, not really though
     while($row = mysqli_fetch_array($result)) 
     {    
         $branchLat = $row['Branch_Lat'];
@@ -63,6 +63,7 @@ $key = 'AIzaSyDv0SJXrfeWAu-LeH9z_1XXriQC-Lrdilk';
         {   
             $branchID = $row['Branch_ID'];
             array_push($inRangeBranch,$branchID);
+            echo "<p>in range branch = ".var_dump($inRangeBranch)."</p>";
         }
     }
     mysqli_close($con);
@@ -97,13 +98,14 @@ $key = 'AIzaSyDv0SJXrfeWAu-LeH9z_1XXriQC-Lrdilk';
 $con = mysqli_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
           mysqli_select_db($con,"16ac3d07"); // SELECT DATABASE
           
-         $in = join(',', $inRangeBranch);
+         $in = implode(',', $inRangeBranch);
           
 $sql="SELECT * FROM searchView WHERE Make LIKE '".$make."' AND Model LIKE '".$model."' AND Colour LIKE '".$colour."' "
         . "AND Fuel_Type LIKE '".$fuelType."' AND Car_Type LIKE '".$carType."' AND Transmission LIKE '".$transType."'"
         . "AND Number_of_Doors LIKE '".$numDoors."' AND Car_Condition LIKE '".$condition."' "
-        . "AND Mileage BETWEEN '".$mileLow."' AND '".$mileHigh."' AND Branch_ID IN ('".$in."')"
+        . "AND Mileage BETWEEN '".$mileLow."' AND '".$mileHigh."' AND Branch_ID IN (".$in.")"
         . "AND Sold='".'0'."'";
+echo "<p>$sql </p>";
 $result = mysqli_query($con,$sql);
 
     $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
