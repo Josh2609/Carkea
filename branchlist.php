@@ -12,14 +12,13 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="Style.css" />
-        <script src="dropdown.js"></script>
+        <link rel="stylesheet" type="text/css" href="newStyle.css" />
         <title>Branch List</title>
     </head>
     <body>
         <div class="nav">
             <ul>
-                <li style="float:left; color:#999999"><a href="index.php">Carkea</a></li>
+                <li class="logo"><a class = "logo" href="index.php">Carkea</a></li>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="search.php">Search</a></li>
 		<li><a href="#">Contact Us</a></li>
@@ -32,27 +31,29 @@ and open the template in the editor.
                 if (isset($_SESSION['loggedIn'])) {
                     if($_SESSION['loggedIn'] == "true" )
                     {   ?>
-                        <li class="dropdown">
-                        <button onclick="myFunction()" class="dropbtn"><?=$loggedInUser?></button>
-                        <div id="myDropdown" class="dropdown-content">
+                        <li><div class="dropdown">
+                        <span><a href="#"><?=$loggedInUser?></a></span>
+                        <div class="dropdown-content">
                             <?php if ($_SESSION['staff'] === "false")
                             {?>
                                 <a href="user/editProfile.php?id=<?=$_SESSION['customerID']?>">Update Details</a>
                                 <a href="user/updateaddress.php?id=<?=$_SESSION['customerID']?>">Update Addresses</a> <!-- Add if for user type **EDIT** -->
                                 <a href="#">View Purchases</a>
                             <?php } else {?>
-                                <a href="staff/editProfile.php">Update Details</a>
-                                <a href="#">View Purchases</a> <!-- Add if for user type **EDIT** -->
+                                <a href="staff/editProfile.php?id=<?=$_SESSION['employeeID']?>">Update Details</a>
+                                <a href="staff/searchcustomers.php">Search Customers</a> <!-- Add if for user type **EDIT** -->
                                 <a href="#">Link 3</a>
                             <?php } ?>
-                        </div>
+                        </div></div>
                         </li>
                         <li><a href="php_files/Logout.php">Logout</a></li>
                     <?php } else { ?>
                     <li><a href="login.php">Login</a></li>
+                    <li><a href="register.php">Register</a></li>
                     <?php } 
                 } else { ?>
                 <li><a href="login.php">Login</a></li>
+                <li><a href="register.php">Register</a></li>
                 <?php }
 
                 if (isset($_SESSION["accessLevel"])) 
@@ -68,6 +69,7 @@ and open the template in the editor.
                 }?>
             </ul>
         </div> <!-- nav close -->
+        <br>
         <div class="mainbody">
         <?php
             // change to Team7 and CarkeaDB for release

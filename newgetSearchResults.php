@@ -106,24 +106,7 @@ while($row = mysqli_fetch_array($result))
 {    
     $vin = $row['Vehicle_Identification_Number'];
     //**EDIT** Probably a much better way to do this
-    $stmt = $dbConnection->prepare("SELECT Image_Blob FROM CarImage WHERE Vehicle_Identification_Number =?");
-    
-   // echo '<tr>';
-//    if ($stmt->execute(array($vin))) 
-//    {
-//        if ($column=$stmt->fetch())
-//        {
-//            echo '<td><img src="data:image/jpeg;base64,' . base64_encode($column['Image_Blob']) . '""height="90" width="90"></td>';
-//        } else {
-//            echo '<td><img src="placeholder.png "height="90" width="90"></td>';
-//        }
-//    }
-//    echo '<td><a href="stock.php?id='.$vin.'">' . $row["Make"] . '</a></td>';
-//    echo "<td>" . $row['Model'] . "</td>";
-//    echo "<td>" . $row['Colour'] . "</td>";
-//    echo "<td>" . $row['Registration'] . "</td>";
-//    echo "</tr>";
-    
+    $stmt = $dbConnection->prepare("SELECT Image_Blob FROM CarImage WHERE Vehicle_Identification_Number =?");    
     
     echo '<div class="searchResults">';
     if ($stmt->execute(array($vin))) 
@@ -136,7 +119,7 @@ while($row = mysqli_fetch_array($result))
         }
     }
                 echo '<div class="searchInfo">';
-                    echo '<h3 style="color:#2d5986">'.$row['Make'].' '.$row['Model'].'</h3>';
+                    echo '<h3 style="color:#2d5986" ><a <a href="stock.php?id='.$vin.'">'.$row['Make'].' '.$row['Model'].'<a/></h3>';
                     echo '<h2>£'.$row['Asking_Price'].'</h2>';
                     echo '<table style="width:60%">';
                         echo '<tr>';

@@ -17,6 +17,8 @@
     $condition = $_POST["condition"];
     $sold = '0';
     
+    $reg = str_replace(' ', '', $reg);
+    
     $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
 
     $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);

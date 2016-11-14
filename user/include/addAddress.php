@@ -7,6 +7,8 @@
     $city = $_POST["city"];
     $county = $_POST["county"];
     $postcode = $_POST["postcode"];
+    
+    $postcode = str_replace(' ', '', $postcode);
 
     $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
 

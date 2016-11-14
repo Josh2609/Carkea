@@ -14,7 +14,6 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <!--<link rel="stylesheet" type="text/css" href="Style.css" />-->
         <link href="newStyle.css" rel="stylesheet" type="text/css"/>
-        <script src="dropdown.js"></script>
         <title>Carkea</title>
     </head>
     <body>
@@ -33,9 +32,9 @@ and open the template in the editor.
                 if (isset($_SESSION['loggedIn'])) {
                     if($_SESSION['loggedIn'] == "true" )
                     {   ?>
-                        <li class="dropdown">
-                        <button onclick="myFunction()" class="dropbtn"><?=$loggedInUser?></button>
-                        <div id="myDropdown" class="dropdown-content">
+                        <li><div class="dropdown">
+                        <span><a href="#"><?=$loggedInUser?></a></span>
+                        <div class="dropdown-content">
                             <?php if ($_SESSION['staff'] === "false")
                             {?>
                                 <a href="user/editProfile.php?id=<?=$_SESSION['customerID']?>">Update Details</a>
@@ -46,7 +45,7 @@ and open the template in the editor.
                                 <a href="staff/searchcustomers.php">Search Customers</a> <!-- Add if for user type **EDIT** -->
                                 <a href="#">Link 3</a>
                             <?php } ?>
-                        </div>
+                        </div></div>
                         </li>
                         <li><a href="php_files/Logout.php">Logout</a></li>
                     <?php } else { ?>

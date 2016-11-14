@@ -9,6 +9,8 @@ if(isset($_POST['username']) && $_POST['password'])
     $surname = $_POST['surname'];
     $email = $_POST['email'];
     $telephone = $_POST['telephone'];
+    
+    $telephone = str_replace(' ', '', $telephone);
 
     if ($password !== $repeatPass)
     {

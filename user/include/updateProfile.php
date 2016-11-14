@@ -8,6 +8,8 @@
     $telephone = $_POST["telephone"];
     $email = $_POST["email"];
     $password = $_POST["currPassword"];
+    
+    $telephone = str_replace(' ', '', $telephone);
 
     
     $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
