@@ -38,7 +38,8 @@ and open the template in the editor.
                             <?php if ($_SESSION['staff'] === "false")
                             {?>
                                 <a href="user/editprofile.php?id=<?=$_SESSION['customerID']?>">Update Details</a>
-                                <a href="user/updateaddress.php?id=<?=$_SESSION['customerID']?>">Update Addresses</a> <!-- Add if for user type **EDIT** -->
+                                <a href="user/updateaddress.php?id=<?=$_SESSION['customerID']?>">Update Addresses</a>
+                                <a href="user/wishlist.php?id=<?=$_SESSION['customerID']?>">Wishlist</a>
                                 <a href="#">View Purchases</a>
                             <?php } else {?>
                                 <a href="staff/editProfile.php?id=<?=$_SESSION['employeeID']?>">Update Details</a>

@@ -26,15 +26,15 @@ table, td, th {
 th {text-align: left;}
 </style>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="Style.css" />
+        <link rel="stylesheet" type="text/css" href="newStyle.css" />
         <script src="dropdown.js"></script>
         <script src="js/showCarDetails.js"></script>
         <title>Carkea</title>
     </head>
     <body>
-        <div class="nav">
+         <div class="nav">
             <ul>
-                <li style="float:left; color:#999999"><a href="index.php">Carkea</a></li>
+                <li class="logo"><a class = "logo" href="index.php">Carkea</a></li>
                 <li><a href="index.php">Home</a></li>
                 <li><a class = "active" href="search.php">Search</a></li>
 		<li><a href="#">Contact Us</a></li>
@@ -47,27 +47,30 @@ th {text-align: left;}
                 if (isset($_SESSION['loggedIn'])) {
                     if($_SESSION['loggedIn'] == "true" )
                     {   ?>
-                        <li class="dropdown">
-                        <button onclick="myFunction()" class="dropbtn"><?=$loggedInUser?></button>
-                        <div id="myDropdown" class="dropdown-content">
+                        <li><div class="dropdown">
+                        <span><a href="#"><?=$loggedInUser?></a></span>
+                        <div class="dropdown-content">
                             <?php if ($_SESSION['staff'] === "false")
                             {?>
-                                <a href="user/editProfile.php">Edit Details</a>
-                                <a href="#">View Purchases</a> <!-- Add if for user type **EDIT** -->
-                                <a href="#">Link 3</a>
+                                <a href="user/editprofile.php?id=<?=$_SESSION['customerID']?>">Update Details</a>
+                                <a href="user/updateaddress.php?id=<?=$_SESSION['customerID']?>">Update Addresses</a>
+                                <a href="user/wishlist.php?id=<?=$_SESSION['customerID']?>">Wishlist</a>
+                                <a href="#">View Purchases</a>
                             <?php } else {?>
-                                <a href="staff/editProfile.php">Edit Details</a>
-                                <a href="#">View Purchases</a> <!-- Add if for user type **EDIT** -->
+                                <a href="staff/editProfile.php?id=<?=$_SESSION['employeeID']?>">Update Details</a>
+                                <a href="staff/searchcustomers.php">Search Customers</a> <!-- Add if for user type **EDIT** -->
                                 <a href="#">Link 3</a>
                             <?php } ?>
-                        </div>
+                        </div></div>
                         </li>
                         <li><a href="php_files/Logout.php">Logout</a></li>
                     <?php } else { ?>
                     <li><a href="login.php">Login</a></li>
+                    <li><a href="register.php">Register</a></li>
                     <?php } 
                 } else { ?>
                 <li><a href="login.php">Login</a></li>
+                <li><a href="register.php">Register</a></li>
                 <?php }
 
                 if (isset($_SESSION["accessLevel"])) 
@@ -83,8 +86,10 @@ th {text-align: left;}
                 }?>
             </ul>
         </div> <!-- nav close -->
-        <div class="mainbody">
-           
+        <br><br><br>
+        <div class="mainbody1">
+           <div class = "StockInfo">
+            
             <?php
 
             $con = mysqli_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
@@ -94,27 +99,83 @@ th {text-align: left;}
 
             $result = mysqli_query($con,$sql);
 
-            echo "<table>
-            <tr>
-            <th>Make</th>
-            <th>Model</th>
-            <th>Colour</th>
-            <th>Asking Price</th>
-            <th>Mileage</th>
-            <th>Car Type</th>
-            <th>Fuel Type</th>
-            <th>Registration</th>
-            </tr>";
+            $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
+
+            $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
             while($row = mysqli_fetch_array($result)) {
-                echo '<tr>';
-                echo '<td>' . $row["Make"] . '</td>';
-                echo "<td>" . $row['Model'] . "</td>";
-                echo "<td>" . $row['Colour'] . "</td>";
-                echo "<td>" . $row['Asking_Price'] . "</td>";
-                echo "<td>" . $row['Mileage'] . "</td>";
-                echo "<td>" . $row['Car_Type'] . "</td>";
-                echo "<td>" . $row['Fuel_Type'] . "</td>";
-                echo "<td>" . $row['Registration'] . "</td>";
+                $vin = $row['Vehicle_Identification_Number'];
+                //**EDIT** Probably a much better way to do this
+                $stmt = $dbConnection->prepare("SELECT Image_Blob FROM CarImage WHERE Vehicle_Identification_Number =?");    
+    
+                if ($stmt->execute(array($vin))) 
+                {
+                    if ($column=$stmt->fetch())
+                    {
+                        echo '<img src="data:image/jpeg;base64,' . base64_encode($column['Image_Blob']) . '""height="70" width="70">';
+                    } else {
+                        echo '<img src="placeholder.png "height="90" width="90">';
+                    }
+                }
+                
+                echo '<div class="info">';
+                
+                echo '<h1>'.$row["Make"].' '.$row["Model"].'</h1>
+                    <h3>'.$row["Engine_Size"].' Litre/'.$row["Fuel_Type"].'/'.$row["Number_of_Doors"].'-Door</h3>
+                    <br><br>
+                    <h1>£'.$row["Asking_Price"].'</h1>
+                    <br><br>
+                    <h5>Branches where ***DO DIS***this car is Available</h5>
+                    </div> ';
+                
+               if (isset($_SESSION["accessLevel"])) 
+                {
+                    if($_SESSION["accessLevel"] == "1" || $_SESSION["accessLevel"] == "2")
+                    {?>
+                        <div class="wishList">
+                            <button id="wishList">Mark as Sold</button>
+                        </div>
+                    <?php } else {?>
+                        
+                    <?php }  
+                } else {?>
+                <div class="wishList">
+                    <button id="wishList">Add To Wishlist</button>
+                </div>
+                <?php }?>
+           </div>
+            </div> <!-- close mainbody -->
+            <div class="mainbody2">
+            <h5 style = "background-color:#2d5986;padding-top:10px;padding-bottom:10px;width:100%;color:white;">Vehicle Specifications</h5>
+            <div class="VSpec">
+            <?php 
+                echo '<table>
+                    <tr>
+                        <th>ExampleInfo1Title</th>
+                        <td>ExampleInfo1</td>
+                    </tr>
+                    <tr>
+                        <th>ExampleInfo2Title</th>
+                        <td>ExampleInfo2</td>
+                    </tr>
+                    <tr>
+                        <th>ExampleInfo3Title</th>
+                        <td>ExampleInfo3</td>
+                    </tr>
+                    <tr>
+                        <th>ExampleInfo4Title</th>
+                        <td>ExampleInfo4</td>
+                    </tr>
+                    <tr>
+                        <th>ExampleInfo5Title</th>
+                        <td>ExampleInfo5</td>
+                    </tr>
+                    <tr>
+                        <th>ExampleInfo6Title</th>
+                        <td>ExampleInfo6</td>
+                    </tr>
+                </table>';
                 echo '<td><button type="button" onclick="('.$row["Vehicle_Identification_Number"].')">Add to wishlist</button></td>';
                 echo "</tr>";
             }
@@ -124,8 +185,9 @@ th {text-align: left;}
             
             ?>
             
+            </div>
+        </div>
             
-            
-        </div> <!-- close mainbody -->
+       
     </body>
 </html>
