@@ -86,23 +86,42 @@ and open the template in the editor.
                 if (isset($_SESSION['loggedIn'])) {
                     if($_SESSION['loggedIn'] == "true" )
                     {   ?>
-                        <li><a href="profile.php"><?=$loggedInUser?></a></li>
+                        <li><div class="dropdown">
+                        <span><a href="#"><?=$loggedInUser?></a></span>
+                        <div class="dropdown-content">
+                            <?php if ($_SESSION['staff'] === "false")
+                            {?>
+                                <a href="user/editprofile.php?id=<?=$_SESSION['customerID']?>">Update Details</a>
+                                <a href="user/updateaddress.php?id=<?=$_SESSION['customerID']?>">Update Addresses</a> <!-- Add if for user type **EDIT** -->
+                                <a href="#">View Purchases</a>
+                            <?php } else {?>
+                                <a href="staff/editProfile.php?id=<?=$_SESSION['employeeID']?>">Update Details</a>
+                                <a href="staff/searchcustomers.php">Search Customers</a> <!-- Add if for user type **EDIT** -->
+                                <a href="#">Link 3</a>
+                            <?php } ?>
+                        </div></div>
+                        </li>
                         <li><a href="php_files/Logout.php">Logout</a></li>
                     <?php } else { ?>
                     <li><a href="login.php">Login</a></li>
+                    <li><a href="register.php">Register</a></li>
                     <?php } 
                 } else { ?>
                 <li><a href="login.php">Login</a></li>
-                <?php } ?>
-                <li class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-                    <div id="myDropdown" class="dropdown-content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                    </div>
-                </li>
-                </ul>
+                <li><a href="register.php">Register</a></li>
+                <?php }
+                if (isset($_SESSION["accessLevel"])) 
+                {
+                    if($_SESSION["accessLevel"] == "1")
+                    {?>
+                        <li><a href="staff/addstock.php">Add Stock</a></li>
+                    <?php }  
+                    else if($_SESSION["accessLevel"] == "3")
+                    {?>
+                        <li><a href="staff/addemployee.php">Add Employee</a></li>
+                    <?php }  
+                }?>
+            </ul>
         </div> <!-- nav close -->
         
             <div class="searchBody">

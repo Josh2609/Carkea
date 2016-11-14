@@ -26,15 +26,14 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="../Style.css" />
-        <script src="../dropdown.js"></script>
+        <link rel="stylesheet" type="text/css" href="../newStyle.css" />
         <script src="js/showUser.js"></script>
         <title>Edit Profile</title>
     </head>
     <body>
         <div class="nav">
             <ul>
-                <li style="float:left; color:#999999"><a href="index.php">Carkea</a></li>
+                <li class="logo"><a class = "logo" href="index.php">Carkea</a></li>
                 <li><a href="../index.php">Home</a></li>
                 <li><a href="../search.php">Search</a></li>
 		<li><a href="#">Contact Us</a></li>
@@ -47,13 +46,13 @@ and open the template in the editor.
                 if (isset($_SESSION['loggedIn'])) {
                     if($_SESSION['loggedIn'] == "true" )
                     {   ?>
-                        <li class="dropdown">
-                        <button onclick="myFunction()" class="dropbtn"><?=$loggedInUser?></button>
-                        <div id="myDropdown" class="dropdown-content">
-                            <a href="editProfile.php">Edit Details</a>
-                            <a href="#">View Purchases</a> <!-- Add if for user type **EDIT** -->
-                            <a href="#">Link 3</a>
-                        </div>
+                <li><div class="dropdown">
+                        <span><a href="#"><?=$loggedInUser?></a></span>
+                        <div class="dropdown-content">
+                            <a href="editprofile.php?id=<?=$_SESSION['customerID']?>">Update Details</a>
+                            <a href="updateaddress.php?id=<?=$_SESSION['customerID']?>">Update Addresses</a> <!-- Add if for user type **EDIT** -->
+                            <a href="#">View Purchases</a>
+                        </div></div>
                         </li>
                         <li><a href="../php_files/Logout.php">Logout</a></li>
                     <?php } else { ?>

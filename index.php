@@ -37,7 +37,7 @@ and open the template in the editor.
                         <div class="dropdown-content">
                             <?php if ($_SESSION['staff'] === "false")
                             {?>
-                                <a href="user/editProfile.php?id=<?=$_SESSION['customerID']?>">Update Details</a>
+                                <a href="user/editprofile.php?id=<?=$_SESSION['customerID']?>">Update Details</a>
                                 <a href="user/updateaddress.php?id=<?=$_SESSION['customerID']?>">Update Addresses</a> <!-- Add if for user type **EDIT** -->
                                 <a href="#">View Purchases</a>
                             <?php } else {?>
@@ -77,7 +77,11 @@ and open the template in the editor.
                 <h2><span>Buy a new Car</span></h2>
                     </div></td>
                     <td><div class="IndexIMG">
-                            <a href ="#" class = "homepageimgs"><img src="Carkea/image2.jpg" style="width: 100%;height:100%;"  align="middle"></a>
+                            <?php if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == "true" ) { ?>
+                                <img src="Carkea/image2.jpg" style="width: 100%;height:100%;"  align="middle">
+                            <?php } else { ?>
+                                <a href ="login.php?staff=true" class = "homepageimgs"><img src="Carkea/image2.jpg" style="width: 100%;height:100%;"  align="middle"></a>
+                            <?php } ?>
                 <h2><span>Employee Login</span></h2>
                         </div></td>
             </tr><tr>
