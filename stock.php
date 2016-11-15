@@ -3,6 +3,13 @@
 session_start(); 
 $_SESSION["incorrectLogin"] = "false";
 $vin = $_GET['id'];
+
+    
+    $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
+
+    $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
 ?>
 <!DOCTYPE html>
 <!--
@@ -28,6 +35,7 @@ th {text-align: left;}
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="newStyle.css" />
         
+        <script src="user/js/addToWishlist.js"></script>
         <script src="js/showCarDetails.js"></script>
         <script>
             function showFinanceForm()
@@ -109,11 +117,6 @@ th {text-align: left;}
             $sql="SELECT * FROM searchView WHERE Vehicle_Identification_Number LIKE '".$vin."'";
 
             $result = mysqli_query($con,$sql);
-
-            $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
-
-            $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-            $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
             while($row = mysqli_fetch_array($result)) {
                 $vin = $row['Vehicle_Identification_Number'];
@@ -200,8 +203,25 @@ th {text-align: left;}
                         
                     <?php }  
                 } else {?>
+                    <script>
+                      var stockID = "<?php echo $carStockID ?>" ;
+                      var custID = "<?php echo $_SESSION['customerID'] ?>";
+                    </script>
                 <div class="wishList">
-                    <button id="wishList">Add To Wishlist</button>
+                    <?php
+                    $stmt = $dbConnection->prepare("SELECT Wishlist_ID FROM customerwishlist "
+                    . "WHERE Car_Stock_ID=? AND Customer_ID=?");
+                    
+                    $stmt->execute(array($carStockID,$_SESSION['customerID']));
+
+                    if ($stmt->rowCount() > 0) 
+                    { ?>
+                        <button id="wishList" type="button" disabled>Already in Wishlist</button>
+                    <?php } else { ?>
+                        <button id="wishList" type="button" onclick="addToWishlist(stockID, custID)">Add To Wishlist</button>
+                    <?php }
+                    ?>
+                    
                 </div>
                 <?php }?>
            </div>
@@ -253,7 +273,7 @@ th {text-align: left;}
                     </tr>
                     
                 </table>';
-                echo '<td><button type="button" onclick="('.$row["Vehicle_Identification_Number"].')">Add to wishlist</button></td>';
+                echo '<td><button type="button" id="ayy" onclick="('.$row["Vehicle_Identification_Number"].')">Add to wishlist</button></td>';
                 echo "</tr>";
             }
             echo "</table>";
@@ -264,6 +284,7 @@ th {text-align: left;}
             
             </div>
         </div>
+            <div id="wishlistResult"><b></b></div>
             
        
     </body>
