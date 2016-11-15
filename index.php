@@ -44,7 +44,7 @@ and open the template in the editor.
                             <?php } else {?>
                                 <a href="staff/editProfile.php?id=<?=$_SESSION['employeeID']?>">Update Details</a>
                                 <a href="staff/searchcustomers.php">Search Customers</a> <!-- Add if for user type **EDIT** -->
-                                <a href="#">Link 3</a>
+                                <a href="staff/searchsoldcars.php">Search Sold Cars</a>
                             <?php } ?>
                         </div></div>
                         </li>
@@ -60,13 +60,17 @@ and open the template in the editor.
 
                 if (isset($_SESSION["accessLevel"])) 
                 {
-                    if($_SESSION["accessLevel"] == "1")
+                    if($_SESSION["accessLevel"] == "1" || $_SESSION["accessLevel"] == "2")
                     {?>
                         <li><a href="staff/addstock.php">Add Stock</a></li>
                     <?php }  
                     else if($_SESSION["accessLevel"] == "3")
                     {?>
                         <li><a href="staff/addemployee.php">Add Employee</a></li>
+                    <?php }  
+                    else if($_SESSION["accessLevel"] == "4")
+                    {?>
+                        <li><a href="staff/addfinancecompany.php">Add Finance</a></li>
                     <?php }  
                 }?>
             </ul>
