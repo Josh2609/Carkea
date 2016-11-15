@@ -22,6 +22,8 @@ $mileLow = $_GET['milelow'];
 $mileHigh = $_GET['milehigh'];
 $postcode = $_GET['postcode'];
 $distance = $_GET['distance'];
+$priceLow = $_GET['pricelow'];
+$priceHigh = $_GET['pricehigh'];
 if ($postcode=="")
     $postcode="UK";
 if ($distance=="")
@@ -77,11 +79,21 @@ $key = 'AIzaSyDv0SJXrfeWAu-LeH9z_1XXriQC-Lrdilk'; // Josh's key for googles API
             $mileLow="0";
     if ($mileHigh=="")
             $mileHigh="100000000";
+    if ($priceLow=="")
+            $priceLow="0";
+    if ($priceHigh=="")
+            $priceHigh="100000000";
     if ($mileHigh<$mileLow) // stops the user being stupid
     {
             $temp=$mileHigh;
             $mileHigh=$mileLow;
             $mileLow=$temp;
+    }
+    if ($priceHigh<$priceLow) // stops the user being stupid
+    {
+            $temp=$priceHigh;
+            $priceHigh=$priceLow;
+            $priceLow=$temp;
     }
 
 $con = mysqli_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
@@ -92,7 +104,8 @@ $con = mysqli_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // C
 $sql="SELECT * FROM searchView WHERE Make LIKE '".$make."' AND Model LIKE '".$model."' AND Colour LIKE '".$colour."' "
         . "AND Fuel_Type LIKE '".$fuelType."' AND Car_Type LIKE '".$carType."' AND Transmission LIKE '".$transType."'"
         . "AND Number_of_Doors LIKE '".$numDoors."' AND Car_Condition LIKE '".$condition."' "
-        . "AND Mileage BETWEEN '".$mileLow."' AND '".$mileHigh."' AND Branch_ID IN (".$in.")"
+        . "AND Mileage BETWEEN '".$mileLow."' AND '".$mileHigh."'"
+        . "AND Asking_Price BETWEEN '".$priceLow."' AND '".$priceHigh."' AND Branch_ID IN (".$in.")"
         . "AND Sold='".'0'."'";
 $result = mysqli_query($con,$sql);
 if ($result)

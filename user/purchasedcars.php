@@ -55,6 +55,7 @@ and open the template in the editor.
             </ul>
         </div> <!-- nav close -->
         <br><br><br><br>
+        <h2 align="center">Purchased Cars</h2>
             <?php include "include/getPurchasedCars.php";?>
 
     </body>

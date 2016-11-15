@@ -34,7 +34,7 @@ and open the template in the editor.
     <body>
         <div class="nav">
             <ul>
-                <li class="logo"><a class = "logo" href="index.php">Carkea</a></li>
+                <li class="logo"><a class = "logo" href="../index.php">Carkea</a></li>
                 <li><a href="../index.php">Home</a></li>
                 <li><a href="../search.php">Search</a></li>
 		<li><a href="#">Contact Us</a></li>
@@ -64,7 +64,8 @@ and open the template in the editor.
                 <?php } ?>
                 </ul>
         </div> <!-- nav close -->
-        <br><br><br>
+        <br><br><br><br>
+        <h2 align="center">Wishlist</h2>
         <?php
             include "include/getWishlist.php";
 

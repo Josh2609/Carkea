@@ -31,7 +31,7 @@ and open the template in the editor.
     <body>
         <div class="nav">
             <ul>
-                <li class="logo"><a class = "logo" href="index.php">Carkea</a></li>
+                <li class="logo"><a class = "logo" href="../index.php">Carkea</a></li>
                 <li><a href="../index.php">Home</a></li>
                 <li><a href="../search.php">Search</a></li>
 		<li><a href="#">Contact Us</a></li>

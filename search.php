@@ -30,6 +30,8 @@ and open the template in the editor.
             var mileHigh = '100000000';
             var postcode = '';
             var distance = '500';
+            var priceLow = '0';
+            var priceHigh = '100000000';
             
             function getMake(option) {
                 make = option.value;  
@@ -66,6 +68,12 @@ and open the template in the editor.
             }
             function getDistance(option) {
                 distance = option.value;  
+            }
+            function getPriceLow(option) {
+                priceLow = option.value;  
+            }
+            function getPriceHigh(option) {
+                priceHigh = option.value;  
             }
         </script>
             
@@ -260,10 +268,10 @@ and open the template in the editor.
                 <input type="text" style="width: 155px;height:30px;color:#2d5986" name="mileageLow" onchange="getMileLow(this)" placeholder=Minimum>&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" style="width:155px;height:30px;color:#2d5986" name="mileageHigh" onchange="getMileHigh(this)" placeholder="Maximum"><br>
                             
                 <br><h5 style = "background-color:#2d5986;padding-top:10px;padding-bottom:10px;width:100%;color:white;">Price</h5>               
-                <input type="text" style="width: 155px;height:30px;color:#2d5986" name="#" placeholder=Minimum>&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" style="width:155px;height:30px;color:#2d5986" name="#" placeholder="Maximum"><br><br>
+                <input type="text" style="width: 155px;height:30px;color:#2d5986" name="priceLow" placeholder=Minimum onchange="getPriceLow(this)">&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" style="width:155px;height:30px;color:#2d5986" name="priceHigh" placeholder="Maximum" onchange="getPriceHigh(this)"><br><br>
             </form>  
             
-            <button type="button" onclick="showSearchResults(make, model, colour, fuel, carType, transType, numDoors, condition, mileLow, mileHigh, postcode, distance)">Search</button> 
+            <button type="button" onclick="showSearchResults(make, model, colour, fuel, carType, transType, numDoors, condition, mileLow, mileHigh, postcode, distance, priceLow, priceHigh)">Search</button> 
             </div></div>
                 <br><br>
             </div>

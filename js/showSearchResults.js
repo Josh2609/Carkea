@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function showSearchResults(make, model, colour, fuel, carType, transType, numDoors, condition, mileLow, mileHigh, postcode, distance) {
+function showSearchResults(make, model, colour, fuel, carType, transType, numDoors, condition, mileLow, mileHigh, postcode, distance, priceLow, priceHigh) {
   if (make=="") {
     document.getElementById("searchResults").innerHTML="";
     return;
@@ -19,7 +19,7 @@ function showSearchResults(make, model, colour, fuel, carType, transType, numDoo
       document.getElementById("searchResults").innerHTML=this.responseText;
     }
   }
-  xmlhttp.open("GET","newgetSearchResults.php?make="+make+"&model="+model+"&colour="+colour+"&fuel="+fuel+"&cartype="+carType+"&transtype="+transType+"&numdoors="+numDoors+"&condition="+condition+"&milelow="+mileLow+"&milehigh="+mileHigh+"&postcode="+postcode+"&distance="+distance,true);                      
+  xmlhttp.open("GET","newgetSearchResults.php?make="+make+"&model="+model+"&colour="+colour+"&fuel="+fuel+"&cartype="+carType+"&transtype="+transType+"&numdoors="+numDoors+"&condition="+condition+"&milelow="+mileLow+"&milehigh="+mileHigh+"&postcode="+postcode+"&distance="+distance+"&pricelow="+priceLow+"&pricehigh="+priceHigh,true);                      
   xmlhttp.send();
 }
 

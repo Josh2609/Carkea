@@ -68,13 +68,18 @@
         $db = mysql_connect("silva.computing.dundee.ac.uk", "16ac3u07", "bac132");
         // SELECT DATABASE
         mysql_select_db("16ac3d07");
-
+        
+        if ($_FILES['image']['size'] == 0 && $_FILES['image']['error'] == 0)
+        {
+        
+        } else {
         $image = mysql_real_escape_string(file_get_contents($_FILES['image']['tmp_name']));
         $image_name = mysql_real_escape_string($_FILES['image']['name']);
 
         $query = "INSERT INTO CarImage (Image_ID, Image_Name, Image_Blob, Vehicle_Identification_Number"
                 . " ) VALUES (NULL, '$image_name', '$image', '$vin')";
         mysql_query($query,$db);
+        }
         
         
         header("Location: ../addstock.php?message=success");
