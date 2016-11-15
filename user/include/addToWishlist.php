@@ -22,6 +22,4 @@ $custID = $_GET['custID'];
     $stmt->bindParam(':custID', $custID);
     $stmt->execute();
     
-    echo "<p>TEST</p>";
     echo '<div class="wishlistResult">';
-    echo '</div>';

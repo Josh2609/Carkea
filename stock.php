@@ -273,7 +273,7 @@ th {text-align: left;}
                     </tr>
                     
                 </table>';
-                echo '<td><button type="button" id="ayy" onclick="('.$row["Vehicle_Identification_Number"].')">Add to wishlist</button></td>';
+                
                 echo "</tr>";
             }
             echo "</table>";
