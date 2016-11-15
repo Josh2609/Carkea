@@ -5,7 +5,7 @@ $id = $_SESSION['customerID'];
     $con = mysqli_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
           mysqli_select_db($con,"16ac3d07"); // SELECT DATABASE
     
-    $sql="SELECT * FROM soldCarView WHERE Customer_ID='".$id."'";   
+    $sql="SELECT * FROM customerPurchasedCars WHERE Customer_ID='".$id."'";   
     $result = mysqli_query($con,$sql);
     
 
@@ -18,7 +18,6 @@ $id = $_SESSION['customerID'];
         
         while($row = mysqli_fetch_array($result)) 
         {    
-            echo '<div class="searchResults">';
             $vin = $row['Vehicle_Identification_Number'];
             //**EDIT** Probably a much better way to do this
             $stmt = $dbConnection->prepare("SELECT Image_Blob FROM CarImage WHERE Vehicle_Identification_Number =?");    
@@ -35,7 +34,7 @@ $id = $_SESSION['customerID'];
             }
             
              echo '<div class="searchInfo">';
-                    echo '<h3 style="color:#2d5986" ><a <a href="stock.php?id='.$vin.'">'.$row['Make'].' '.$row['Model'].'<a/></h3>';
+                    echo '<h3 style="color:#2d5986" >'.$row['Make'].' '.$row['Model'].'</h3>';
                     echo '<h2>£'.$row['Sold_Price'].'</h2>';
                     echo '<table style="width:60%">';
                         echo '<tr>';

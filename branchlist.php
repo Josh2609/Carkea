@@ -103,10 +103,8 @@ and open the template in the editor.
             echo "</table>";
 
             mysql_close($db); // CLOSE CONNECTION
-        ?>
-            </div>
-             
+            ?>
+            </div>         
         </div> <!-- close mainbody -->
-        
     </body>
 </html>

@@ -123,7 +123,7 @@ and open the template in the editor.
                 }?>
             </ul>
         </div> <!-- nav close -->
-        
+        <div>
             <div class="searchBody">
             <div class="thingyholder">
             <br>

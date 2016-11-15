@@ -54,8 +54,8 @@ and open the template in the editor.
                 <?php }?>
             </ul>
         </div> <!-- nav close -->
-        <div class="mainbody">
+        <br><br><br><br>
             <?php include "include/getPurchasedCars.php";?>
-        </div>
+
     </body>
 </html>
