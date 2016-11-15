@@ -129,7 +129,11 @@ th {text-align: left;}
                         echo '<img src="placeholder.png "height="90" width="90">';
                     }
                 }
+                $stmt = $dbConnection->prepare("SELECT Branch_Name FROM Branch WHERE Branch_ID =?");
                 
+                $branchID = $row["Branch_ID"];
+                $stmt->execute(array($branchID));
+                $column=$stmt->fetch();
                 echo '<div class="info">';
                 
                 echo '<h1>'.$row["Make"].' '.$row["Model"].'</h1>
@@ -137,10 +141,11 @@ th {text-align: left;}
                     <br><br>
                     <h1>£'.$row["Asking_Price"].'</h1>
                     <br><br>
-                    <h5>Branches where ***DO DIS***this car is Available</h5>
+                    <h5>This Car is available at our '.$column["Branch_Name"].' Branch</h5>
                     </div> ';
+     
                 
-                $branchID = $row["Branch_ID"];
+                
                 $carStockID = $row["Car_Stock_ID"];
                 
                 if (isset($_SESSION["accessLevel"])) 
@@ -207,29 +212,46 @@ th {text-align: left;}
             <?php 
                 echo '<table>
                     <tr>
-                        <th>ExampleInfo1Title</th>
-                        <td>ExampleInfo1</td>
+                        <th>Make</th>
+                        <td>'. $row['Make'].'</td>
                     </tr>
                     <tr>
-                        <th>ExampleInfo2Title</th>
-                        <td>ExampleInfo2</td>
+                        <th>Model</th>
+                        <td>'. $row['Model'].'</td>
                     </tr>
                     <tr>
-                        <th>ExampleInfo3Title</th>
-                        <td>ExampleInfo3</td>
+                        <th>Colour</th>
+                        <td>'. $row['Colour'].'</td>
                     </tr>
                     <tr>
-                        <th>ExampleInfo4Title</th>
-                        <td>ExampleInfo4</td>
+                        <th>Mileage</th>
+                        <td>'. $row['Mileage'].' Miles</td>
                     </tr>
                     <tr>
-                        <th>ExampleInfo5Title</th>
-                        <td>ExampleInfo5</td>
+                        <th>Car Type</th>
+                        <td>'. $row['Car_Type'].'</td>
                     </tr>
                     <tr>
-                        <th>ExampleInfo6Title</th>
-                        <td>ExampleInfo6</td>
+                        <th>Fuel Type</th>
+                        <td>'. $row['Fuel_Type'].'</td>
                     </tr>
+                    <tr>
+                        <th>Engine Size</th>
+                        <td>'. $row['Engine_Size'].' Litres</td>
+                    </tr>
+                    <tr>
+                        <th>Transmission</th>
+                        <td>'. $row['Transmission'].'</td>
+                    </tr>
+                    <tr>
+                        <th>Manufacture Date</th>
+                        <td>'. $row['Manufacture_Date'].'</td>
+                    </tr>
+                    <tr>
+                        <th>Car Condition</th>
+                        <td>'. $row['Car_Condition'].'</td>
+                    </tr>
+                    
                 </table>';
                 echo '<td><button type="button" onclick="('.$row["Vehicle_Identification_Number"].')">Add to wishlist</button></td>';
                 echo "</tr>";

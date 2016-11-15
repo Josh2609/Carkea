@@ -92,7 +92,7 @@ and open the template in the editor.
                     <li>First Name<input type="text" name="firstName" required></li>
                     <li>Last Name<input type="text" name="lastName" required></li>
                     <li>Salary<input type="text" name="salary" required></li>
-                    <li>Line Manager (if any)<input type="text" name="manager"></li>
+                    <li>Line Manager ID(if any)<input type="text" name="manager"></li>
                     
                     <li>Account Username<input type="text" name="username" required></li>
                     <li>Temporary Account Password<input type="password" name="password" required></li>

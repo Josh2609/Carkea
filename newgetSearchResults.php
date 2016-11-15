@@ -95,7 +95,9 @@ $sql="SELECT * FROM searchView WHERE Make LIKE '".$make."' AND Model LIKE '".$mo
         . "AND Mileage BETWEEN '".$mileLow."' AND '".$mileHigh."' AND Branch_ID IN (".$in.")"
         . "AND Sold='".'0'."'";
 $result = mysqli_query($con,$sql);
-
+if ($result)
+{
+ 
     $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
 
     $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
@@ -124,15 +126,19 @@ while($row = mysqli_fetch_array($result))
                     echo '<table style="width:60%">';
                         echo '<tr>';
                             echo '<td>Mileage: '. $row['Mileage'].'</td>';
-                            echo '<td>Example Info2</td>';
+                            echo '<td>Condition: '. $row['Car_Condition'].'</td>';
                         echo '</tr>';
                         echo '<tr>';
-                            echo '<td>Example Info3</td>';
-                            echo '<td>Example Info4</td>';
+                            echo '<td>Colour: '. $row['Colour'].'</td>';
+                            echo '<td>Fuel: '. $row['Fuel_Type'].'</td>';
                         echo '</tr>';
                         echo '<tr>';
-                            echo '<td>Example Info5</td>';
-                            echo '<td>Example Info6</td>';
+                            echo '<td>Doors: '. $row['Number_of_Doors'].'</td>';
+                            echo '<td>Transmisiion: '. $row['Transmission'].'</td>';
+                        echo '</tr>';
+                        echo '<tr>'; 
+                            echo '<td>Engine:  '. $row['Engine_Size'].'L</td>';
+                            echo '<td>Car Type: '. $row['Car_Type'].'</td>';
                         echo '</tr>';
                     echo '</table>';
                 echo '</div>';
@@ -140,6 +146,9 @@ while($row = mysqli_fetch_array($result))
             echo '<br>';
 }
 echo "</table>";
+} else {
+    echo '<p align="center">No Results Found</p>';
+}
 mysqli_close($con);
 
 ?>
