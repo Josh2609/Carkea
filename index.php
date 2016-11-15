@@ -40,7 +40,7 @@ and open the template in the editor.
                                 <a href="user/editprofile.php?id=<?=$_SESSION['customerID']?>">Update Details</a>
                                 <a href="user/updateaddress.php?id=<?=$_SESSION['customerID']?>">Update Addresses</a>
                                 <a href="user/wishlist.php?id=<?=$_SESSION['customerID']?>">Wishlist</a>
-                                <a href="#">View Purchases</a>
+                                <a href="user/purchasedcars.php?id=<?=$_SESSION['customerID']?>">View Purchases</a>
                             <?php } else {?>
                                 <a href="staff/editProfile.php?id=<?=$_SESSION['employeeID']?>">Update Details</a>
                                 <a href="staff/searchcustomers.php">Search Customers</a> <!-- Add if for user type **EDIT** -->
