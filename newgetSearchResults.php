@@ -134,7 +134,7 @@ while($row = mysqli_fetch_array($result))
         }
     }
                 echo '<div class="searchInfo">';
-                    echo '<h3 style="color:#2d5986" ><a <a href="stock.php?id='.$vin.'">'.$row['Make'].' '.$row['Model'].'<a/></h3>';
+                    echo '<h3 style="color:#2d5986" ><a href="stock.php?id='.$vin.'">'.$row['Make'].' '.$row['Model'].'<a/></h3>';
                     echo '<h2>£'.$row['Asking_Price'].'</h2>';
                     echo '<table style="width:60%">';
                         echo '<tr>';

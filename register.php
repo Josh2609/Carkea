@@ -80,7 +80,7 @@ and open the template in the editor.
                 <ul style='list-style:none;'>
                         <li>First Name<input type ="text" name ="firstname"></li>
                         <li><br></li>
-                        <li>Surname<input type="text" name ="surname"></li>
+                        <li>Last Name<input type="text" name ="surname"></li>
                         <li><br></li>
                         <li>Telephone<input type ="text" name="telephone"></li>
                         <li><br></li>

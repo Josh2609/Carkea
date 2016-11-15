@@ -81,7 +81,7 @@ and open the template in the editor.
                 echo mysql_error() ;
 
             
-            $queryBranchView = "SELECT * FROM branchView;";
+            $queryBranchView = "SELECT * FROM branchView ORDER BY Branch_Name ASC;";
             $branchQueryResult = mysql_query($queryBranchView,$db);
             
             // Displays branch list, needs cleaning up with css/html
