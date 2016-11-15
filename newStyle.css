@@ -85,7 +85,7 @@ footer{
   text-align: center;
   padding: 0;
   margin: 0 auto;
-  padding: 40px;
+  /*padding: 40px;*/
   padding-bottom: 0px; 
   padding-top: 0px;
   border-bottom: 4px solid #33ccff;
@@ -95,6 +95,12 @@ footer{
 .nav li {
   font-family: 'Oswald', sans-serif;
   font-size: 100%;
+  
+  -webkit-transition: all 1s ease;
+     -moz-transition: all 1s ease;
+       -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+          transition: all 1s ease;
   /*line-height: 40px;
   height: 40px;*/
   /*border-bottom: 4px solid #ff8000;*/
@@ -114,7 +120,7 @@ footer{
 }
  
 .nav a.active {
-  background-color: #00ace6;
+  background-color: #33ccff;
   color: black;
   cursor: default;
 }
@@ -141,7 +147,7 @@ footer{
     display: block;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 850px) {
   .nav li {
     width: 120px;
     border-bottom: none;
@@ -149,18 +155,32 @@ footer{
     line-height: 50px;
     /*font-size: 1.4em;*/
   }
+  
+  .nav ul{
+      padding-left: 40px;
+  }
  
   /* Option 1 - Display Inline */
   .nav li {
+          -webkit-transition: all 1s ease;
+     -moz-transition: all 1s ease;
+       -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+          transition: all 1s ease;
     display: inline-block;
     margin-right: -4px;
   }
   
-  .logo{
+  .nav li.logo{
     color:black;
     font-size: 150%;
     font-family: "Lucida Console", Monaco, monospace;
     float:left;
+  }
+  .nav a.logo{
+    color:black;
+    font-size: 150%;
+    font-family: "Lucida Console", Monaco, monospace;
   }
   
   .nav a.active {
@@ -169,6 +189,13 @@ footer{
     cursor: default;
     border-bottom: 4px solid black;
   }
+  
+  .mainbodyLog{
+    padding-top: 100px;
+    /*padding: 85px;*/
+    width: 80%;
+    text-align: center;
+}
 }  
 /*Nav bar stuff closing*/
 
@@ -201,9 +228,15 @@ footer{
 
 .searchBody{
     margin: 0 auto;
-    margin-top: 50px;
-    width: 60%;
+    padding-top: 135px;
+    width: 100%;
     text-align: center;
+    
+  -webkit-transition: all 1s ease;
+     -moz-transition: all 1s ease;
+       -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+          transition: all 1s ease;
 }
 .list {
     display:block;  
@@ -214,14 +247,19 @@ footer{
     display:block; 
     margin:0 auto;
     width: 100%;
-    /*padding:20px;*/
     background-color: #eeeeee;
     color: #2d5986;
     border: 1px solid #d9d9d9;
     text-align: center;
-    /*border-bottom-right-radius: 50px;
-    border-bottom-left-radius: 50px; 
-    /*position: fixed;*/
+}
+
+@media screen and (min-width: 850px) {
+    .searchBody{
+    margin: 0 auto;
+    padding-top: 50px;
+    width: 60%;
+    text-align: center;
+}
 }
 
 
@@ -287,24 +325,28 @@ footer{
 
 
 /*working on making the homepage images responsive STARTS*/
-.centreing{
-    margin: 0 auto;
-    position: relative;
-    padding: 0;
-    top: 50px; /*Space created between nav bar and images when in mobile view*/
-}
+
 .imglist{
     margin: 0 auto;
 }
 
-.imglist ul {
-  width: 95%;
-  list-style: none;
+/*.imglist table {
   margin: 0 auto;
-}
-.imglist li {
+  padding-top: 50px;
+  left:50%;
+  right:50%;
+  text-align: center;
+  display: block;
+}*/
+.imglist tr {
     display: block;
-    width: 90%;
+    width: 100%;
+    margin: 0 auto;
+    transition: width .7s; 
+    text-align: left;
+}
+
+.imglist td{
     margin: 0 auto;
 }
  
@@ -312,21 +354,19 @@ footer{
   color: white;
   display: block;
   transition: .3s background-color;
-   margin: 0 auto;
+  margin: 0 auto;
 }
  
 @media screen and (min-width: 1000px) {
-
-  .imglist li {
-    display: inline-block;
+.imglist table {
+  text-align: center;
+  display: block;
+}
+  .imglist tr {
+    display: inline-table;
     margin: 0 auto;
     width: 45%;
-  }
-  
-  .centreing{
-    top: 0px; /*Nav bar distancing when in normal view*/
-}
-  
+  }  
 } 
 /*working on making the homepage images responsive ENDS*/
 
@@ -380,7 +420,7 @@ footer{
 .searchResults {
     display: block;
     margin: 0 auto;
-    width: 60%;
+    width: 100%;
     height: 200px;
     background-color: white;
     border: 1px solid #d9d9d9;
@@ -428,26 +468,20 @@ footer{
     width: 30%;
     height: 100%;
     margin-right: 20px;
-    /*opacity: 0.5;
-    border: 1px solid #d9d9d9;
+    opacity: 0.5;
+    /*border: 1px solid #d9d9d9;
     border-right: none;*/
 }
 
-/*
-@media screen and (min-width: 600px) {
-    .searchResults img{
-        width: 30%;
-        height: 100%;
-        display: inline-block;
+@media screen and (min-width: 850px) {
+    .searchResults {
+        width: 60%;
     }
-
-    .searchResults li{
-        list-style: none;
-        display: inline-block;
-    }
-}*/
+}
 
 
+
+/*Stock Page Starts HERE*/
 .StockInfo{
     width: 60%;
     height: 100%;
@@ -461,7 +495,7 @@ footer{
 
 .StockInfo img{
     display: inline-block;
-    width: 40%;
+    width: 38%;
     height: 100%;
     float: left;
 }
@@ -469,7 +503,7 @@ footer{
 .info{
     display: inline-block;
     color: #2d5986;
-    width: 40%;
+    width: 38%;
     height: 100%;
     text-align: left;
     background-color: white;
@@ -606,3 +640,88 @@ footer{
     border: none;
     color: white;
 }
+
+/*Stock Page ends here*/
+
+.branch{
+    padding-top: 60px;
+}
+.branch table{
+    margin: 0 auto;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border: none;
+}
+
+.branch td, th{
+    /*border: 1px solid #dddddd;*/
+    border: none;
+    text-align: left;
+    padding: 8px;
+    color: #2d5986;
+}
+
+.branch tr:nth-child(even) {
+    background-color: #cceeff;
+}
+
+@media screen and (min-width: 850px){
+    .branch{
+        padding-top: 10px;
+    }
+}
+
+
+#editprof{
+    color: #2d5986;
+    width: 60%;
+    margin:0 auto;
+    /*background-color: red;*/
+}
+
+#editprof table{
+    width: 40%;
+    text-align: left;
+    margin:0 auto;
+}
+
+.inputText{
+    width: 200px;
+    height: 30px;
+    font-size: 16px;
+    border: 1px solid #eeeeee;
+    border-radius: 3px;
+    color: #2d5986;
+}
+
+.mainbodyProf{
+    margin: 0 auto;
+    padding: 60px;
+    width: 80%;
+    text-align: center;
+    background-color: white;
+}
+
+.profButton{
+    background-color: #33ccff;
+    width: 250px;
+    height: 40px;
+    border-radius: 5px;
+    display: inline-block;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+    transition: .5s background-color;
+    font-weight: bold;
+}
+
+.profButton:hover{
+    background-color: #0073e6;
+}
+

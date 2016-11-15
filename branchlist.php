@@ -71,6 +71,7 @@ and open the template in the editor.
         </div> <!-- nav close -->
         <br>
         <div class="mainbody">
+            <div class="branch">
         <?php
             // change to Team7 and CarkeaDB for release
             $db = mysql_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
@@ -82,17 +83,29 @@ and open the template in the editor.
             
             $queryBranchView = "SELECT * FROM branchView;";
             $branchQueryResult = mysql_query($queryBranchView,$db);
-
+            
             // Displays branch list, needs cleaning up with css/html
+            echo "<table>
+                <tr><th>Branch Name</th><th>No. of Cars in Stock</th><th>Telephone</th><th>Street Number</th><th>Street</th><th>City</th><th>County</th><th>Postcode</th>";
             while ($row = mysql_fetch_array($branchQueryResult))
             {
-                echo $row['Branch_Name']." ".$row['Stock_Amount']." ".$row['Telephone']." ".$row['Street_Number']
-                        ." ".$row['Street']." ".$row['City']." ".$row['County']." ".$row['Postcode'];
-                echo "<br>";
+                echo "<tr>"
+                     .'<td>'.$row['Branch_Name'].'</td>
+                     <td>'.$row['Stock_Amount'].'</td>
+                     <td>'.$row['Telephone'].'</td>
+                     <td>'.$row['Street_Number'].'</td>
+                     <td>'.$row['Street'].'</td>
+                     <td>'.$row['City'].'</td>
+                     <td>'.$row['County'].'</td>
+                     <td>'.$row['Postcode'];
+                echo "</tr>";
             }
+            echo "</table>";
 
             mysql_close($db); // CLOSE CONNECTION
         ?>
+            </div>
+             
         </div> <!-- close mainbody -->
         
     </body>
