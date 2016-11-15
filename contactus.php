@@ -14,15 +14,15 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <!--<link rel="stylesheet" type="text/css" href="Style.css" />-->
         <link href="newStyle.css" rel="stylesheet" type="text/css"/>
-        <title>Carkea</title>
+        <title>Contact Us</title>
     </head>
     <body>
         <div class="nav">
             <ul>
                 <li class="logo"><a class = "logo" href="index.php">Carkea</a></li>
-                <li><a class = "active" href="index.php">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li><a href="search.php">Search</a></li>
-		<li><a href="contactus.php">Contact Us</a></li>
+		<li><a class = "active" href="contactus.php">Contact Us</a></li>
                 <li><a href="branchlist.php">Branch List</a></li>
                 <?php 
                 if (isset($_SESSION['username'])) {
@@ -40,7 +40,7 @@ and open the template in the editor.
                                 <a href="user/editprofile.php?id=<?=$_SESSION['customerID']?>">Update Details</a>
                                 <a href="user/updateaddress.php?id=<?=$_SESSION['customerID']?>">Update Addresses</a>
                                 <a href="user/wishlist.php?id=<?=$_SESSION['customerID']?>">Wishlist</a>
-                                <a href="user/purchasedcars.php?id=<?=$_SESSION['customerID']?>">View Purchases</a>
+                                <a href="#">View Purchases</a>
                             <?php } else {?>
                                 <a href="staff/editProfile.php?id=<?=$_SESSION['employeeID']?>">Update Details</a>
                                 <a href="staff/searchcustomers.php">Search Customers</a> <!-- Add if for user type **EDIT** -->
@@ -75,58 +75,18 @@ and open the template in the editor.
                 }?>
             </ul>
         </div> <!-- nav close -->
-        <br><br><br><br><br>
-        <table style="width:80%;margin:0 auto;"><tr>
-                <td><div class="IndexIMG">
-                <img src="Carkea/image1.jpg" style="width: 100%;height:100%;"  align="middle">
-                <h2><span>Buy a new Car</span></h2>
-                    </div></td>
-                    <td><div class="IndexIMG">
-                            <?php if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == "true" ) { ?>
-                                <img src="Carkea/image2.jpg" style="width: 100%;height:100%;"  align="middle">
-                            <?php } else { ?>
-                                <a href ="login.php?staff=true" class = "homepageimgs"><img src="Carkea/image2.jpg" style="width: 100%;height:100%;"  align="middle"></a>
-                            <?php } ?>
-                <h2><span>Employee Login</span></h2>
-                        </div></td>
-            </tr><tr>
-                <td><div class="IndexIMG">
-                <img src="Carkea/image3.jpg" style="width: 100%;height:100%;"  align="middle">
-                <h2><span>Sign Up</span></h2>
-                    </div></td>
-                    <td><div class="IndexIMG">
-                <img src="Carkea/image4.jpg" style="width: 100%;height:100%;"  align="middle">
-                <h2><span>Sell your car</span></h2>
-                        </div></td></tr>
-            <tr>
-                <td><div class="IndexIMG">
-                <img src="Carkea/image1.jpg" style="width: 100%;height:100%;"  align="middle">
-                <h2><span>Buy a new Car</span></h2>
-                    </div></td>
-                    <td><div class="IndexIMG">
-                <img src="Carkea/image2.jpg" style="width: 100%;height:100%;"  align="middle">
-                <h2><span>Employee Login</span></h2>
-                        </div></td>
-            </tr>
-            <tr>
-                <td><div class="IndexIMG">
-                <img src="Carkea/image3.jpg" style="width: 100%;height:100%;"  align="middle">
-                <h2><span>Sign Up</span></h2>
-                    </div></td>
-                    <td><div class="IndexIMG">
-                <img src="Carkea/image4.jpg" style="width: 100%;height:100%;"  align="middle">
-                <h2><span>Sell your car</span></h2>
-                        </div></td></tr>
-            
-            
-            <!--<img src="Carkea/image1.jpg" style="width: 100%;height:100%;"  align="middle">
-            <img src="Carkea/image2.jpg" style="width: 100%;height:100%;"  align="middle">
-            <img src="Carkea/image3.jpg" style="width: 100%;height:100%;"  align="middle">
-            <img src="Carkea/image4.jpg" style="width: 100%;height:100%;"  align="middle">-->
-            
-            
-        </table>
-        <br><br><br><br><br><br><br><br>
-       
+        <div class="mainbody">
+        
+            <form>
+                <br><br>Topic:<br>
+                <input type = "text" name= "topic"><br>
+                Your email address:<br>
+                <input type = "text" name = "emailaddress"><br>
+                Message:<br>
+                <textarea name = "message" rows="10" cols="60"></textarea>
+                <br>
+                <input type="submit" value="Send">
+            </form>
+        </div> <!-- close mainbody -->
     </body>
 </html>
