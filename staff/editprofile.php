@@ -26,18 +26,16 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="../Style.css" />
-        <script src="../dropdown.js"></script>
+        <link rel="stylesheet" type="text/css" href="../newStyle.css" />
         <script src="js/showUser.js"></script>
         <title>Edit Profile</title>
     </head>
-    <body>
-        <div class="nav">
+    <div class="nav">
             <ul>
-                <li style="float:left; color:#999999"><a href="index.php">Carkea</a></li>
+                <li class="logo"><a class = "logo" href="../index.php">Carkea</a></li>
                 <li><a href="../index.php">Home</a></li>
                 <li><a href="../search.php">Search</a></li>
-		<li><a href="#">Contact Us</a></li>
+		<li><a href="../contactus.php">Contact Us</a></li>
                 <li><a href="../branchlist.php">Branch List</a></li>
                 <?php 
                 if (isset($_SESSION['username'])) {
@@ -47,34 +45,74 @@ and open the template in the editor.
                 if (isset($_SESSION['loggedIn'])) {
                     if($_SESSION['loggedIn'] == "true" )
                     {   ?>
-                        <li class="dropdown">
-                        <button onclick="myFunction()" class="dropbtn"><?=$loggedInUser?></button>
-                        <div id="myDropdown" class="dropdown-content">
-                            <a href="editProfile.php">Edit Details</a>
-                            <a href="#">View Purchases</a> <!-- Add if for user type **EDIT** -->
-                            <a href="#">Link 3</a>
-                        </div>
+                        <li><div class="dropdown">
+                        <span><a href="#"><?=$loggedInUser?></a></span>
+                        <div class="dropdown-content">
+                            <?php if ($_SESSION['staff'] === "false")
+                            {?>
+                                <a href="user/editprofile.php?id=<?=$_SESSION['customerID']?>">Update Details</a>
+                                <a href="user/updateaddress.php?id=<?=$_SESSION['customerID']?>">Update Addresses</a>
+                                <a href="user/wishlist.php?id=<?=$_SESSION['customerID']?>">Wishlist</a>
+                                <a href="user/purchasedcars.php?id=<?=$_SESSION['customerID']?>">View Purchases</a>
+                            <?php } else {?>
+                                <a href="editprofile.php?id=<?=$_SESSION['employeeID']?>">Update Details</a>
+                                <a href="searchcustomers.php">Search Customers</a> <!-- Add if for user type **EDIT** -->
+                                <a href="searchsoldcars.php">Search Sold Cars</a>
+                            <?php } ?>
+                        </div></div>
                         </li>
                         <li><a href="../php_files/Logout.php">Logout</a></li>
                     <?php } else { ?>
                     <li><a href="../login.php">Login</a></li>
+                    <li><a href="../register.php">Register</a></li>
                     <?php } 
                 } else { ?>
                 <li><a href="../login.php">Login</a></li>
-                <?php } ?>
-                </ul>
+                <li><a href="../register.php">Register</a></li>
+                <?php }
+
+                if (isset($_SESSION["accessLevel"])) 
+                {
+                    if($_SESSION["accessLevel"] == "1" || $_SESSION["accessLevel"] == "2")
+                    {?>
+                        <li><a href="addstock.php">Add Stock</a></li>
+                    <?php }  
+                    else if($_SESSION["accessLevel"] == "3")
+                    {?>
+                        <li><a href="addemployee.php">Add Employee</a></li>
+                    <?php }  
+                    else if($_SESSION["accessLevel"] == "4")
+                    {?>
+                        <li><a href="addfinancecompany.php">Add Finance</a></li>
+                        <li><a href="searchfinance.php">Search Finance</a></li>
+                    <?php }  
+                }?>
+            </ul>
         </div> <!-- nav close -->
-        <div class="mainbody">
+        <div class="mainbodyProf">
+            <br>
+            Enter a new password if you would like to update your password
+            <br><br>
+            <div id="editprof">
             <form method="POST"  action="include/changePass.php">
-                <ul style='list-style:none;'>
-                    <li>Enter a new password if you would like to update your password</li>
-                    <li><br></li>
-                    <li>Current Password  &nbsp;<input type="password" name="currPassword"></li> 
-                    <li>New Password  &nbsp;<input type="password" name="newPassword"></li>
-                    <li>Repeate New Password  &nbsp;<input type="password" name="repeatNewPass"></li>
-                </ul>
-                <input type="submit" value="Change Password"> 
+                <table>
+                    <tr>
+                        <td>Current Password:</td>
+                        <td><input type="password" name="currPassword" class="inputText"></td>
+                    </tr> 
+                    <tr>
+                        <td>New Password:</td>
+                        <td><input type="password" name="newPassword" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Repeat New Password:</td>
+                        <td><input type="password" name="repeatNewPass" class="inputText"></td>
+                    </tr>
+                </table>
+                <br>
+                <input type="submit" value="Change Password" class = "profButton"> 
             </form> 
+            </div>
             
             <?php 
             if(!empty($_GET['message2']))
