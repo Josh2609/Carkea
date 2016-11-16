@@ -24,7 +24,7 @@ if(isset($_POST['username']) && $_POST['password'])
     $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
    
     
-    $stmt = $dbConnection->prepare("INSERT INTO Customer(Customer_ID, First_Name, Last_Name, Telephone, Email) "
+    $stmt = $dbConnection->prepare("INSERT INTO CustomerDetailsView(Customer_ID, First_Name, Last_Name, Telephone, Email) "
             . "VALUES(NULL, :firstName, :surname, :telephone, :email)");
     $stmt->bindParam(':firstName', $firstname);
     $stmt->bindParam(':surname', $surname);
@@ -35,7 +35,7 @@ if(isset($_POST['username']) && $_POST['password'])
     $passwordHash = password_hash($password, PASSWORD_BCRYPT);
     $customerID = $dbConnection->lastInsertId();
     
-    $stmt = $dbConnection->prepare("INSERT INTO CustomerLoginDetails(Login_Username, Login_Password_Hash, Customer_ID) "
+    $stmt = $dbConnection->prepare("INSERT INTO CustomerLoginView(Login_Username, Login_Password_Hash, Customer_ID) "
             . "VALUES(:username, :passwordHash, :custID)");
     $stmt->bindParam(':username', $username);
     $stmt->bindParam(':passwordHash', $passwordHash);

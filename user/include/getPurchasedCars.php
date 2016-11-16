@@ -1,5 +1,4 @@
 <?php
-//**EDIT**
 $id = $_SESSION['customerID'];
 
     $con = mysqli_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
@@ -20,7 +19,7 @@ $id = $_SESSION['customerID'];
         {    
             $vin = $row['Vehicle_Identification_Number'];
             //**EDIT** Probably a much better way to do this
-            $stmt = $dbConnection->prepare("SELECT Image_Blob FROM CarImage WHERE Vehicle_Identification_Number =?");    
+            $stmt = $dbConnection->prepare("SELECT Image_Blob FROM CarImageView WHERE Vehicle_Identification_Number =?");    
 
             echo '<div class="searchResults">';
             if ($stmt->execute(array($vin))) 

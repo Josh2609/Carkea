@@ -15,7 +15,7 @@ $custID = $_GET['custID'];
     $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    $stmt = $dbConnection->prepare("INSERT INTO customerwishlist (Wishlist_ID, Car_Stock_ID, Customer_ID)"
+    $stmt = $dbConnection->prepare("INSERT INTO customerWishlistView (Wishlist_ID, Car_Stock_ID, Customer_ID)"
             . "VALUES (NULL, :carStockID, :custID)");    
     
     $stmt->bindParam(':carStockID', $stockID);

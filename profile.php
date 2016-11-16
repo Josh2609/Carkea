@@ -47,11 +47,11 @@ and open the template in the editor.
                             <?php if ($_SESSION['staff'] === "false")
                             {?>
                                 <a href="user/editProfile.php">Edit Details</a>
-                                <a href="#">View Purchases</a> <!-- Add if for user type **EDIT** -->
+                                <a href="#">View Purchases</a> 
                                 <a href="#">Link 3</a>
                             <?php } else {?>
                                 <a href="staff/editProfile.php">Edit Details</a>
-                                <a href="#">View Purchases</a> <!-- Add if for user type **EDIT** -->
+                                <a href="#">View Purchases</a> 
                                 <a href="#">Link 3</a>
                             <?php } ?>
                         </div>

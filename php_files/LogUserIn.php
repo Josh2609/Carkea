@@ -15,10 +15,10 @@
     
     if ($staff)
     {
-        $stmt = $dbConnection->prepare('SELECT * FROM employeelogindetails WHERE Login_Username=:username');
+        $stmt = $dbConnection->prepare('SELECT * FROM employeeLoginView WHERE Login_Username=:username');
        
     } else {
-        $stmt = $dbConnection->prepare('SELECT * FROM customerlogindetails WHERE Login_Username=:username');
+        $stmt = $dbConnection->prepare('SELECT * FROM customerLoginView WHERE Login_Username=:username');
     }
     $stmt->bindParam(':username', $username);
     $stmt->execute();
@@ -30,7 +30,7 @@
         if ($staff)
         {
             $employeeID = $row['Employee_ID'];
-            $stmt = $dbConnection->prepare('SELECT Branch_ID FROM employee WHERE Employee_ID=:empID');
+            $stmt = $dbConnection->prepare('SELECT Branch_ID FROM employeeView WHERE Employee_ID=:empID');
             $stmt->bindParam(':empID', $employeeID);
             $stmt->execute();
             foreach ($stmt as $i)

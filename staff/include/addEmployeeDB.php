@@ -90,7 +90,7 @@ if(!isset($_POST['roleSelect']) || !isset($_POST['branchSelect']) || !isset($_PO
     {
         if ($stmt->execute())
         {
-            $stmt2 = $dbConnection->prepare('UPDATE Branch SET Employee_Amount = Employee_Amount + 1 WHERE Branch_ID = :branchID');
+            $stmt2 = $dbConnection->prepare('UPDATE branchUpdateAmountView SET Employee_Amount = Employee_Amount + 1 WHERE Branch_ID = :branchID');
             $stmt2->bindParam(':branchID', $branchID);
             $stmt2->execute();
             header("Location: ../addemployee.php?message=success");

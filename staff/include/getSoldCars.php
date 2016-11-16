@@ -82,7 +82,7 @@ while($row = mysqli_fetch_array($result))
 {    
     $vin = $row['Vehicle_Identification_Number'];
     //**EDIT** Probably a much better way to do this
-    $stmt = $dbConnection->prepare("SELECT Image_Blob FROM CarImage WHERE Vehicle_Identification_Number =?");    
+    $stmt = $dbConnection->prepare("SELECT Image_Blob FROM CarImageView WHERE Vehicle_Identification_Number =?");    
     
     echo '<div class="searchResults">';
     if ($stmt->execute(array($vin))) 

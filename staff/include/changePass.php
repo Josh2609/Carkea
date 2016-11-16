@@ -11,7 +11,7 @@
     $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-    $stmt = $dbConnection->prepare('SELECT Login_Password_Hash FROM EmployeeLoginDetails WHERE Employee_ID = :id');
+    $stmt = $dbConnection->prepare('SELECT Login_Password_Hash FROM EmployeeLoginView WHERE Employee_ID = :id');
     $stmt->bindParam(':id', $id);
     $stmt->execute();
     
@@ -28,7 +28,7 @@
         {
              header("Location: ../editProfile.php?message2=newpassnotmatch");
         } else {
-            $stmt = $dbConnection->prepare('UPDATE EmployeeLoginDetails SET Login_Password_Hash=:newPassHash WHERE Employee_ID=:empID');
+            $stmt = $dbConnection->prepare('UPDATE EmployeeLoginView SET Login_Password_Hash=:newPassHash WHERE Employee_ID=:empID');
             $stmt->bindParam(':newPassHash', $newPassHash);
             $stmt->bindParam(':empID', $id);
             if ($stmt->execute())

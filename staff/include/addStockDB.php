@@ -24,7 +24,7 @@
     $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    $stmt = $dbConnection->prepare('INSERT INTO car (Vehicle_Identification_Number, Registration, Make, Model, Colour, Mileage, Fuel_Type, Car_Type, Transmission, Manufacture_Date, Number_of_Doors, Engine_Size, Sold) VALUES (:vin, :reg, :make, :model, :colour, :mileage, :fuelType, :carType, :transmission, :manufactureDate, :numDoors, :engSize, :sold)');
+    $stmt = $dbConnection->prepare('INSERT INTO carView (Vehicle_Identification_Number, Registration, Make, Model, Colour, Mileage, Fuel_Type, Car_Type, Transmission, Manufacture_Date, Number_of_Doors, Engine_Size, Sold) VALUES (:vin, :reg, :make, :model, :colour, :mileage, :fuelType, :carType, :transmission, :manufactureDate, :numDoors, :engSize, :sold)');
     
     $stmt->bindParam(':vin', $vin);
     $stmt->bindParam(':reg', $reg);

@@ -19,7 +19,7 @@
     $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    $stmt = $dbConnection->prepare('INSERT INTO SoldCar '
+    $stmt = $dbConnection->prepare('INSERT INTO SoldCarView '
              . '(Sold_Car_ID, Sold_Price, Sold_Date, Vehicle_Identification_Number, Customer_ID, Branch_ID)'
              . 'VALUES (NULL, :soldPrice, CURDATE(), :vin, :custID, :branchID)');
      
@@ -34,7 +34,7 @@
     {
         if ($yesFinance = 'true')
         {
-            $stmt = $dbConnection->prepare('INSERT INTO FinancePlan '
+            $stmt = $dbConnection->prepare('INSERT INTO financePlanView '
                     . '(Finance_ID, Payment_Method, Monthly_Repayment_Amount, Total_Finance_Amount, Outstanding_Payment_Remaining, Finance_Company_ID, Sold_Car_ID)'
                     . 'VALUES(NULL, :paymentMethod, :monthlyPayments, :financeAmount, :outstandingPayment, :companyID, :soldCarID)');
             $stmt->bindParam(':paymentMethod', $paymentMethod);
