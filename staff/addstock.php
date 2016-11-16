@@ -20,16 +20,16 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="../Style.css" />
+        <link rel="stylesheet" type="text/css" href="../newStyle.css" />
         <title>Add Stock</title>
     </head>
     <body>
         <div class="nav">
             <ul>
-                <li style="float:left; color:#999999"><a href="../index.php">Carkea</a></li>
+                <li class="logo"><a class = "logo" href="../index.php">Carkea</a></li>
                 <li><a href="../index.php">Home</a></li>
                 <li><a href="../search.php">Search</a></li>
-		<li><a href="#">Contact Us</a></li>
+		<li><a href="../contactus.php">Contact Us</a></li>
                 <li><a href="../branchlist.php">Branch List</a></li>
                 <?php 
                 if (isset($_SESSION['username'])) {
@@ -39,82 +39,161 @@ and open the template in the editor.
                 if (isset($_SESSION['loggedIn'])) {
                     if($_SESSION['loggedIn'] == "true" )
                     {   ?>
-                        <li><a href="../profile.php"><?=$loggedInUser?></a></li>
+                        <li><div class="dropdown">
+                        <span><a href="#"><?=$loggedInUser?></a></span>
+                        <div class="dropdown-content">
+                            <?php if ($_SESSION['staff'] === "false")
+                            {?>
+                                <a href="user/editprofile.php?id=<?=$_SESSION['customerID']?>">Update Details</a>
+                                <a href="user/updateaddress.php?id=<?=$_SESSION['customerID']?>">Update Addresses</a>
+                                <a href="user/wishlist.php?id=<?=$_SESSION['customerID']?>">Wishlist</a>
+                                <a href="user/purchasedcars.php?id=<?=$_SESSION['customerID']?>">View Purchases</a>
+                            <?php } else {?>
+                                <a href="editprofile.php?id=<?=$_SESSION['employeeID']?>">Update Details</a>
+                                <a href="searchcustomers.php">Search Customers</a> <!-- Add if for user type **EDIT** -->
+                                <a href="searchsoldcars.php">Search Sold Cars</a>
+                            <?php } ?>
+                        </div></div>
+                        </li>
                         <li><a href="../php_files/Logout.php">Logout</a></li>
                     <?php } else { ?>
                     <li><a href="../login.php">Login</a></li>
+                    <li><a href="../register.php">Register</a></li>
                     <?php } 
                 } else { ?>
                 <li><a href="../login.php">Login</a></li>
+                <li><a href="../register.php">Register</a></li>
                 <?php }
 
                 if (isset($_SESSION["accessLevel"])) 
                 {
-                    if($_SESSION["accessLevel"] == "1")
+                    if($_SESSION["accessLevel"] == "1" || $_SESSION["accessLevel"] == "2")
                     {?>
-                        <li><a class = "active" href="/addstock.php">Add Stock</a></li>
+                        <li><a class="active" href="addstock.php">Add Stock</a></li>
+                    <?php }  
+                    else if($_SESSION["accessLevel"] == "3")
+                    {?>
+                        <li><a href="addemployee.php">Add Employee</a></li>
+                    <?php }  
+                    else if($_SESSION["accessLevel"] == "4")
+                    {?>
+                        <li><a href="addfinancecompany.php">Add Finance</a></li>
+                        <li><a href="searchfinance.php">Search Finance</a></li>
                     <?php }  
                 }?>
             </ul>
         </div> <!-- nav close -->
         
-        <div class="mainbody">
+        <div class="mainbodyProf">
+             <br><br>
+            <div id="editprof">
              <form action="include/addStockDB.php" method="POST" enctype="multipart/form-data" >
-                <ul style='list-style:none;'>
+                <table>
                     <?php if ($_SESSION['accessLevel'] == "1")
                     {?>
-                    <li><select id="branchSelect1" name="branchSelect">
+                    <tr>
+                        <td>Select a Branch:</td>
+                        <td><select id="branchSelect1" name="branchSelect" class="inputText">
                         
-                        <?php
-                        include "../php_files/db_connect.php";
-                        $stmt = $dbConnection->prepare('SELECT Branch_ID, Branch_Name FROM branchView WHERE Branch_ID=:branchID');
-                        $stmt->bindParam(':branchID',$_SESSION["empBranch"]);
-                        $stmt->execute();
+                            <?php
+                            include "../php_files/db_connect.php";
+                            $stmt = $dbConnection->prepare('SELECT Branch_ID, Branch_Name FROM branchView WHERE Branch_ID=:branchID');
+                            $stmt->bindParam(':branchID',$_SESSION["empBranch"]);
+                            $stmt->execute();
                             
-                        foreach ($stmt as $row)
-                        { 
-                            $branchID = $row['Branch_ID'];
-                            $branchName = $row['Branch_Name'];  
-                        } ?>
-                        <option value="<?=$branchID?>"><?=$branchName?></option>
-                    </select></li>
+                            foreach ($stmt as $row)
+                            { 
+                                $branchID = $row['Branch_ID'];
+                                $branchName = $row['Branch_Name'];  
+                            } ?>
+                            <option value="<?=$branchID?>"><?=$branchName?></option>
+                        </select></td>
+                    </tr>
                         <?php
                     } else if ($_SESSION['accessLevel'] == "10")
                     { ?>
-                    <li><select id="branchSelect10" name="branchSelect">
-                        <?php
-                        include "../php_files/db_connect.php";
-                        $stmt = $dbConnection->prepare('SELECT Branch_ID, Branch_Name FROM branchView');
-                        $stmt->execute();
+                    <tr>
+                        <td>Select a Branch<td>
+                        <td><select id="branchSelect10" name="branchSelect" class="inputText">
+                            <?php
+                            include "../php_files/db_connect.php";
+                            $stmt = $dbConnection->prepare('SELECT Branch_ID, Branch_Name FROM branchView');
+                            $stmt->execute();
                             
-                        foreach ($stmt as $row)
-                        { 
-                            $branchID = $row['Branch_ID'];
-                            $branchName = $row['Branch_Name'];?>
-                            <option value="<?=$branchID?>"><?=$branchName?></option>
-                        <?php } ?>
-                        </select></li>
+                            foreach ($stmt as $row)
+                            { 
+                                $branchID = $row['Branch_ID'];
+                                $branchName = $row['Branch_Name'];?>
+                                <option value="<?=$branchID?>"><?=$branchName?></option>
+                            <?php } ?>
+                            </select><td>
+                                
+                    </tr>
                     <?php } ?>
                         
-                    <li>Vehicle Identification Number (VIN)<input type="text" name="vin" required></li>
-                    <li>Registration<input type="text" name="reg" required></li>
-                    <li>Make<input type="text" name="make" required></li>
-                    <li>Model<input type="text" name="model" required></li>
-                    <li>Colour<input type="text" name="colour" required></li>
-                    <li>Mileage<input type="text" name="mileage" required></li>
-                    <li>Fuel Type<input type="text" name="fuelType" required></li>
-                    <li>Car Type<input type="text" name="carType" required></li>
-                    <li>Transmission<input type="text" name="transmission" required></li>
-                    <li>Manufacture Date<input type="text" name="manufactureDate" required></li>
-                    <li>Number of Doors<input type="text" name="numDoors" required></li>
-                    <li>Engine Size<input type="text" name="engSize" required></li>
-                    
-                    <li>Asking Price<input type="text" name="askPrice" required></li>
-                    <li>Condition<input type="text" name="condition" required></li>
-                    
-                    <li><label>File: </label><input type="file" name="image" accept="image/*"/><br/></li>
-                </ul>
-                <input type="submit" value="Add Stock"> 
+                    <tr>
+                        <td>Vehicle Identification Number (VIN)</td>
+                        <td><input type="text" name="vin" required class="inputText" placeholder="01234567891234567"></td>
+                    </tr>
+                    <tr>
+                        <td>Registration</td>
+                        <td><input type="text" name="reg" required class="inputText" placeholder="AA11 AAA"></td>
+                    </tr>
+                    <tr>
+                        <td>Make</td>
+                        <td><input type="text" name="make" required class="inputText" placeholder="Ford"></td>
+                    </tr>
+                    <tr>
+                        <td>Model</td>
+                        <td><input type="text" name="model" required class="inputText" placeholder="Mondeo"></td>
+                    </tr>
+                    <tr>
+                        <td>Colour</td>
+                        <td><input type="text" name="colour" required class="inputText" placeholder="Blue"></td>
+                    </tr>
+                    <tr>
+                        <td>Mileage</td>
+                        <td><input type="text" name="mileage" required class="inputText" placeholder="00001"></td>
+                    </tr>
+                    <tr>
+                        <td>Fuel Type</td>
+                        <td><input type="text" name="fuelType" required class="inputText" placeholder="Petrol"></td>
+                    </tr>
+                    <tr>
+                        <td>Car Type</td>
+                        <td><input type="text" name="carType" required class="inputText" placeholder="Saloon"></td>
+                    </tr>
+                    <tr>
+                        <td>Transmission</td>
+                        <td><input type="text" name="transmission" required class="inputText" placeholder="Manual"></td>
+                    </tr>
+                    <tr>
+                        <td>Manufacture Date</td>
+                        <td><input type="text" name="manufactureDate" required class="inputText" placeholder="YYYY-MM-DD"></td>
+                    </tr>
+                    <tr>
+                        <td>Number of Doors</td>
+                        <td><input type="text" name="numDoors" required class="inputText" placeholder="5"></td>
+                    </tr>
+                    <tr>
+                        <td>Engine Size</td>
+                        <td><input type="text" name="engSize" required class="inputText" placeholder="2.0L"></td>
+                    </tr>
+                    <tr>
+                        <td>Asking Price</td>
+                        <td><input type="text" name="askPrice" required class="inputText" placeholder="£20000"></td>
+                    </tr>
+                    <tr>
+                        <td>Condition</td>
+                        <td><input type="text" name="condition" required class="inputText" placeholder="New"></td>
+                    </tr>                    
+                    <tr>
+                        <td><label>Select an Image</label></td>
+                        <td><input type="file" name="image" accept="image/*"/></td>
+                    </tr>
+                </table>
+                 <br>
+                <input type="submit" value="Add Stock" class = "profButton"> 
             </form> 
             
             <?php 
@@ -132,6 +211,7 @@ and open the template in the editor.
                 }
             }
             ?>
+            </div>
         </div> <!-- mainbody close -->
     </body>
 </html>

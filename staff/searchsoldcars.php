@@ -74,7 +74,7 @@ and open the template in the editor.
                 <li class="logo"><a class = "logo" href="../index.php">Carkea</a></li>
                 <li><a href="../index.php">Home</a></li>
                 <li><a href="../search.php">Search</a></li>
-		<li><a href="#">Contact Us</a></li>
+		<li><a href="../contactus.php">Contact Us</a></li>
                 <li><a href="../branchlist.php">Branch List</a></li>
                 <?php 
                 if (isset($_SESSION['username'])) {
@@ -90,33 +90,40 @@ and open the template in the editor.
                             <?php if ($_SESSION['staff'] === "false")
                             {?>
                                 <a href="user/editprofile.php?id=<?=$_SESSION['customerID']?>">Update Details</a>
-                                <a href="user/updateaddress.php?id=<?=$_SESSION['customerID']?>">Update Addresses</a> <!-- Add if for user type **EDIT** -->
-                                <a href="#">View Purchases</a>
+                                <a href="user/updateaddress.php?id=<?=$_SESSION['customerID']?>">Update Addresses</a>
+                                <a href="user/wishlist.php?id=<?=$_SESSION['customerID']?>">Wishlist</a>
+                                <a href="user/purchasedcars.php?id=<?=$_SESSION['customerID']?>">View Purchases</a>
                             <?php } else {?>
-                                <a href="staff/editProfile.php?id=<?=$_SESSION['employeeID']?>">Update Details</a>
-                                <a href="staff/searchcustomers.php">Search Customers</a> <!-- Add if for user type **EDIT** -->
-                                <a href="#">Link 3</a>
+                                <a href="editprofile.php?id=<?=$_SESSION['employeeID']?>">Update Details</a>
+                                <a href="searchcustomers.php">Search Customers</a> <!-- Add if for user type **EDIT** -->
+                                <a href="searchsoldcars.php">Search Sold Cars</a>
                             <?php } ?>
                         </div></div>
                         </li>
-                        <li><a href="php_files/Logout.php">Logout</a></li>
+                        <li><a href="../php_files/Logout.php">Logout</a></li>
                     <?php } else { ?>
-                    <li><a href="login.php">Login</a></li>
-                    <li><a href="register.php">Register</a></li>
+                    <li><a href="../login.php">Login</a></li>
+                    <li><a href="../register.php">Register</a></li>
                     <?php } 
                 } else { ?>
-                <li><a href="login.php">Login</a></li>
-                <li><a href="register.php">Register</a></li>
+                <li><a href="../login.php">Login</a></li>
+                <li><a href="../register.php">Register</a></li>
                 <?php }
+
                 if (isset($_SESSION["accessLevel"])) 
                 {
-                    if($_SESSION["accessLevel"] == "1")
+                    if($_SESSION["accessLevel"] == "1" || $_SESSION["accessLevel"] == "2")
                     {?>
-                        <li><a href="staff/addstock.php">Add Stock</a></li>
+                        <li><a href="addstock.php">Add Stock</a></li>
                     <?php }  
                     else if($_SESSION["accessLevel"] == "3")
                     {?>
-                        <li><a href="staff/addemployee.php">Add Employee</a></li>
+                        <li><a href="addemployee.php">Add Employee</a></li>
+                    <?php }  
+                    else if($_SESSION["accessLevel"] == "4")
+                    {?>
+                        <li><a href="addfinancecompany.php">Add Finance</a></li>
+                        <li><a href="searchfinance.php">Search Finance</a></li>
                     <?php }  
                 }?>
             </ul>
@@ -194,7 +201,7 @@ and open the template in the editor.
                             <select id="carTypeSelect" name="carTypeSelect" onchange="getCarType(this)" style="width: 155px;height:30px;color:#2d5986">
                             <option value="anyCarType">Car Type (Any)</option>
                         <?php
-                            $stmt = $dbConnection->prepare('SELECT DISTINCT Car_Type FROM Car'); // **EDIT**
+                            $stmt = $dbConnection->prepare('SELECT DISTINCT Car_Type FROM searchView'); // **EDIT**
                             $stmt->execute();
                             
                             foreach ($stmt as $row)
@@ -210,7 +217,7 @@ and open the template in the editor.
                             <select id="transmissionSelect" name="transmissionSelect" onchange="getTransType(this)" style="width: 155px;height:30px;color:#2d5986">
                             <option value="anyTransmission">Transmission (Any)</option>
                         <?php
-                            $stmt = $dbConnection->prepare('SELECT DISTINCT Transmission FROM Car'); // **EDIT**
+                            $stmt = $dbConnection->prepare('SELECT DISTINCT Transmission FROM searchView'); // **EDIT**
                             $stmt->execute();
                             
                             foreach ($stmt as $row)
@@ -225,7 +232,7 @@ and open the template in the editor.
                             <select id="numDoorSelect" name="numDoorSelect" onchange="getNumDoors(this)" style="width: 155px;height:30px;color:#2d5986">
                             <option value="anyNumDoors">Number of Doors (Any)</option>
                         <?php
-                            $stmt = $dbConnection->prepare('SELECT DISTINCT Number_of_Doors FROM Car'); // **EDIT**
+                            $stmt = $dbConnection->prepare('SELECT DISTINCT Number_of_Doors FROM searchView'); // **EDIT**
                             $stmt->execute();
                             
                             foreach ($stmt as $row)
