@@ -78,8 +78,9 @@ $_SESSION["incorrectLogin"] = "false";
     $username = $_POST['username'];
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
-    $email = $_POST['email'];
-    $telephone = $_POST['telephone'];
+    $employeeID = $_POST['employeeID'];
+    $role = $_POST['role'];
+    $branch =$_POST['branch'];
 
     if ($username=="")
         $username="%";
@@ -87,21 +88,23 @@ $_SESSION["incorrectLogin"] = "false";
         $firstName="%";
     if ($lastName=="")
         $lastName="%";
-    if ($email=="")
-        $email="%";
-    if ($telephone=="")
-        $telephone="%";
+    if ($employeeID=="")
+        $employeeID="%";
+    if ($role=="")
+        $role="%";
+    if ($branch="")
+        $branch="%";
 
     $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
 
     $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    $query = 'SELECT * FROM customerView WHERE First_Name LIKE ?'
-            . ' AND Last_Name LIKE ? AND Telephone LIKE ? AND email LIKE ? '
-            . 'AND Login_Username LIKE ?';
+    $query = 'SELECT * FROM employeeView WHERE First_Name LIKE ?'
+            . ' AND Last_Name LIKE ? AND Role_ID LIKE ? '
+            . 'AND Login_Username LIKE ? AND Branch_ID LIKE ?';
     
-    $params = array("%$firstName%", "%$lastName%", "%$telephone%", "%$email%", "%$username%");
+    $params = array("%$firstName%", "%$lastName%", "%$role%", "%$username%", "%$branch%");
 
     $stmt = $dbConnection->prepare($query);
     $stmt->execute($params);
@@ -111,16 +114,16 @@ echo "<table>
 <tr>
 <th>First Name</th>
 <th>Last Name</th>
-<th>Email</th>
-<th>Telephone</th>
-<th>Username</th>
+<th>Branch ID</th>
+<th>Salary</th>
+<th>Login Username</th>
 </tr>";
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     echo '<tr>';
     echo '<td>' . $row["First_Name"] . '</a></td>';
     echo "<td>" . $row['Last_Name'] . "</td>";
-    echo "<td>" . $row['Email'] . "</td>";
-    echo "<td>" . $row['Telephone'] . "</td>";
+    echo "<td>" . $row['Branch_ID'] . "</td>";
+    echo "<td>" . $row['Salary'] . "</td>";
     echo "<td>" . $row['Login_Username'] . "</td>";
     echo "</tr>";
 }

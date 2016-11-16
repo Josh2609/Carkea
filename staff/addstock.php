@@ -3,7 +3,7 @@
 session_start(); 
 if (isset($_SESSION['loggedIn']) || isset($_SESSION['staff']) || isset($_SESSION['accessLevel'])) 
 {
-    if($_SESSION['loggedIn'] !== "true" || $_SESSION['staff'] !== "true" || $_SESSION['accessLevel'] != "1")
+    if($_SESSION['loggedIn'] !== "true" || $_SESSION['staff'] !== "true" || $_SESSION['accessLevel'] != "1" || $_SESSION['accessLevel'] != "2")
     {
         header("Location: ../index.php");
     } 
