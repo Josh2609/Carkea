@@ -59,7 +59,7 @@ th {text-align: left;}
         }
         echo "</table>";
         echo "<br>";
-        echo '<button type="button" onclick="showAddressForm()">Add New Address</button> ';
+        echo '<button class="profButton" type="button" onclick="showAddressForm()">Add New Address</button> ';
     }
     
     ?>

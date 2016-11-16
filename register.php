@@ -22,7 +22,7 @@ and open the template in the editor.
                 <li class="logo"><a class = "logo" href="index.php">Carkea</a></li>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="search.php">Search</a></li>
-		<li><a href="contactus.php">Contact Us</a></li>
+				<li><a href="contactus.php">Contact Us</a></li>
                 <li><a href="branchlist.php">Branch List</a></li>
                 <?php 
                 if (isset($_SESSION['username'])) {
@@ -43,8 +43,25 @@ and open the template in the editor.
                                 <a href="user/purchasedcars.php?id=<?=$_SESSION['customerID']?>">View Purchases</a>
                             <?php } else {?>
                                 <a href="staff/editProfile.php?id=<?=$_SESSION['employeeID']?>">Update Details</a>
-                                <a href="staff/searchcustomers.php">Search Customers</a> 
+                                <a href="staff/searchcustomers.php">Search Customers</a> <!-- Add if for user type **EDIT** -->
                                 <a href="staff/searchsoldcars.php">Search Sold Cars</a>
+								<?php if (isset($_SESSION["accessLevel"])) 
+									{
+										if($_SESSION["accessLevel"] == "1" || $_SESSION["accessLevel"] == "2")
+										{?>
+											<a href="staff/addstock.php">Add Stock</a>
+										<?php }  
+										else if($_SESSION["accessLevel"] == "3")
+										{?>
+											<a href="staff/addemployee.php">Add Employee</a>
+											<a href = "staff/searchemployees.php">Search Employees</a>
+										<?php }  
+										else if($_SESSION["accessLevel"] == "4")
+										{?>
+											<a href="staff/addfinancecompany.php">Add Finance</a>
+											<a href="staff/searchfinance.php">Search Finance</a>
+										<?php }  
+										}?>
                             <?php } ?>
                         </div></div>
                         </li>
@@ -56,25 +73,8 @@ and open the template in the editor.
                 } else { ?>
                 <li><a href="login.php">Login</a></li>
                 <li><a class = "active" href="register.php">Register</a></li>
-                <?php }
-
-                if (isset($_SESSION["accessLevel"])) 
-                {
-                    if($_SESSION["accessLevel"] == "1" || $_SESSION["accessLevel"] == "2")
-                    {?>
-                        <li><a href="staff/addstock.php">Add Stock</a></li>
-                    <?php }  
-                    else if($_SESSION["accessLevel"] == "3")
-                    {?>
-                        <li><a href="staff/addemployee.php">Add Employee</a></li>
-                    <?php }  
-                    else if($_SESSION["accessLevel"] == "4")
-                    {?>
-                        <li><a href="staff/addfinancecompany.php">Add Finance</a></li>
-                        <li><a href="staff/searchfinance.php">Search Finance</a></li>
-                    <?php }  
-                }?>
-            </ul>
+                <?php } ?>
+			</ul>
         </div> <!-- nav close -->
         <div class="mainbodyLog">                       
             <div class="regpage">
@@ -83,19 +83,19 @@ and open the template in the editor.
                 <br>
                 <form method="POST"  action="php_files/registerUserDB.php">
                     <table>
-                        <tr><input type="text" name="username" style="width:280px;border:none;border-bottom:1px solid #999999;font-size: 18px;color:#2d5986" placeholder="Username" align="center"><br></tr>
+                        <tr><input type="text" name="username" style="width:280px;border:none;border-bottom:1px solid #999999;font-size: 18px;color:#2d5986" placeholder="Username" align="center" required><br></tr>
                         <br>
-                        <tr><input type ="text" name ="firstname" style="width:280px;border:none;border-bottom:1px solid #999999;font-size: 18px;color:#2d5986" placeholder="First Name" align="center"><br></tr>
+                        <tr><input type ="text" name ="firstname" style="width:280px;border:none;border-bottom:1px solid #999999;font-size: 18px;color:#2d5986" placeholder="First Name" align="center" required><br></tr>
                         <br>
-                        <tr><input type="text" name ="surname" style="width:280px;border:none;border-bottom:1px solid #999999;font-size: 18px;color:#2d5986" placeholder="Surname" align="center"><br></tr>
+                        <tr><input type="text" name ="surname" style="width:280px;border:none;border-bottom:1px solid #999999;font-size: 18px;color:#2d5986" placeholder="Surname" align="center" required><br></tr>
                         <br>
-                        <tr><input type ="text" name="telephone" style="width:280px;border:none;border-bottom:1px solid #999999;font-size: 18px;color:#2d5986" placeholder="Telephone" align="center"><br></tr>
+                        <tr><input type ="text" name="telephone" style="width:280px;border:none;border-bottom:1px solid #999999;font-size: 18px;color:#2d5986" placeholder="Telephone" align="center" required><br></tr>
                         <br>
-                        <tr><input type ="text" name="email" style="width:280px;border:none;border-bottom:1px solid #999999;font-size: 18px;color:#2d5986" placeholder="Email" align="center"><br></tr>
+                        <tr><input type ="text" name="email" style="width:280px;border:none;border-bottom:1px solid #999999;font-size: 18px;color:#2d5986" placeholder="Email" align="center" required><br></tr>
                         <br>
-                        <tr><input type="password" name="password" style="width:280px;border:none;border-bottom:1px solid #999999;font-size: 18px;color:#2d5986" placeholder="Password" align="center"><br></tr>
+                        <tr><input type="password" name="password" style="width:280px;border:none;border-bottom:1px solid #999999;font-size: 18px;color:#2d5986" placeholder="Password" align="center" required minlength=4 maxlength=72><br></tr>
                         <br>
-                        <tr><input type="password" name="repeatPass" name="password" style="width:280px;border:none;border-bottom:1px solid #999999;font-size: 18px;color:#2d5986" placeholder="Confirm Password" align="center"><br></tr>
+                        <tr><input type="password" name="repeatPass" name="password" style="width:280px;border:none;border-bottom:1px solid #999999;font-size: 18px;color:#2d5986" placeholder="Confirm Password" align="center" required minlength=4 maxlength=72><br></tr>
                         
                     </table>
                     <br/> 

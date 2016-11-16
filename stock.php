@@ -51,12 +51,12 @@ th {text-align: left;}
         <title>Carkea</title>
     </head>
     <body>
-         <div class="nav">
+        <div class="nav">
             <ul>
                 <li class="logo"><a class = "logo" href="index.php">Carkea</a></li>
                 <li><a href="index.php">Home</a></li>
                 <li><a class = "active" href="search.php">Search</a></li>
-		<li><a href="#">Contact Us</a></li>
+				<li><a href="contactus.php">Contact Us</a></li>
                 <li><a href="branchlist.php">Branch List</a></li>
                 <?php 
                 if (isset($_SESSION['username'])) {
@@ -74,11 +74,28 @@ th {text-align: left;}
                                 <a href="user/editprofile.php?id=<?=$_SESSION['customerID']?>">Update Details</a>
                                 <a href="user/updateaddress.php?id=<?=$_SESSION['customerID']?>">Update Addresses</a>
                                 <a href="user/wishlist.php?id=<?=$_SESSION['customerID']?>">Wishlist</a>
-                                <a href="#">View Purchases</a>
+                                <a href="user/purchasedcars.php?id=<?=$_SESSION['customerID']?>">View Purchases</a>
                             <?php } else {?>
                                 <a href="staff/editProfile.php?id=<?=$_SESSION['employeeID']?>">Update Details</a>
                                 <a href="staff/searchcustomers.php">Search Customers</a> <!-- Add if for user type **EDIT** -->
-                                <a href="#">Link 3</a>
+                                <a href="staff/searchsoldcars.php">Search Sold Cars</a>
+								<?php if (isset($_SESSION["accessLevel"])) 
+									{
+										if($_SESSION["accessLevel"] == "1" || $_SESSION["accessLevel"] == "2")
+										{?>
+											<a href="staff/addstock.php">Add Stock</a>
+										<?php }  
+										else if($_SESSION["accessLevel"] == "3")
+										{?>
+											<a href="staff/addemployee.php">Add Employee</a>
+											<a href = "staff/searchemployees.php">Search Employees</a>
+										<?php }  
+										else if($_SESSION["accessLevel"] == "4")
+										{?>
+											<a href="staff/addfinancecompany.php">Add Finance</a>
+											<a href="staff/searchfinance.php">Search Finance</a>
+										<?php }  
+										}?>
                             <?php } ?>
                         </div></div>
                         </li>
@@ -90,20 +107,8 @@ th {text-align: left;}
                 } else { ?>
                 <li><a href="login.php">Login</a></li>
                 <li><a href="register.php">Register</a></li>
-                <?php }
-
-                if (isset($_SESSION["accessLevel"])) 
-                {
-                    if($_SESSION["accessLevel"] == "1")
-                    {?>
-                        <li><a href="staff/addstock.php">Add Stock</a></li>
-                    <?php }  
-                    else if($_SESSION["accessLevel"] == "3")
-                    {?>
-                        <li><a href="staff/addemployee.php">Add Employee</a></li>
-                    <?php }  
-                }?>
-            </ul>
+                <?php } ?>
+			</ul>
         </div> <!-- nav close -->
         <br><br><br>
         <div class="mainbody1">
@@ -183,17 +188,17 @@ th {text-align: left;}
                                             <li><select id="fCompanySelect" name="fCompanySelect" onchange="getFinanceCompanyID(this)" style="width: 155px;height:30px;color:#2d5986">
                                             <option value="">Finance Company</option>
                                             <?php
-                                            $stmt2 = $dbConnection->prepare("SELECT Finance_Company_ID, Company_Name FROM FinanceCompany");  
+                                            $stmt2 = $dbConnection->prepare("SELECT Finance_Company_ID, Company_Name FROM FinanceCompanyView");  
                                             $stmt2->execute();
                                             foreach ($stmt2 as $data)
                                             { ?>
-                                                <option value="<?=$data['Company_ID'];?>"><?=$data['Finance_Company_Name'];?></option>
+                                                <option value="<?=$data['Finance_Company_ID'];?>"><?=$data['Company_Name'];?></option>
                                             <?php } ?>
                                             </select></li>
                                         </ul>
                                     </div>
-                                        <button type="button" id="btnFinance" onclick="showFinanceForm()">Add Finance?</button> 
-                                    <input type="submit" value="Submit"> 
+                                        <button class = "profButton" type="button" id="btnFinance" onclick="showFinanceForm()">Add Finance?</button> 
+                                    <input  class = "profButton" type="submit" value="Submit"> 
                                 </form>
                             </div>
                         </div>

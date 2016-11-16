@@ -40,11 +40,28 @@ and open the template in the editor.
                                 <a href="user/editprofile.php?id=<?=$_SESSION['customerID']?>">Update Details</a>
                                 <a href="user/updateaddress.php?id=<?=$_SESSION['customerID']?>">Update Addresses</a>
                                 <a href="user/wishlist.php?id=<?=$_SESSION['customerID']?>">Wishlist</a>
-                                <a href="#">View Purchases</a>
+                                <a href="user/purchasedcars.php?id=<?=$_SESSION['customerID']?>">View Purchases</a>
                             <?php } else {?>
                                 <a href="staff/editProfile.php?id=<?=$_SESSION['employeeID']?>">Update Details</a>
-                                <a href="staff/searchcustomers.php">Search Customers</a>
+                                <a href="staff/searchcustomers.php">Search Customers</a> <!-- Add if for user type **EDIT** -->
                                 <a href="staff/searchsoldcars.php">Search Sold Cars</a>
+								<?php if (isset($_SESSION["accessLevel"])) 
+									{
+										if($_SESSION["accessLevel"] == "1" || $_SESSION["accessLevel"] == "2")
+										{?>
+											<a href="staff/addstock.php">Add Stock</a>
+										<?php }  
+										else if($_SESSION["accessLevel"] == "3")
+										{?>
+											<a href="staff/addemployee.php">Add Employee</a>
+											<a href = "staff/searchemployees.php">Search Employees</a>
+										<?php }  
+										else if($_SESSION["accessLevel"] == "4")
+										{?>
+											<a href="staff/addfinancecompany.php">Add Finance</a>
+											<a href="staff/searchfinance.php">Search Finance</a>
+										<?php }  
+										}?>
                             <?php } ?>
                         </div></div>
                         </li>
@@ -56,24 +73,8 @@ and open the template in the editor.
                 } else { ?>
                 <li><a href="login.php">Login</a></li>
                 <li><a href="register.php">Register</a></li>
-                <?php }
-
-                if (isset($_SESSION["accessLevel"])) 
-                {
-                    if($_SESSION["accessLevel"] == "1" || $_SESSION["accessLevel"] == "2")
-                    {?>
-                        <li><a href="staff/addstock.php">Add Stock</a></li>
-                    <?php }  
-                    else if($_SESSION["accessLevel"] == "3")
-                    {?>
-                        <li><a href="staff/addemployee.php">Add Employee</a></li>
-                    <?php }  
-                    else if($_SESSION["accessLevel"] == "4")
-                    {?>
-                        <li><a href="staff/addfinancecompany.php">Add Finance</a></li>
-                    <?php }  
-                }?>
-            </ul>
+                <?php } ?>
+			</ul>
         </div> <!-- nav close -->
         <div class="mainbody">
         
@@ -84,8 +85,8 @@ and open the template in the editor.
                 <input type = "text" name = "emailaddress"><br>
                 Message:<br>
                 <textarea name = "message" rows="10" cols="60"></textarea>
-                <br>
-                <input type="submit" value="Send">
+                <br><br>
+                <input class = "profButton" type="submit" value="Send">
             </form>
         </div> <!-- close mainbody -->
     </body>

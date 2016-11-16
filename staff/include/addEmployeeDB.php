@@ -36,6 +36,8 @@ if(!isset($_POST['roleSelect']) || !isset($_POST['branchSelect']) || !isset($_PO
     $username = $_POST["username"];
     $password = $_POST["password"];
     $repeatPassword = $_POST["repeatPassword"];
+
+	
     
     if ($password !== $repeatPassword)
     {

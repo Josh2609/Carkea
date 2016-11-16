@@ -28,10 +28,10 @@ and open the template in the editor.
         
         <div class="nav">
             <ul>
-                <li class="logo"><a class = "logo" href="../index.php">Carkea</a></li>
+                <li class="logo"><a class = "logo" href="index.php">Carkea</a></li>
                 <li><a href="../index.php">Home</a></li>
                 <li><a href="../search.php">Search</a></li>
-		<li><a href="#">Contact Us</a></li>
+		<li><a href="../contactus.php">Contact Us</a></li>
                 <li><a href="../branchlist.php">Branch List</a></li>
                 <?php 
                 if (isset($_SESSION['username'])) {
@@ -42,13 +42,35 @@ and open the template in the editor.
                     if($_SESSION['loggedIn'] == "true" )
                     {   ?>
                         <li><div class="dropdown">
-                        <span><a href="#"><?=$loggedInUser?></a></span>
+                        <span><a class = "active" href="#"><?=$loggedInUser?></a></span>
                         <div class="dropdown-content">
-                            <?php if ($_SESSION['staff'] === "true")
-                                {?>
-                                <a href="editProfile.php?id=<?=$_SESSION['employeeID']?>">Update Details</a>
-                                <a href="searchcustomers.php">Search Customers</a> <!-- Add if for user type **EDIT** -->
-                                <a href="searchsoldcars.php">Search Sold Cars</a>
+                            <?php if ($_SESSION['staff'] === "false")
+                            {?>
+                                <a href="../user/editprofile.php?id=<?=$_SESSION['customerID']?>">Update Details</a>
+                                <a href="../user/updateaddress.php?id=<?=$_SESSION['customerID']?>">Update Addresses</a>
+                                <a href="../user/wishlist.php?id=<?=$_SESSION['customerID']?>">Wishlist</a>
+                                <a href="../user/purchasedcars.php?id=<?=$_SESSION['customerID']?>">View Purchases</a>
+                            <?php } else {?>
+                                <a href="../staff/editProfile.php?id=<?=$_SESSION['employeeID']?>">Update Details</a>
+                                <a href="../staff/searchcustomers.php">Search Customers</a> <!-- Add if for user type **EDIT** -->
+                                <a href="../staff/searchsoldcars.php">Search Sold Cars</a>
+								<?php if (isset($_SESSION["accessLevel"])) 
+									{
+										if($_SESSION["accessLevel"] == "1" || $_SESSION["accessLevel"] == "2")
+										{?>
+											<a href="../staff/addstock.php">Add Stock</a>
+										<?php }  
+										else if($_SESSION["accessLevel"] == "3")
+										{?>
+											<a href="../staff/addemployee.php">Add Employee</a>
+											<a href = "../staff/searchemployees.php">Search Employees</a>
+										<?php }  
+										else if($_SESSION["accessLevel"] == "4")
+										{?>
+											<a href="../staff/addfinancecompany.php">Add Finance</a>
+											<a href="../staff/searchfinance.php">Search Finance</a>
+										<?php }  
+										}?>
                             <?php } ?>
                         </div></div>
                         </li>
@@ -60,36 +82,27 @@ and open the template in the editor.
                 } else { ?>
                 <li><a href="../login.php">Login</a></li>
                 <li><a href="../register.php">Register</a></li>
-                <?php }
-
-                if (isset($_SESSION["accessLevel"])) 
-                {
-                    if($_SESSION["accessLevel"] == "1" || $_SESSION["accessLevel"] == "2")
-                    {?>
-                        <li><a href="addstock.php">Add Stock</a></li>
-                    <?php }  
-                    else if($_SESSION["accessLevel"] == "3")
-                    {?>
-                        <li><a href="addemployee.php">Add Employee</a></li>
-                    <?php }  
-                    else if($_SESSION["accessLevel"] == "4")
-                    {?>
-                        <li><a href="addfinancecompany.php">Add Finance</a></li>
-                        <li><a class="active"  href="searchfinance.php">Search Finance</a></li>
-                    <?php }  
-                }?>
-            </ul>
+                <?php } ?>
+			</ul>
         </div> <!-- nav close -->
-         <div class="mainbody">
+		<div class="mainbodyProf">
+            <br><br>
+            <div id="editprof">
             <form method="POST"  action="include/getFinance.php">
-                <ul style='list-style:none;'>
-                    <li>Customer ID<input type="text" name="custID"></li>
-                    <li><br></li>
-                    <li>Car Registration<input type="text" name="carReg"></li>
-                    <li><br></li>
-                </ul>
-                <input type="submit" value="Search"> 
+                <table>
+                    <tr>
+						<td>Customer ID</td>
+						<td><input type="text" name="custID" class="inputText"></td>
+					</tr>
+                    <tr>
+						<td>Car Registration</td>
+						<td><input type="text" name="carReg" class="inputText"></td>
+					</tr>
+                </table>
+				<br><br>
+                <input type="submit" value="Search" class = "profButton"> 
             </form>       
         </div> <!-- close mainbody -->
+		</div>
     </body>
 </html>
