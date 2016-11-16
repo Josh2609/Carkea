@@ -71,6 +71,7 @@ and open the template in the editor.
                     else if($_SESSION["accessLevel"] == "4")
                     {?>
                         <li><a href="staff/addfinancecompany.php">Add Finance</a></li>
+                        <li><a href="staff/searchfinance.php">Search Finance</a></li>
                     <?php }  
                 }?>
             </ul>
@@ -127,6 +128,6 @@ and open the template in the editor.
             
         </table>
         <br><br><br><br><br><br><br><br>
-       
+       <footer>© 2016 Carkea</footer>
     </body>
 </html>

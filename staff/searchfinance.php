@@ -29,7 +29,7 @@ and open the template in the editor.
         <div class="nav">
             <ul>
                 <li class="logo"><a class = "logo" href="../index.php">Carkea</a></li>
-                <li><a class = "active" href="../index.php">Home</a></li>
+                <li><a href="../index.php">Home</a></li>
                 <li><a href="../search.php">Search</a></li>
 		<li><a href="#">Contact Us</a></li>
                 <li><a href="../branchlist.php">Branch List</a></li>
@@ -74,37 +74,22 @@ and open the template in the editor.
                     <?php }  
                     else if($_SESSION["accessLevel"] == "4")
                     {?>
-                        <li><a class="active" href="addfinancecompany.php">Add Finance</a></li>
-                        <li><a href="searchfinance.php">Search Finance</a></li>
+                        <li><a href="addfinancecompany.php">Add Finance</a></li>
+                        <li><a class="active"  href="searchfinance.php">Search Finance</a></li>
                     <?php }  
                 }?>
             </ul>
         </div> <!-- nav close -->
-        
-        <div class="mainbody">
-            <form method="POST"  action="include/addCompanyDB.php">
+         <div class="mainbody">
+            <form method="POST"  action="include/getFinance.php">
                 <ul style='list-style:none;'>
-                    <li>Company Name<input type="text" name="compName"></li>
-                    <li>Company Email<input type="text" name="compEmail"></li>
-                    <li>Company Telephone<input type="text" name="compTelephone"></li>
+                    <li>Customer ID<input type="text" name="custID"></li>
+                    <li><br></li>
+                    <li>Car Registration<input type="text" name="carReg"></li>
+                    <li><br></li>
                 </ul>
-                <br/> 
-                <input type="submit" value="Add Finance Company"> 
-            </form>
-            
-             <?php 
-            if(!empty($_GET['message']))
-            {
-                $message = $_GET['message'];
-                if($message == "success")
-                {
-                    echo "<p>Finance Company successfully added to the database.</p>";
-                } else {
-                    echo "<p>There was an error adding the Finance Company, please try again later.</p>";
-                }
-            }
-            ?>
-            
-        </div>
+                <input type="submit" value="Search"> 
+            </form>       
+        </div> <!-- close mainbody -->
     </body>
 </html>

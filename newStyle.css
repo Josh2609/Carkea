@@ -44,10 +44,98 @@ footer{
     display: inline-block;
   }  
 
-/*.regpage{
-    padding-left: 10px;
-    padding-right: 10px;
-}*/
+.mainbodyLog{
+    margin: 0 auto;
+    padding-top: 175px;
+    /*padding: 85px;*/
+    width: 80%;
+    text-align: center;
+}
+
+.logpage{
+    display:inline-block;
+    width:350px;
+    height: 320px;
+    padding: 10px;
+    background-color:white;
+    color: #2d5986;
+    border-radius: 10px;
+    margin: 0 auto;
+    -webkit-box-shadow: 3px 4px 14px -1px rgba(0,0,0,0.61);
+    -moz-box-shadow: 3px 4px 14px -1px rgba(0,0,0,0.61);
+    box-shadow: 3px 4px 14px -1px rgba(0,0,0,0.61);
+}
+
+.logpage table{
+    margin: 0 auto;
+    line-height: 40px;
+}
+
+.logpage tr{
+    display: block;
+}
+
+.logpage h3{
+    line-height: 0px;
+}
+
+.loginButton{
+    background-color: #33ccff;
+    width: 250px;
+    height: 40px;
+    border-radius: 5px;
+    display: inline-block;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+    transition: .5s background-color;
+}
+
+.loginButton:hover{
+    background-color: #0073e6;
+}
+
+
+.mainbodyreg{
+    margin: 0 auto;
+    padding-top: 175px;
+    /*padding: 85px;*/
+    width: 80%;
+    text-align: center;
+}
+
+.regpage{
+    display:inline-block;
+    width:350px;
+    height: 540px;
+    padding: 10px;
+    background-color:white;
+    color: #2d5986;
+    border-radius: 10px;
+    margin: 0 auto;
+    -webkit-box-shadow: 3px 4px 14px -1px rgba(0,0,0,0.61);
+    -moz-box-shadow: 3px 4px 14px -1px rgba(0,0,0,0.61);
+    box-shadow: 3px 4px 14px -1px rgba(0,0,0,0.61);
+}
+
+.regpage table{
+    margin: 0 auto;
+    line-height: 40px;
+}
+
+.regpage tr{
+    display: block;
+}
+
+.regpage h3{
+    line-height: 0px;
+}
+
 
 .reg ul{
     text-decoration: none;
@@ -701,6 +789,7 @@ footer{
     width: 80%;
     text-align: center;
     background-color: white;
+    padding-top: 140px;
 }
 
 .profButton{
@@ -725,3 +814,8 @@ footer{
     background-color: #0073e6;
 }
 
+@media screen and (min-width:850px){
+    .mainbodyProf{
+         padding-top: 60px;
+    }
+}

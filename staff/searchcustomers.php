@@ -15,12 +15,6 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="../Style.css" />
         <script src="../dropdown.js"></script>
         <title>Customer Search</title>
-        <script>
-            var make = '%';
-            function getMake(option) {
-                make = option.value;  
-            }
-        </script>
     </head>
     <body>
         <div class="nav">
@@ -79,9 +73,9 @@ and open the template in the editor.
                 <ul style='list-style:none;'>
                     <li>Customer Username<input type="text" name="username"></li>
                     <li><br></li>
-                    <li>First Name <input type="text" name="firstName"></li>
+                    <li>First Name<input type="text" name="firstName"></li>
                     <li><br></li>
-                    <li>Last Name <input type="text" name="lastName"></li>
+                    <li>Last Name<input type="text" name="lastName"></li>
                     <li><br></li>
                     <li>Email<input type="text" name="email"></li>
                     <li><br></li>

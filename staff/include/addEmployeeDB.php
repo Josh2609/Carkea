@@ -50,7 +50,7 @@ if(!isset($_POST['roleSelect']) || !isset($_POST['branchSelect']) || !isset($_PO
     
     if ($manager == "")
     {
-        $stmt = $dbConnection->prepare('INSERT INTO employee (Employee_ID, First_Name, Last_Name, Salary, Role_ID, Branch_ID)'
+        $stmt = $dbConnection->prepare('INSERT INTO employeeView (Employee_ID, First_Name, Last_Name, Salary, Role_ID, Branch_ID)'
                 . ' VALUES (NULL, :firstName, :lastName, :salary, :roleID, :branchID)');
 
         $stmt->bindParam(':firstName', $firstName);
@@ -59,7 +59,7 @@ if(!isset($_POST['roleSelect']) || !isset($_POST['branchSelect']) || !isset($_PO
         $stmt->bindParam(':roleID', $roleID);
         $stmt->bindParam(':branchID', $branchID);
     } else {
-        $stmt = $dbConnection->prepare('INSERT INTO employee (Employee_ID, First_Name, Last_Name, Salary, Role_ID, Branch_ID, Line_Manager_ID)'
+        $stmt = $dbConnection->prepare('INSERT INTO employeeView (Employee_ID, First_Name, Last_Name, Salary, Role_ID, Branch_ID, Line_Manager_ID)'
                 . ' VALUES (NULL, :firstName, :lastName, :salary, :roleID, :branchID, :manager)');
 
         $stmt->bindParam(':firstName', $firstName);
@@ -76,7 +76,7 @@ if(!isset($_POST['roleSelect']) || !isset($_POST['branchSelect']) || !isset($_PO
     
     $employeeID = $dbConnection->lastInsertId();
     
-    $stmt = $dbConnection->prepare('INSERT INTO EmployeeLoginDetails (Login_Username, Login_Password_Hash, Data_Access_Permissions, Employee_ID)'
+    $stmt = $dbConnection->prepare('INSERT INTO employeeLoginView (Login_Username, Login_Password_Hash, Data_Access_Permissions, Employee_ID)'
             . ' VALUES (:username, :passwordHash, :roleID, :employeeID)');
     
     $stmt->bindParam(':username', $username);

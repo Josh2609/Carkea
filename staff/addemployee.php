@@ -20,16 +20,16 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="../Style.css" />
+        <link rel="stylesheet" type="text/css" href="../newStyle.css" />
         <title>Add Employee</title>
     </head>
     <body>
         <div class="nav">
             <ul>
-                <li style="float:left; color:#999999"><a href="../index.php">Carkea</a></li>
+                <li class="logo"><a class = "logo" href="../index.php">Carkea</a></li>
                 <li><a href="../index.php">Home</a></li>
                 <li><a href="../search.php">Search</a></li>
-		<li><a href="#">Contact Us</a></li>
+		<li><a href="../contactus.php">Contact Us</a></li>
                 <li><a href="../branchlist.php">Branch List</a></li>
                 <?php 
                 if (isset($_SESSION['username'])) {
@@ -39,29 +39,58 @@ and open the template in the editor.
                 if (isset($_SESSION['loggedIn'])) {
                     if($_SESSION['loggedIn'] == "true" )
                     {   ?>
-                        <li><a href="../profile.php"><?=$loggedInUser?></a></li>
+                        <li><div class="dropdown">
+                        <span><a href="#"><?=$loggedInUser?></a></span>
+                        <div class="dropdown-content">
+                            <?php if ($_SESSION['staff'] === "false")
+                            {?>
+                                <a href="user/editprofile.php?id=<?=$_SESSION['customerID']?>">Update Details</a>
+                                <a href="user/updateaddress.php?id=<?=$_SESSION['customerID']?>">Update Addresses</a>
+                                <a href="user/wishlist.php?id=<?=$_SESSION['customerID']?>">Wishlist</a>
+                                <a href="user/purchasedcars.php?id=<?=$_SESSION['customerID']?>">View Purchases</a>
+                            <?php } else {?>
+                                <a href="editprofile.php?id=<?=$_SESSION['employeeID']?>">Update Details</a>
+                                <a href="searchcustomers.php">Search Customers</a> <!-- Add if for user type **EDIT** -->
+                                <a href="searchsoldcars.php">Search Sold Cars</a>
+                            <?php } ?>
+                        </div></div>
+                        </li>
                         <li><a href="../php_files/Logout.php">Logout</a></li>
                     <?php } else { ?>
                     <li><a href="../login.php">Login</a></li>
+                    <li><a href="../register.php">Register</a></li>
                     <?php } 
                 } else { ?>
                 <li><a href="../login.php">Login</a></li>
+                <li><a href="../register.php">Register</a></li>
                 <?php }
 
                 if (isset($_SESSION["accessLevel"])) 
                 {
-                    if($_SESSION["accessLevel"] == "3")
+                    if($_SESSION["accessLevel"] == "1" || $_SESSION["accessLevel"] == "2")
                     {?>
-                        <li><a class = "active" href="addemployee.php">Add Employee</a></li>
+                        <li><a href="addstock.php">Add Stock</a></li>
+                    <?php }  
+                    else if($_SESSION["accessLevel"] == "3")
+                    {?>
+                        <li><a href="addemployee.php">Add Employee</a></li>
+                    <?php }  
+                    else if($_SESSION["accessLevel"] == "4")
+                    {?>
+                        <li><a href="addfinancecompany.php">Add Finance</a></li>
+                        <li><a href="searchfinance.php">Search Finance</a></li>
                     <?php }  
                 }?>
             </ul>
         </div> <!-- nav close -->
-        <div class="mainbody">
-            
+        <div class="mainbodyProf">
+            <br><br>
+            <div id="editprof">
             <form method="POST"  action="include/addEmployeeDB.php">
-                <ul style='list-style:none;'>
-                    <li><select id="roleSelect" name="roleSelect">
+                <table>
+                    <tr>
+                        <td>Select a Role</td>
+                    <td><select id="roleSelect" name="roleSelect" class="inputText">
                         <?php
                             include "../php_files/db_connect.php";
                             $stmt = $dbConnection->prepare('SELECT Role_ID, Role_Name FROM roleView');
@@ -73,9 +102,11 @@ and open the template in the editor.
                                 $roleName = $row['Role_Name'];   ?>
                                 <option value="<?=$roleID?>"><?=$roleName?></option>
                         <?php } ?>
-                    </select></li>
-                    
-                    <li><select id="branchSelect" name="branchSelect">
+                    </select></td>
+                    </tr>
+                    <tr>
+                    <td>Select a Branch</td>
+                    <td><select id="branchSelect" name="branchSelect" class="inputText">
                         <?php
                             include "../php_files/db_connect.php";
                             $stmt = $dbConnection->prepare('SELECT Branch_ID, Branch_Name FROM branchView');
@@ -87,20 +118,39 @@ and open the template in the editor.
                             $branchName = $row['Branch_Name'];?>
                             <option value="<?=$branchID?>"><?=$branchName?></option>
                         <?php } ?>
-                    </select></li>
-                    
-                    <li>First Name<input type="text" name="firstName" required></li>
-                    <li>Last Name<input type="text" name="lastName" required></li>
-                    <li>Salary<input type="text" name="salary" required></li>
-                    <li>Line Manager ID(if any)<input type="text" name="manager"></li>
-                    
-                    <li>Account Username<input type="text" name="username" required></li>
-                    <li>Temporary Account Password<input type="password" name="password" required></li>
-                    <li>Repeat Account Password<input type="password" name="repeatPassword" required></li>
-
-                </ul>
-                <br/> 
-                <input type="submit" value="Add Employee"> 
+                    </select></td>
+                    </tr>
+                    <tr>
+                        <td>First Name</td>
+                        <td><input type="text" name="firstName" required class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td><input type="text" name="lastName" required class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Salary</td>
+                        <td><input type="text" name="salary" required class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Line Manager ID(if any)</td>
+                        <td><input type="text" name="manager" class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Account Username</td>
+                        <td><input type="text" name="username" required class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Temporary Account Password</td>
+                        <td><input type="password" name="password" required class="inputText"></td>
+                    </tr>
+                    <tr>
+                        <td>Repeat Account Password</td>
+                        <td><input type="password" name="repeatPassword" required class="inputText"></td>
+                    </tr>
+                </table>
+                 <br>
+                <input type="submit" value="Add Employee" class = "profButton"> 
             </form>  
             
             <?php 
@@ -122,7 +172,7 @@ and open the template in the editor.
                 }
             }
             ?>
-            
+            </div>
         </div> <!-- close mainbody -->
     </body>
 </html>

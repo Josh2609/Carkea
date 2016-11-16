@@ -248,11 +248,8 @@ and open the template in the editor.
             <button type="button" onclick="showSoldSearchResults(make, model, colour, fuel, carType, transType, numDoors, mileLow, mileHigh, priceLow, priceHigh, registration)">Search</button> 
             </div></div>
                 <br><br>
-            </div>
-            
-            
+            </div>     
             <div id="searchResults"><b></b></div>
-            
         </div> <!-- close mainbody -->
     </body>
 </html>
