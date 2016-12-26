@@ -5,7 +5,7 @@
     $vin = $_POST["vin"];
     $branchID = $_POST["branchID"];
     $carStockID = $_POST["carStockID"];
-    if (isset($_POST["paymentMethod"]))
+    if ($_POST["paymentMethod"] != '')
     {
         $yesFinance = 'true';
         $paymentMethod = $_POST["paymentMethod"];
@@ -14,12 +14,10 @@
         $fCompanyID = $_POST["fCompanySelect"];
     }
 
-    $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
+    include "dbconnect/pdoconnect.php";
 
-    $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    $stmt = $dbConnection->prepare('INSERT INTO SoldCarView '
+    $stmt = $dbConnection->prepare('INSERT INTO soldCarView '
              . '(Sold_Car_ID, Sold_Price, Sold_Date, Vehicle_Identification_Number, Customer_ID, Branch_ID)'
              . 'VALUES (NULL, :soldPrice, CURDATE(), :vin, :custID, :branchID)');
      
@@ -32,7 +30,7 @@
     
     if ($stmt->execute())
     {
-        if ($yesFinance = 'true')
+        if ($yesFinance == 'true')
         {
             $stmt = $dbConnection->prepare('INSERT INTO financePlanView '
                     . '(Finance_ID, Payment_Method, Monthly_Repayment_Amount, Total_Finance_Amount, Outstanding_Payment_Remaining, Finance_Company_ID, Sold_Car_ID)'
@@ -47,14 +45,11 @@
             $stmt->execute();
         }
         
-        $stmt = $dbConnection->prepare('DELETE FROM CarStock WHERE Car_Stock_ID=:carStockID');
+        $stmt = $dbConnection->prepare('DELETE FROM carstock WHERE Car_Stock_ID=:carStockID');
         $stmt->bindParam(':carStockID', $carStockID);
         
         if ($stmt->execute())
         {
-             header("Location: ../stock.php?id=$vin");
+             header("Location: ../search.php");
         }
     }
-    
-    // **EDIT**
-    

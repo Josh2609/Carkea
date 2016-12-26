@@ -59,8 +59,7 @@ $registration = str_replace(' ', '', $registration);
             $priceLow=$temp;
     }
 
-$con = mysqli_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
-          mysqli_select_db($con,"16ac3d07"); // SELECT DATABASE
+include "../../php_files/dbconnect/mysqliconnect.php";
           
           
 $sql="SELECT * FROM soldSearchView WHERE Make LIKE '".$make."' AND Model LIKE '".$model."' AND Colour LIKE '".$colour."' "
@@ -69,20 +68,17 @@ $sql="SELECT * FROM soldSearchView WHERE Make LIKE '".$make."' AND Model LIKE '"
         . "AND Mileage BETWEEN '".$mileLow."' AND '".$mileHigh."'"
         . "AND Sold_Price BETWEEN '".$priceLow."' AND '".$priceHigh."'";
 $result = mysqli_query($con,$sql);
+
 if ($result)
 {
- 
-    $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
-
-    $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include "../../php_files/dbconnect/pdoconnect.php";
 
 
 while($row = mysqli_fetch_array($result)) 
 {    
     $vin = $row['Vehicle_Identification_Number'];
     //**EDIT** Probably a much better way to do this
-    $stmt = $dbConnection->prepare("SELECT Image_Blob FROM CarImageView WHERE Vehicle_Identification_Number =?");    
+    $stmt = $dbConnection->prepare("SELECT Image_Blob FROM carImageView WHERE Vehicle_Identification_Number =?");    
     
     echo '<div class="searchResults">';
     if ($stmt->execute(array($vin))) 

@@ -12,12 +12,9 @@ if (isset($_SESSION['loggedIn']))
 
 $noItems;
  $stockOnWishlist = array();
-    $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
-
-    $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include "../php_files/dbconnect/pdoconnect.php";
             
-    $stmt = $dbConnection->prepare('SELECT Car_Stock_ID FROM CustomerWishlistView WHERE Customer_ID = :id');
+    $stmt = $dbConnection->prepare('SELECT Car_Stock_ID FROM customerWishlistView WHERE Customer_ID = :id');
     $stmt->bindParam(':id', $id);
     $stmt->execute();
     
@@ -37,7 +34,7 @@ $noItems;
         {
             $vin = $row['Vehicle_Identification_Number'];
     //**EDIT** Probably a much better way to do this
-    $stmt = $dbConnection->prepare("SELECT Image_Blob FROM CarImageView WHERE Vehicle_Identification_Number =?");    
+    $stmt = $dbConnection->prepare("SELECT Image_Blob FROM carImageView WHERE Vehicle_Identification_Number =?");    
     
     echo '<div class="searchResults">';
     if ($stmt->execute(array($vin))) 

@@ -7,7 +7,7 @@
 </head>
 <body>
 <?php
-    include "db_connect.php";
+    include "dbconnect/pdoconnect.php";
     $q = intval($_GET['q']);
     
     $stmt = $dbConnection->prepare('SELECT * FROM modelView');

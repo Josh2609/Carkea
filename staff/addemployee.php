@@ -92,7 +92,7 @@ and open the template in the editor.
                         <td>Select a Role</td>
                     <td><select id="roleSelect" name="roleSelect" class="inputText">
                         <?php
-                            include "../php_files/db_connect.php";
+                            include "../php_files/dbconnect/pdoconnect.php";
                             $stmt = $dbConnection->prepare('SELECT Role_ID, Role_Name FROM roleView');
                             $stmt->execute();
                             
@@ -108,7 +108,7 @@ and open the template in the editor.
                     <td>Select a Branch</td>
                     <td><select id="branchSelect" name="branchSelect" class="inputText">
                         <?php
-                            include "../php_files/db_connect.php";
+                            include "../php_files/dbconnect/pdoconnect.php";
                             $stmt = $dbConnection->prepare('SELECT Branch_ID, Branch_Name FROM branchView');
                             $stmt->execute();
                             

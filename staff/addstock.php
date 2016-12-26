@@ -96,7 +96,7 @@ and open the template in the editor.
                         <td><select id="branchSelect1" name="branchSelect" class="inputText">
                         
                             <?php
-                            include "../php_files/db_connect.php";
+                            include "../php_files/dbconnect/pdoconnect.php";
                             $stmt = $dbConnection->prepare('SELECT Branch_ID, Branch_Name FROM branchView WHERE Branch_ID=:branchID');
                             $stmt->bindParam(':branchID',$_SESSION["empBranch"]);
                             $stmt->execute();
@@ -116,7 +116,7 @@ and open the template in the editor.
                         <td>Select a Branch<td>
                         <td><select id="branchSelect10" name="branchSelect" class="inputText">
                             <?php
-                            include "../php_files/db_connect.php";
+                            include "../php_files/dbconnect/pdoconnect.php";
                             $stmt = $dbConnection->prepare('SELECT Branch_ID, Branch_Name FROM branchView');
                             $stmt->execute();
                             

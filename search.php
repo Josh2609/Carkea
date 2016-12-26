@@ -155,7 +155,7 @@ and open the template in the editor.
                     <td><select id="makeSelect" name="makeSelect" onchange="getMake(this)" style="width: 155px;height:30px;color:#2d5986">
                         <option value="anyMake">Make (Any)</option>
                         <?php
-                            include "php_files/db_connect.php";
+                            include "php_files/dbconnect/pdoconnect.php";
                             $stmt = $dbConnection->prepare('SELECT * FROM makeView');
                             $stmt->execute();
                             
@@ -214,7 +214,7 @@ and open the template in the editor.
                             <select id="carTypeSelect" name="carTypeSelect" onchange="getCarType(this)" style="width: 155px;height:30px;color:#2d5986">
                             <option value="anyCarType">Car Type (Any)</option>
                         <?php
-                            $stmt = $dbConnection->prepare('SELECT DISTINCT Car_Type FROM CarSearchView'); // 
+                            $stmt = $dbConnection->prepare('SELECT DISTINCT Car_Type FROM carSearchView'); // 
                             $stmt->execute();
                             
                             foreach ($stmt as $row)
@@ -229,7 +229,7 @@ and open the template in the editor.
                             <select id="transmissionSelect" name="transmissionSelect" onchange="getTransType(this)" style="width: 155px;height:30px;color:#2d5986">
                             <option value="anyTransmission">Transmission (Any)</option>
                         <?php
-                            $stmt = $dbConnection->prepare('SELECT DISTINCT Transmission FROM CarSearchView'); 
+                            $stmt = $dbConnection->prepare('SELECT DISTINCT Transmission FROM carSearchView'); 
                             $stmt->execute();
                             
                             foreach ($stmt as $row)
@@ -244,7 +244,7 @@ and open the template in the editor.
                             <select id="numDoorSelect" name="numDoorSelect" onchange="getNumDoors(this)" style="width: 155px;height:30px;color:#2d5986">
                             <option value="anyNumDoors">Number of Doors (Any)</option>
                         <?php
-                            $stmt = $dbConnection->prepare('SELECT DISTINCT Number_of_Doors FROM CarSearchView'); // **EDIT**
+                            $stmt = $dbConnection->prepare('SELECT DISTINCT Number_of_Doors FROM carSearchView'); // **EDIT**
                             $stmt->execute();
                             
                             foreach ($stmt as $row)
@@ -261,7 +261,7 @@ and open the template in the editor.
                             <select id="conditionSelect" name="conditionSelect" onchange="getCondition(this)" style="width: 155px;height:30px;color:#2d5986">
                             <option value="anyCondition">Condition (Any)</option>
                         <?php
-                            $stmt = $dbConnection->prepare('SELECT DISTINCT Car_Condition FROM CarSearchView'); // **EDIT**
+                            $stmt = $dbConnection->prepare('SELECT DISTINCT Car_Condition FROM carSearchView'); // **EDIT**
                             $stmt->execute();
                             
                             foreach ($stmt as $row)

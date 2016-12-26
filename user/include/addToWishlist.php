@@ -10,10 +10,7 @@ session_start();
 $stockID = $_GET['stockID'];
 $custID = $_GET['custID'];
 
-    $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
-
-    $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include "../../php_files/dbconnect/pdoconnect.php";
     
     $stmt = $dbConnection->prepare("INSERT INTO customerWishlistView (Wishlist_ID, Car_Stock_ID, Customer_ID)"
             . "VALUES (NULL, :carStockID, :custID)");    

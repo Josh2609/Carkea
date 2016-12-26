@@ -39,10 +39,9 @@ $key = 'AIzaSyDv0SJXrfeWAu-LeH9z_1XXriQC-Lrdilk'; // Josh's key for googles API
     $xlatAddress = $data->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
     $xlongAddress = $data->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
 
-    $con = mysqli_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
-          mysqli_select_db($con,"16ac3d07"); // SELECT DATABASE
+    include "php_files/dbconnect/mysqliconnect.php";
             
-    $sql="SELECT Branch_Lat, Branch_Long, Branch_ID FROM BranchLocation";
+    $sql="SELECT Branch_Lat, Branch_Long, Branch_ID FROM branchlocation";
     $result = mysqli_query($con,$sql);
     
     $inRangeBranch = array();
@@ -57,7 +56,7 @@ $key = 'AIzaSyDv0SJXrfeWAu-LeH9z_1XXriQC-Lrdilk'; // Josh's key for googles API
             array_push($inRangeBranch,$branchID);
         }
     }
-    mysqli_close($con);
+    //mysqli_close($con);
 
     if ($make=="anyMake")
             $make="%";
@@ -96,8 +95,7 @@ $key = 'AIzaSyDv0SJXrfeWAu-LeH9z_1XXriQC-Lrdilk'; // Josh's key for googles API
             $priceLow=$temp;
     }
 
-$con = mysqli_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
-          mysqli_select_db($con,"16ac3d07"); // SELECT DATABASE
+    // include "php_files/dbconnect/mysqlconnect.php";
           
         $in = implode(',', $inRangeBranch);
           
@@ -111,17 +109,14 @@ $result = mysqli_query($con,$sql);
 if ($result)
 {
  
-    $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
-
-    $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include "php_files/dbconnect/pdoconnect.php";
 
 
 while($row = mysqli_fetch_array($result)) 
 {    
     $vin = $row['Vehicle_Identification_Number'];
     //**EDIT** Probably a much better way to do this
-    $stmt = $dbConnection->prepare("SELECT Image_Blob FROM CarImage WHERE Vehicle_Identification_Number =?");    
+    $stmt = $dbConnection->prepare("SELECT Image_Blob FROM carImageView WHERE Vehicle_Identification_Number =?");    
     
     echo '<div class="searchResults">';
     if ($stmt->execute(array($vin))) 

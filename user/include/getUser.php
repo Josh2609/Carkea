@@ -1,8 +1,7 @@
 <?php
 $id = intval($_SESSION['customerID']);
 
-$con = mysqli_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
-          mysqli_select_db($con,"16ac3d07"); // SELECT DATABASE
+include "../php_files/dbconnect/mysqliconnect.php";
 
 $sql="SELECT * FROM customerView WHERE Customer_ID = '".$id."'";
 $result = mysqli_query($con,$sql);
@@ -19,4 +18,3 @@ while($row = mysqli_fetch_array($result)) {
 }
 echo "</table>";
 mysqli_close($con);
-?>

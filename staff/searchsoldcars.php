@@ -144,7 +144,7 @@ and open the template in the editor.
                     <td><select id="makeSelect" name="makeSelect" onchange="getMake(this)" style="width: 155px;height:30px;color:#2d5986">
                         <option value="anyMake">Make (Any)</option>
                         <?php
-                            include "../php_files/db_connect.php";
+                            include "../php_files/dbconnect/pdoconnect.php";
                             $stmt = $dbConnection->prepare('SELECT * FROM makeView');
                             $stmt->execute();
                             

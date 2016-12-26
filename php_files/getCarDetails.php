@@ -21,8 +21,7 @@ th {text-align: left;}
 session_start();
 $vin = $_GET['vin'];
 
-$con = mysqli_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
-          mysqli_select_db($con,"16ac3d07"); // SELECT DATABASE
+include "dbconnect/mysqliconnect.php";
           
 $sql="SELECT * FROM searchView WHERE Vehicle_Identification_Number LIKE '".$vin."'";
 

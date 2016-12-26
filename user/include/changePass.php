@@ -6,10 +6,7 @@
     $newPass = $_POST["newPassword"];
     $repeatNewPass = $_POST["repeatNewPass"];
     
-    $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
-
-    $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include "../../php_files/dbconnect/pdoconnect.php";
             
     $stmt = $dbConnection->prepare('SELECT Login_Password_Hash FROM customerView WHERE Customer_ID = :id');
     $stmt->bindParam(':id', $id);
@@ -34,12 +31,12 @@
             
             if ($stmt->execute())
             {
-                header("Location: ../editProfile.php?message2=success");
+                header("Location: ../editProfile.php?id=$id&message2=success");
             } else {  
-                header("Location: ../editProfile.php?message2=error");
+                header("Location: ../editProfile.php?id=$id&message2=error");
             }
         }
     } else {
-        header("Location: ../editProfile.php?message2=passwordnotmatch");
+        header("Location: ../editProfile.php?id=$id&message2=passwordnotmatch");
     }
 

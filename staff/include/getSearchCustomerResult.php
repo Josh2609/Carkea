@@ -91,10 +91,7 @@ $_SESSION["incorrectLogin"] = "false";
     if ($telephone=="")
         $telephone="%";
 
-    $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
-
-    $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include "../../php_files/dbconnect/pdoconnect.php";
     
     $query = 'SELECT * FROM customerView WHERE First_Name LIKE ?'
             . ' AND Last_Name LIKE ? AND Telephone LIKE ? AND email LIKE ? '

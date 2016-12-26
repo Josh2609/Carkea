@@ -94,14 +94,14 @@ and open the template in the editor.
                         <br>
                         <tr><input type="password" name="password" style="width:280px;border:none;border-bottom:1px solid #999999;font-size: 18px;color:#2d5986" placeholder="Password" align="center" required minlength=4 maxlength=72 ><br></tr>
                         <br>
-						<?php 
-							if (isset($staffLogin) &&  $staffLogin == 'true')
-							{ ?>
-                         <tr><input type="checkbox" name="staff" value="staff" checked>Staff?</tr>
+			<?php 
+			if (isset($staffLogin) &&  $staffLogin == 'true')
+			{ ?>
+                        <tr><div><input type="checkbox" name="staff" value="staff" checked>Staff?</div></tr>
                     <?php 
                                 
                     } else { ?>
-                        <tr><input type="checkbox" name="staff" value="staff">Staff?</tr>
+                    <tr><div><input type="checkbox" name="staff" value="staff">Staff?</div></tr>
                     <?php } ?>
                         
                     </table>

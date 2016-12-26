@@ -19,10 +19,7 @@
     
     $reg = str_replace(' ', '', $reg);
     
-    $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
-
-    $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include "../../php_files/dbconnect/pdoconnect.php";
     
     $stmt = $dbConnection->prepare('INSERT INTO carView (Vehicle_Identification_Number, Registration, Make, Model, Colour, Mileage, Fuel_Type, Car_Type, Transmission, Manufacture_Date, Number_of_Doors, Engine_Size, Sold) VALUES (:vin, :reg, :make, :model, :colour, :mileage, :fuelType, :carType, :transmission, :manufactureDate, :numDoors, :engSize, :sold)');
     
@@ -51,7 +48,7 @@
         }
    }   
    
-    $stmt = $dbConnection->prepare('INSERT INTO CarStock (Car_Stock_ID, Asking_Price, Date_Acquired, Car_Condition, Branch_ID, Vehicle_Identification_Number)'
+    $stmt = $dbConnection->prepare('INSERT INTO carstock (Car_Stock_ID, Asking_Price, Date_Acquired, Car_Condition, Branch_ID, Vehicle_Identification_Number)'
              . ' VALUES (NULL, :askPrice, CURDATE(), :condition, :branchID, :vin)');
 
     $stmt->bindParam(':askPrice', $askPrice);
@@ -65,9 +62,7 @@
         $stmt2->bindParam(':branchID', $branchID);
         $stmt2->execute();
         
-        $db = mysql_connect("silva.computing.dundee.ac.uk", "16ac3u07", "bac132");
-        // SELECT DATABASE
-        mysql_select_db("16ac3d07");
+        include "../../php_files/dbconnect/mysqlconnect.php";
         
         if ($_FILES['image']['size'] == 0 && $_FILES['image']['error'] == 0)
         {

@@ -12,10 +12,7 @@
     $telephone = str_replace(' ', '', $telephone);
 
     
-    $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
-
-    $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include "../../php_files/dbconnect/pdoconnect.php";
             
     $stmt = $dbConnection->prepare('SELECT Login_Password_Hash FROM customerView WHERE Customer_ID = :id');
     $stmt->bindParam(':id', $id);
@@ -38,10 +35,10 @@
         
         if ($stmt->execute())
         {
-            header("Location: ../editProfile.php?message=success");
+            header("Location: ../editProfile.php?id=$id&message=success");
         } else {  
-            header("Location: ../editProfile.php?message=error");
+            header("Location: ../editProfile.php?id=$id&message=error");
         }
     } else {
-        header("Location: ../editProfile.php?message=passwordnotmatch");
+        header("Location: ../editProfile.php?id=$id&message=passwordnotmatch");
     }

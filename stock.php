@@ -5,10 +5,7 @@ $_SESSION["incorrectLogin"] = "false";
 $vin = $_GET['id'];
 
     
-    $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
-
-    $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include "php_files/dbconnect/pdoconnect.php";
             
 ?>
 <!DOCTYPE html>
@@ -116,8 +113,7 @@ th {text-align: left;}
             
             <?php
 
-            $con = mysqli_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
-                      mysqli_select_db($con,"16ac3d07"); // SELECT DATABASE
+            include "php_files/dbconnect/mysqliconnect.php";
 
             $sql="SELECT * FROM searchView WHERE Vehicle_Identification_Number LIKE '".$vin."'";
 
@@ -126,7 +122,7 @@ th {text-align: left;}
             while($row = mysqli_fetch_array($result)) {
                 $vin = $row['Vehicle_Identification_Number'];
                 //**EDIT** Probably a much better way to do this
-                $stmt = $dbConnection->prepare("SELECT Image_Blob FROM CarImage WHERE Vehicle_Identification_Number =?");    
+                $stmt = $dbConnection->prepare("SELECT Image_Blob FROM carImageView WHERE Vehicle_Identification_Number =?");    
     
                 if ($stmt->execute(array($vin))) 
                 {
@@ -137,7 +133,7 @@ th {text-align: left;}
                         echo '<img src="placeholder.png "height="90" width="90">';
                     }
                 }
-                $stmt = $dbConnection->prepare("SELECT Branch_Name FROM Branch WHERE Branch_ID =?");
+                $stmt = $dbConnection->prepare("SELECT Branch_Name FROM branchView WHERE Branch_ID =?");
                 
                 $branchID = $row["Branch_ID"];
                 $stmt->execute(array($branchID));
@@ -188,7 +184,7 @@ th {text-align: left;}
                                             <li><select id="fCompanySelect" name="fCompanySelect" onchange="getFinanceCompanyID(this)" style="width: 155px;height:30px;color:#2d5986">
                                             <option value="">Finance Company</option>
                                             <?php
-                                            $stmt2 = $dbConnection->prepare("SELECT Finance_Company_ID, Company_Name FROM FinanceCompanyView");  
+                                            $stmt2 = $dbConnection->prepare("SELECT Finance_Company_ID, Company_Name FROM financeCompanyView");  
                                             $stmt2->execute();
                                             foreach ($stmt2 as $data)
                                             { ?>

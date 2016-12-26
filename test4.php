@@ -85,8 +85,8 @@ th {text-align: left;}
         <div class="mainbody1">
            
             <?php
-            /*$con = mysqli_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
-                      mysqli_select_db($con,"16ac3d07"); // SELECT DATABASE
+            /*
+            include "php_files/dbconnect/mysqliconnect.php";
             $sql="SELECT * FROM searchView WHERE Vehicle_Identification_Number LIKE '".$vin."'";
             $result = mysqli_query($con,$sql);
             echo "<table>

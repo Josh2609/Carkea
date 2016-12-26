@@ -1,9 +1,7 @@
 <?php
 
-    include "db_connect.php";
-    
-    $con = mysqli_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
-          mysqli_select_db($con,"16ac3d07"); // SELECT DATABASE
+    include "dbconnect/pdoconnect.php";
+    include "dbconnect/mysqliconnect.php";
           
     session_start();
     

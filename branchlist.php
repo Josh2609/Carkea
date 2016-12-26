@@ -79,12 +79,12 @@ and open the template in the editor.
             <div class="branch">
         <?php
             // change to Team7 and CarkeaDB for release
-            $db = mysql_connect("silva.computing.dundee.ac.uk", "16ac3u07","bac132"); // CONNECT TO DATABASE
-            mysql_select_db("16ac3d07"); // SELECT DATABASE
+            include "php_files/dbconnect/mysqlconnect.php";
             
             if(!$db)
-                echo mysql_error() ;
-
+            {
+                echo mysql_error();
+            }
             
             $queryBranchView = "SELECT * FROM branchView ORDER BY Branch_Name ASC;";
             $branchQueryResult = mysql_query($queryBranchView,$db);

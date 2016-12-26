@@ -19,9 +19,7 @@ if(isset($_POST['username']) && $_POST['password'])
     }
     
     
-    $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
-    $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include "dbconnect/pdoconnect.php";
    
     
     $stmt = $dbConnection->prepare("INSERT INTO CustomerDetailsView(Customer_ID, First_Name, Last_Name, Telephone, Email) "

@@ -5,10 +5,7 @@
     $password = $_POST["password"];
     $staff = $_POST["staff"];
             
-    $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
-
-    $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include "dbconnect/pdoconnect.php";
             
     // used bcrypt cos it's a fixed size (60) and seems secure enough. Default could change in the future so it's easier this way
     $passwordHash = password_hash($password, PASSWORD_BCRYPT); // **unused?**
@@ -67,5 +64,4 @@
         header("Location: ../login.php");
         exit();
     }
-?>
 

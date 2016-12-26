@@ -6,12 +6,9 @@
     $newPass = $_POST["newPassword"];
     $repeatNewPass = $_POST["repeatNewPass"];
     
-    $dbConnection = new PDO('mysql:dbname=16ac3d07;host=silva.computing.dundee.ac.uk;charset=utf8', '16ac3u07', 'bac132');
-
-    $dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include "../../php_files/dbconnect/pdoconnect.php";
             
-    $stmt = $dbConnection->prepare('SELECT Login_Password_Hash FROM EmployeeLoginView WHERE Employee_ID = :id');
+    $stmt = $dbConnection->prepare('SELECT Login_Password_Hash FROM employeeLoginView WHERE Employee_ID = :id');
     $stmt->bindParam(':id', $id);
     $stmt->execute();
     
@@ -26,19 +23,19 @@
         $newPassHash = password_hash($newPass, PASSWORD_BCRYPT);
         if ($newPass !== $repeatNewPass)
         {
-             header("Location: ../editProfile.php?message2=newpassnotmatch");
+             header("Location: ../editProfile.php?id=$id&message2=newpassnotmatch");
         } else {
-            $stmt = $dbConnection->prepare('UPDATE EmployeeLoginView SET Login_Password_Hash=:newPassHash WHERE Employee_ID=:empID');
+            $stmt = $dbConnection->prepare('UPDATE employeeLoginView SET Login_Password_Hash=:newPassHash WHERE Employee_ID=:empID');
             $stmt->bindParam(':newPassHash', $newPassHash);
             $stmt->bindParam(':empID', $id);
             if ($stmt->execute())
             {
-                header("Location: ../editProfile.php?message2=success");
+                header("Location: ../editProfile.php?id=$id&message2=success");
             } else {  
-                header("Location: ../editProfile.php?message2=error");
+                header("Location: ../editProfile.php?id=$id&message2=error");
             }
         }
     } else {
-        header("Location: ../editProfile.php?message2=passwordnotmatch");
+        header("Location: ../editProfile.php?id=$id&message2=passwordnotmatch");
     }
 
